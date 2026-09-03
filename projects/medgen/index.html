@@ -35,9 +35,9 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700%7CNoto+Sans:400,500,600,700%7CCastoro:400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=20260904-carousel1">
+  <link rel="stylesheet" href="static/css/index.css?v=20260904-layout1">
   <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-  <script defer src="static/js/gallery.js?v=20260904-carousel1"></script>
+  <script defer src="static/js/gallery.js?v=20260904-layout1"></script>
 </head>
 
 <body>
@@ -152,8 +152,8 @@
 
     <section class="section content-section examples-section" id="examples">
       <div class="container project-column">
-        <h2 class="title is-3 has-text-centered">Representative Image-Text Pairs</h2>
-        <p class="section-deck gallery-intro has-text-centered">Each visit randomly selects nine records from the 45-example review set and presents them as three auto-playing pages. Use the arrows or page dots to browse; open any image at native resolution or expand a card for full record details.</p>
+        <h2 class="title is-3 has-text-centered">Representative Examples</h2>
+        <p class="section-deck gallery-intro has-text-centered">MedGEN-Bench evaluates open-ended multimodal medical generation through image-grounded, contextually entangled instructions: the intended answer or transformation depends on the particular input image rather than task wording alone. Its 6,422 expert-reviewed pairs reference 10,703 unique images across six canonical modalities, 15 clinical tasks, and 26 named subtasks, unifying visual question answering, instruction-guided image editing, and contextual multimodal generation.</p>
 
         <div class="benchmark-gallery sample-gallery" data-sample-gallery role="region" aria-label="Curated MedGEN-Bench review sample gallery" tabindex="0">
           <p class="visually-hidden">The three-page gallery rotates automatically and shows three examples per page. Use the previous and next buttons, page selectors, or left and right arrow keys to browse.</p>
@@ -702,6 +702,13 @@
         <div class="table-container results-table-wrap" role="region" aria-label="MedGEN-Bench main results from Table 3" tabindex="0">
           <table class="research-table full-results-table" aria-describedby="table-3-note">
             <caption class="visually-hidden">Table 3. Main results at MedGEN-Bench.</caption>
+            <colgroup>
+              <col class="col-task">
+              <col class="col-system">
+              <col class="col-metric"><col class="col-metric"><col class="col-metric">
+              <col class="col-metric"><col class="col-metric"><col class="col-metric">
+              <col class="col-metric"><col class="col-metric"><col class="col-metric">
+            </colgroup>
             <thead>
               <tr>
                 <th scope="col" rowspan="2">Task</th>
@@ -836,6 +843,11 @@
         <div class="table-container pairing-table-wrap" role="region" aria-label="Behavioral pairing sensitivity from Table 4" tabindex="0">
           <table class="research-table pairing-table" aria-describedby="table-4-note">
             <caption class="visually-hidden">Table 4. Behavioral pairing sensitivity.</caption>
+            <colgroup>
+              <col class="col-control"><col class="col-delta"><col class="col-ci">
+              <col class="col-score"><col class="col-score"><col class="col-score">
+              <col class="col-score"><col class="col-score">
+            </colgroup>
             <thead>
               <tr>
                 <th scope="col" rowspan="2">Control</th>

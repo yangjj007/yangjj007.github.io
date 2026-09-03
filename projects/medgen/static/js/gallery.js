@@ -120,10 +120,6 @@
 
       gallery.innerHTML = `
         <div class="sample-gallery-shell">
-          <div class="sample-gallery-topline">
-            <span><strong>${selectedRecords.length}</strong> randomly selected examples from ${records.length} records</span>
-            <span>Refresh the page for a new selection · Click an image for full resolution</span>
-          </div>
           <div class="sample-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Random MedGEN-Bench examples" tabindex="0">
             <div class="sample-carousel-frame">
               <button class="sample-carousel-arrow sample-carousel-prev" type="button" data-carousel-prev aria-label="Previous examples">‹</button>
@@ -143,7 +139,6 @@
               <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / ${pages.length} · Examples 1–3</p>
             </div>
           </div>
-          <p class="sample-gallery-license">This gallery is a review-only sample for inspection. It is not a clinical dataset release; reuse remains subject to the source-data terms and approvals. <a href="static/data/review-sample/README.md" target="_blank" rel="noopener">Read the sample documentation</a>.</p>
         </div>
       `;
 

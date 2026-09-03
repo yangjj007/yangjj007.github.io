@@ -406,12 +406,24 @@ a:focus-visible {
 .full-results-table {
   font-size: 0.76rem;
   min-width: 1240px;
-  table-layout: auto;
+  table-layout: fixed;
 }
 
 .full-results-table th,
 .full-results-table td {
   padding: 0.48rem 0.52rem;
+}
+
+.full-results-table .col-task {
+  width: 6%;
+}
+
+.full-results-table .col-system {
+  width: 34%;
+}
+
+.full-results-table .col-metric {
+  width: 6.666%;
 }
 
 .full-results-table .metric-band,
@@ -438,7 +450,7 @@ a:focus-visible {
 .pairing-table td,
 .pairing-table thead tr:nth-child(2) th {
   font-variant-numeric: tabular-nums;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -460,7 +472,23 @@ a:focus-visible {
 .pairing-table {
   font-size: 0.82rem;
   min-width: 900px;
-  table-layout: auto;
+  table-layout: fixed;
+}
+
+.pairing-table .col-control {
+  width: 26%;
+}
+
+.pairing-table .col-delta {
+  width: 8%;
+}
+
+.pairing-table .col-ci {
+  width: 14%;
+}
+
+.pairing-table .col-score {
+  width: 10.4%;
 }
 
 .pairing-table thead th:not(:first-child) {
