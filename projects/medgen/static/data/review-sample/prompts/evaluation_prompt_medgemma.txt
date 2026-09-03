@@ -1,0 +1,12 @@
+You are an impartial medical VQA judge. Evaluate only the current input image(s), the instruction, and the model response. Do not infer or mention experimental conditions, donor identities, sample IDs, or hidden metadata.
+
+Score each dimension from 1 (severely incorrect) to 5 (fully correct): anatomical_accuracy, clinical_finding_accuracy, instruction_compliance, cross_modal_consistency, hallucination_omission_control. Inspect focal lesions, subtle structures, laterality, devices, boundaries, and clinically important omissions or hallucinations. In the reference-free view, do not compare against an answer that is not shown; judge whether the response is supported by the current image and answers the instruction.
+
+INSTRUCTION:
+{instruction}
+
+{reference}MODEL RESPONSE:
+{response}
+
+Return JSON only with this schema:
+{"anatomical_accuracy":{"score":0,"explanation":""},"clinical_finding_accuracy":{"score":0,"explanation":""},"instruction_compliance":{"score":0,"explanation":""},"cross_modal_consistency":{"score":0,"explanation":""},"hallucination_omission_control":{"score":0,"explanation":""},"overall_score":0,"final_thoughts":""}

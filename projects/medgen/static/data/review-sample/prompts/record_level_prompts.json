@@ -1,0 +1,741 @@
+[
+  {
+    "sample_id": "S01",
+    "task": "multiple-choice",
+    "instruction": "Question: What is the type of staining used in this image?\n\nOptions:\nA. H&E\nB. PAS\nC. Trichrome\nD. Immunohistochemical",
+    "canonical_reference_answer": "A. H&E",
+    "choices": [
+      "A. H&E",
+      "B. PAS",
+      "C. Trichrome",
+      "D. Immunohistochemical"
+    ],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S02",
+    "task": "blank-filling",
+    "instruction": "The skin condition shown is ____.",
+    "canonical_reference_answer": "Spider angioma",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S03",
+    "task": "question-answering",
+    "instruction": "What organ is inside the red box in this image?",
+    "canonical_reference_answer": "The diagnosis is the heart, as indicated by the red box in the radiograph. Key imaging features supporting this diagnosis include the characteristic silhouette of the heart, which appears as a well-defined, rounded structure located in the mediastinum, typically positioned slightly left of the midline. The heart's borders are usually smooth and can be distinguished from adjacent structures such as the lungs and ribs due to its density and shape. Other options are less likely; the left and right lungs would appear more expansive and less defined, while the first rib would be seen as a bony structure above the heart. In the clinical context of a chest radiograph, identifying the heart is crucial for evaluating cardiac size and potential pathologies, making its recognition essential in the interpretation of thoracic imaging.",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S04",
+    "task": "report-generation",
+    "instruction": "Generate a clinical report for this CT scan.",
+    "canonical_reference_answer": "CT scan abdomen: CA pancreas Poorly delineated pancreatic head-neck junction mass measuring approximately 1.5 x 1 cm. There is ductal dilatation proximal to the mass up to 5 mm. Soft tissue density infiltration extending around the proximal portal vein, central superior mesenteric vein, central splenic vein, and proximal superior mesenteric artery is suspicious for locally advanced, unresectable disease. It also showed intra and extrahepatic biliary duct dilatation related to obstruction by the mass. CT: computed tomography; CA: Cancer",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S05",
+    "task": "anatomical-annotation",
+    "instruction": "Annotate this Ultrasound image of Mitral Valve with detailed labels for the Mitral Regurgitation (Mr), including anatomical landmarks and diagnostic findings",
+    "canonical_reference_answer": "Annotated Ultrasound image with detailed anatomical labels and clinical markers for diagnostic interpretation",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S06",
+    "task": "artifact-removal",
+    "instruction": "Correct imaging artifacts in this X-Ray image",
+    "canonical_reference_answer": "Chest X-ray, PA view with breast shadows digitally removed for improved lung field visualization.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this X-ray image by removing the specified region of the breast tissue.",
+        "explanation": "The Input image displays prominent, superimposed soft-tissue densities over the lower lung fields and costophrenic angles, which are characteristic of breast shadows in a frontal chest radiograph. The task is to remove these artifacts to improve visualization of the underlying pulmonary structures."
+      },
+      "vlm_answer": {
+        "content": "Chest X-ray, PA view with breast shadows digitally removed for improved lung field visualization.",
+        "explanation": "The Ground Truth image shows the same anatomical structures as the Input but without the obscuring breast tissue shadows, resulting in clearer visualization of the lungs, diaphragm, and costophrenic angles, which is the intended outcome of the cleanup task."
+      },
+      "vlm_visual_differences": {
+        "location": "The differences are most prominent in the lower anterior thorax, specifically overlying the lower lung zones and costophrenic angles.",
+        "size": "The area of difference corresponds to the approximate size and shape of the bilateral breast tissue, which has been removed in the Ground Truth image.",
+        "intensity": "The high-attenuation (darker) regions representing breast tissue in the Input image are replaced by lower-attenuation (lighter) areas in the Ground Truth, matching the surrounding lung parenchyma.",
+        "texture": "The heterogeneous, dense texture of the breast tissue in the Input is replaced by the homogeneous, air-filled texture of the lung fields in the Ground Truth."
+      },
+      "validation": {
+        "quality_score": 6,
+        "medical_accuracy": 7,
+        "clarity": 5,
+        "total_score": 18,
+        "suggestions": [
+          "Clarify whether the artifact removal was performed manually, algorithmically, or via post-processing software.",
+          "Specify if breast shadow removal is standard clinical practice or an experimental enhancement.",
+          "Include a brief rationale for why removing breast shadows improves diagnostic utility (e.g., reduces false positives in lung nodule detection).",
+          "Add metadata such as patient positioning, exposure settings, or modality-specific parameters if relevant to artifact correction."
+        ],
+        "overall_assessment": "The instruction-answer pair is partially valid and medically plausible but lacks clarity and contextual detail. The answer correctly identifies a common artifact (breast shadows) and describes a reasonable correction, but fails to explain how or why it was done, which limits its usefulness for AI training.",
+        "is_valid": true
+      }
+    }
+  },
+  {
+    "sample_id": "S07",
+    "task": "contrast-enhancement",
+    "instruction": "Enhance the contrast of this Clinical Photo image using advanced image processing algorithms for improved diagnostic visibility",
+    "canonical_reference_answer": "Enhanced Clinical Photo image with improved contrast and brightness for better diagnostic visibility",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S08",
+    "task": "noise-reconstruction",
+    "instruction": "Apply sophisticated noise reduction to this CT scan while preserving fine anatomical details and diagnostic features",
+    "canonical_reference_answer": "Denoised CT image with reduced noise and enhanced anatomical clarity",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S09",
+    "task": "resolution-editing",
+    "instruction": "Enhance the resolution of this Magnetic Resonance Imaging image using super-resolution algorithms for improved anatomical detail",
+    "canonical_reference_answer": "High-resolution Magnetic Resonance Imaging image with enhanced spatial detail and preserved diagnostic quality",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S10",
+    "task": "style-transfer",
+    "instruction": "Apply advanced style transfer to this Pathology image while preserving anatomical accuracy and diagnostic quality",
+    "canonical_reference_answer": "Style-transformed medical image with preserved anatomical accuracy and enhanced visual appeal",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S11",
+    "task": "2d-to-3d-reconstruction",
+    "instruction": "Generate 3D reconstruction from this low attenuation CT slice",
+    "canonical_reference_answer": "3D volume rendering of the neck and upper thorax with segmented anatomical structures color-coded.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the trachea and esophagus.",
+        "explanation": "The Input images are axial CT slices showing the neck and upper thorax. The colored annotations (yellow, green, pink) highlight structures in the midline, consistent with the trachea and esophagus, which are the target regions for removal as per the task."
+      },
+      "vlm_answer": {
+        "content": "3D volume rendering of the neck and upper thorax with segmented anatomical structures color-coded.",
+        "explanation": "The Ground Truth image is a 3D volumetric rendering that displays multiple segmented anatomical regions (e.g., airway, vascular structures, soft tissue) using distinct colors, indicating a comprehensive segmentation map rather than a single pathology or simple view."
+      },
+      "vlm_visual_differences": {
+        "location": "Input shows 2D axial slices at specific heights; Ground Truth shows a 3D oblique perspective encompassing the entire volume.",
+        "size": "Ground Truth represents the full 3D extent of the anatomy; Input shows only thin 2D cross-sections.",
+        "intensity": "Input uses grayscale Hounsfield units; Ground Truth uses artificial, non-anatomical color coding to differentiate segments.",
+        "texture": "Input has natural CT noise and anatomical detail; Ground Truth has smooth, rendered surfaces with clear boundaries between color-coded regions."
+      }
+    }
+  },
+  {
+    "sample_id": "S12",
+    "task": "3d-to-2d-projection",
+    "instruction": "Create axial_cross_section at 100% position in this 3D CT scan",
+    "canonical_reference_answer": "CT, axial view of the thorax with a highlighted pulmonary nodule in the right lung.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the lung.",
+        "explanation": "The Input image is a grayscale cross-sectional scan showing anatomical structures consistent with a thoracic CT, including bilateral lung fields. The task involves modifying the image by removing a specific region within the lung, which aligns with the visual content and the provided modality hint."
+      },
+      "vlm_answer": {
+        "content": "CT, axial view of the thorax with a highlighted pulmonary nodule in the right lung.",
+        "explanation": "The Ground Truth image is an axial CT slice of the chest, clearly displaying lung parenchyma, mediastinum, and spine. A distinct, circumscribed lesion (nodule) is highlighted in the right lung, indicating the target region for segmentation or annotation."
+      },
+      "vlm_visual_differences": {
+        "location": "The highlighted region in the Ground Truth is located in the right lung parenchyma, whereas the Input image shows no such explicit marking.",
+        "size": "The highlighted nodule in the Ground Truth is small and focal, occupying a limited portion of the lung field; the Input image does not isolate any specific area by size.",
+        "intensity": "The nodule in the Ground Truth appears as a bright, well-defined region against darker lung tissue, while the Input image displays uniform grayscale without enhanced contrast for lesions.",
+        "texture": "The Ground Truth highlights a smooth, rounded lesion with sharp boundaries, contrasting with the heterogeneous, grainy texture of normal lung parenchyma; the Input image lacks such textural differentiation for pathology."
+      }
+    }
+  },
+  {
+    "sample_id": "S14",
+    "task": "instruction-editing",
+    "instruction": "Apply enhancement processing to the jugular_vein using AI enhancement in this hypoechoic Ultrasound longitudinal image",
+    "canonical_reference_answer": "Ultrasound, longitudinal view of the left thyroid with the internal jugular vein segmented in blue.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the jugular vein.",
+        "explanation": "The Input image is a grayscale ultrasound scan showing soft tissue structures. The Ground Truth image highlights a large, anechoic (dark) tubular structure on the right side with blue overlay, which is characteristic of a blood vessel like the jugular vein. The instruction to 'remove' this region aligns with the task of segmenting or masking out the jugular vein from the original image."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound, longitudinal view of the left thyroid with the internal jugular vein segmented in blue.",
+        "explanation": "The Ground Truth image shows the same anatomical field as the Input but with the internal jugular vein explicitly outlined and filled with blue color. This confirms the presence and location of the jugular vein adjacent to the thyroid gland, consistent with standard neck ultrasound anatomy."
+      },
+      "vlm_visual_differences": {
+        "location": "The blue overlay in the Ground Truth is located in the right half of the image, corresponding to the expected anatomical position of the internal jugular vein lateral to the thyroid.",
+        "size": "The blue region occupies a significant portion of the right side of the image, indicating a large vascular structure consistent with the jugular vein's diameter.",
+        "intensity": "The blue overlay has uniform high intensity (color) compared to the grayscale echotexture of the surrounding tissues in the Input image.",
+        "texture": "The blue region is smooth and homogeneous, contrasting with the heterogeneous, grainy echotexture of the thyroid parenchyma and surrounding soft tissues in the Input image."
+      }
+    }
+  },
+  {
+    "sample_id": "S15",
+    "task": "organic-reconstruction",
+    "instruction": "Reconstruct the extensive liver in this speckled Ultrasound image",
+    "canonical_reference_answer": "Ultrasound of the liver showing heterogeneous echotexture with possible focal lesion.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the liver.",
+        "explanation": "The Input image displays a fan-shaped, grayscale ultrasound scan with speckled texture and posterior acoustic shadowing, characteristic of abdominal ultrasound. The metadata hint 'anatomy=abdominal' and 'target_hint=liver' aligns with the visual evidence of hepatic parenchyma, including potential focal lesions or artifacts that may require cleanup."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound of the liver showing heterogeneous echotexture with possible focal lesion.",
+        "explanation": "The Ground Truth image presents a clearer, more uniform depiction of liver tissue compared to the Input, with reduced noise and artifact, suggesting post-processing or denoising. The overall shape and echogenicity are consistent with normal or pathologic liver parenchyma in an abdominal ultrasound."
+      },
+      "vlm_visual_differences": {
+        "location": "The noisy/artifact region in the Input is primarily in the upper left quadrant; it is suppressed or removed in the Ground Truth.",
+        "size": "The affected area appears slightly smaller in the Ground Truth due to artifact removal.",
+        "intensity": "The Input has higher intensity speckle noise and shadowing; the Ground Truth shows smoother, more homogeneous gray-scale intensity.",
+        "texture": "Input exhibits coarse, grainy texture with radial streaks; Ground Truth has finer, more uniform echotexture resembling typical liver parenchyma."
+      }
+    }
+  },
+  {
+    "sample_id": "S16",
+    "task": "organic-removal",
+    "instruction": "Remove the artery from this medical image using inpainting technique",
+    "canonical_reference_answer": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Remove the artery from this medical image while preserving surrounding anatomical structures.",
+        "explanation": "The task requires removing the artery from the medical image using inpainting technique. This involves identifying the target anatomical structure and applying the specified removal method while maintaining the integrity of surrounding tissues."
+      },
+      "vlm_answer": {
+        "content": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+        "explanation": "The processed image shows successful removal of the artery using inpainting technique. The surrounding anatomical structures remain intact, demonstrating proper segmentation and removal of the target organ while preserving the overall image quality and anatomical context."
+      },
+      "vlm_visual_differences": {
+        "location": "The artery region has been completely removed from its original anatomical location.",
+        "size": "The removed artery area has been replaced with inpainting, creating a void in the image.",
+        "intensity": "The intensity values in the artery region have been modified according to the inpainting technique applied.",
+        "texture": "The texture in the artery region has been altered to match the inpainting approach, while surrounding tissues maintain their original texture."
+      }
+    }
+  },
+  {
+    "sample_id": "S17",
+    "task": "multiple-choice",
+    "instruction": "Question: Which organ is this image most likely from?\n\nOptions:\nA. Thymus\nB. Thyroid\nC. Lymph Node\nD. Salivary Gland",
+    "canonical_reference_answer": "B. Thyroid",
+    "choices": [
+      "A. Thymus",
+      "B. Thyroid",
+      "C. Lymph Node",
+      "D. Salivary Gland"
+    ],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S18",
+    "task": "multiple-choice",
+    "instruction": "Question: What lesion is most clearly visible in this image?\n\nOptions:\nA. Atrophic Rete Ridges\nB. Hyperkeratosis\nC. Flat Rete Ridges\nD. Elongated Rete Ridges\nE. Vesicles\nF. Acanthosis\nG. Spongiosis\nH. Parakeratosis",
+    "canonical_reference_answer": "F. Acanthosis",
+    "choices": [
+      "A. Atrophic Rete Ridges",
+      "B. Hyperkeratosis",
+      "C. Flat Rete Ridges",
+      "D. Elongated Rete Ridges",
+      "E. Vesicles",
+      "F. Acanthosis",
+      "G. Spongiosis",
+      "H. Parakeratosis"
+    ],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S19",
+    "task": "blank-filling",
+    "instruction": "The pathology shown in this image is ____.",
+    "canonical_reference_answer": "Erythema migrans",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S20",
+    "task": "blank-filling",
+    "instruction": "The pathology is more consistent with ____.",
+    "canonical_reference_answer": "Acne rosacea",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S21",
+    "task": "question-answering",
+    "instruction": "What imaging modality is used in this image?",
+    "canonical_reference_answer": "The diagnosis is that the imaging modality used in this image is X-ray. Key imaging features supporting this diagnosis include the presence of radiopaque and radiolucent areas, which are characteristic of X-ray imaging, allowing for visualization of bone structures and potential pathologies such as fractures or infections. Other options such as MRI and CT are less likely due to their ability to provide detailed soft tissue contrast and cross-sectional images, which are not typically represented in standard X-ray images. Ultrasound is also less likely as it primarily evaluates soft tissue and fluid collections rather than providing a comprehensive view of bony structures. In clinical context, X-rays are often the first-line imaging modality for assessing skeletal injuries or abnormalities due to their accessibility and speed.",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S22",
+    "task": "question-answering",
+    "instruction": "Based on the radiographic findings in the first and second images, which diagnosis is most consistent with the asymmetric involvement of the distal interphalangeal (DIP) joints, irregular joint margins, and possible osteophytes, while considering the systemic nature of the disease and the potential for mixed or subtle findings?",
+    "canonical_reference_answer": "The diagnosis most consistent with the asymmetric involvement of the distal interphalangeal (DIP) joints, irregular joint margins, and possible osteophytes, as observed in the radiographic findings, is psoriatic arthritis, particularly given the context of a history of psoriasis. \n\nPsoriatic arthritis is known for its characteristic scattershot involvement of joints, which aligns with the asymmetric pattern noted in the images. The irregular joint margins and presence of osteophytes further support this diagnosis, as these features are commonly seen in psoriatic arthritis due to the inflammatory nature of the disease affecting the joint structures. \n\nIn contrast, osteoarthritis typically presents with bilateral joint involvement and a more uniform pattern of degenerative changes, which does not match the asymmetric findings here. Rheumatoid arthritis is also less likely, as it usually affects joints symmetrically and tends to spare the DIP joints, focusing instead on the metacarpophalangeal (MCP) joints and proximal interphalangeal (PIP) joints. \n\nOther conditions such as gout and septic arthritis do not present with the specific radiographic features described, such as osteophytes and irregular joint margins. Erosive osteoarthritis, while it could be considered, usually exhibits central erosions and specific deformities like gull-wing appearances, which are not evident in the provided images. \n\nIn summary, the combination of asymmetric DIP joint involvement, irregular joint margins, and potential osteophyte formation, alongside the clinical history of psoriasis, strongly points to psoriatic arthritis as the most fitting diagnosis.",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S23",
+    "task": "report-generation",
+    "instruction": "Generate a clinical report for this CT scan.",
+    "canonical_reference_answer": "Chest computed tomography. There are multiple small nodules along both the interlobar fissures and peribronchial areas in the right lower lobe (yellow cycle) and in the lingular segment of the left upper lobe, suggestive of early parenchymal involvement of the sarcoidosis. There are several small to borderline-enlarged lymph nodes in both the hilar and interlobar nodal areas.",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S24",
+    "task": "report-generation",
+    "instruction": "Generate a structured radiology report for the following case:\n\nBased on the visual findings across the first, second, and third images, which of the following best describes the progression and interplay between the depressed skull fracture and the associated epidural hematoma?",
+    "canonical_reference_answer": "CLINICAL INDICATION:\nPatient presents with head trauma and neurological symptoms, warranting evaluation for skull fractures and potential intracranial hemorrhage.\n\nTECHNIQUE:\nCT scan of the head was performed without contrast, utilizing axial and coronal views.\n\nFINDINGS:\nCT imaging demonstrates a depressed skull fracture in the frontal region characterized by overriding bone fragments. The fracture is associated with a biconvex epidural hematoma located between the periosteal dura and the inner table of the skull. The hematoma exhibits classic lens-shaped morphology, consistent with its location and the mechanism of injury. Additionally, there is evidence of inward displacement of the skull, which is in contact with the underlying brain tissue, indicating potential brain contusion or injury.\n\nIMPRESSION:\nDepressed skull fracture with associated biconvex epidural hematoma. Clinical correlation is advised for potential surgical intervention.",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S25",
+    "task": "anatomical-annotation",
+    "instruction": "Annotate this Ultrasound image of Liver with detailed labels for the Nodule diagnosed as CHC (Cholangiocarcinoma), including anatomical landmarks and diagnostic findings",
+    "canonical_reference_answer": "Annotated Ultrasound image with detailed anatomical labels and clinical markers for diagnostic interpretation",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S26",
+    "task": "anatomical-annotation",
+    "instruction": "Overlay clinical annotations on this Ultrasound scan",
+    "canonical_reference_answer": "Complex adnexal mass with both solid and cystic components extending from the left ovary, likely benign with calcifications.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the ovary.",
+        "explanation": "The Input image is a grayscale ultrasound scan showing a pelvic structure. The presence of a complex mass with both solid and cystic components, as confirmed in the Ground Truth, strongly suggests the anatomical entity is the ovary. The instruction targets this specific organ for cleanup."
+      },
+      "vlm_answer": {
+        "content": "Complex adnexal mass with both solid and cystic components extending from the left ovary, likely benign with calcifications.",
+        "explanation": "This answer directly reflects the diagnostic text provided in the Ground Truth image, which explicitly identifies the lesion's characteristics (complex, solid/cystic), location (extending from left ovary), and diagnosis (likely benign with calcifications)."
+      },
+      "vlm_visual_differences": {
+        "location": "The Ground Truth image has an overlaid text box in the upper right quadrant containing diagnostic information, which is absent in the Input image.",
+        "size": "No significant difference in the size of the main anatomical structures; the images are identical except for the added text overlay.",
+        "intensity": "No difference in pixel intensity or contrast between the two images; the underlying ultrasound data is unchanged.",
+        "texture": "No difference in texture; the grayscale patterns and speckle noise of the ultrasound image are identical in both."
+      }
+    }
+  },
+  {
+    "sample_id": "S27",
+    "task": "artifact-removal",
+    "instruction": "Clean up this X-Ray scan",
+    "canonical_reference_answer": "Chest X-ray, posteroanterior view, showing clear lung fields and normal cardiac silhouette after artifact removal.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this X-ray image by removing the specified region of the left lung.",
+        "explanation": "The Input image shows a chest X-ray with an apparent artifact or obscuration on the left side, specifically over the left lung field. The instruction targets this region for removal to restore the underlying anatomy, as seen in the Ground Truth."
+      },
+      "vlm_answer": {
+        "content": "Chest X-ray, posteroanterior view, showing clear lung fields and normal cardiac silhouette after artifact removal.",
+        "explanation": "The Ground Truth image displays a standard diagnostic-quality chest X-ray where the left lung is fully visible without any obscuring artifacts, indicating successful cleanup of the input image."
+      },
+      "vlm_visual_differences": {
+        "location": "Left hemithorax, primarily over the left lung field",
+        "size": "Large, occupying approximately one-third of the thoracic cavity",
+        "intensity": "Highly opaque in Input, completely transparent in Ground Truth",
+        "texture": "Uniformly dense and featureless in Input; reveals normal pulmonary vasculature and lung parenchyma in Ground Truth"
+      },
+      "validation": {
+        "quality_score": 6,
+        "medical_accuracy": 8,
+        "clarity": 5,
+        "total_score": 19,
+        "suggestions": [
+          "Clarify what 'clean up' means — specify whether it refers to removing motion blur, metal artifacts, noise, or other types of distortions.",
+          "Include a description of the artifact removal process or technique used (e.g., digital filtering, AI-based denoising) for reproducibility and educational value.",
+          "Specify if the post-processing altered any diagnostic features — e.g., 'no loss of anatomical detail observed after cleanup'.",
+          "Add quantitative or qualitative metrics if available (e.g., SNR improvement, artifact reduction percentage)."
+        ],
+        "overall_assessment": "The instruction is too vague ('clean up') and lacks specificity about the type of artifact or desired outcome. The answer correctly describes a normal chest X-ray post-cleanup but does not explain what was cleaned or how, reducing its utility for training medical AI models. Medical accuracy is acceptable, but clarity and completeness need improvement.",
+        "is_valid": true
+      }
+    }
+  },
+  {
+    "sample_id": "S28",
+    "task": "artifact-removal",
+    "instruction": "Eliminate distortions from this X-Ray scan",
+    "canonical_reference_answer": "Chest X-ray with the left breast shadow digitally removed to enhance lung field visibility.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this X-ray image by removing the specified region of the left breast.",
+        "explanation": "The Input image is a chest X-ray showing a soft tissue density overlying the left lung field, indicated by the red arrow. This is consistent with the normal anatomical position of the left breast. The instruction targets this specific region for removal to improve visualization of the underlying lung parenchyma."
+      },
+      "vlm_answer": {
+        "content": "Chest X-ray with the left breast shadow digitally removed to enhance lung field visibility.",
+        "explanation": "The Ground Truth image visually confirms that the soft tissue opacity in the left lower lung zone (indicated by the red arrow) has been eliminated, resulting in a clearer view of the underlying pulmonary structures, which is the intended outcome of the cleanup task."
+      },
+      "vlm_visual_differences": {
+        "location": "The difference is localized to the left lower lung field, specifically where the breast tissue overlies the lung.",
+        "size": "The area of change corresponds to the approximate size of the left breast shadow, covering a significant portion of the left hemithorax.",
+        "intensity": "The intensity of the soft tissue opacity is reduced to near background levels in the Ground Truth, making the underlying lung markings more visible.",
+        "texture": "The texture changes from a homogenous, dense soft tissue pattern to a more radiolucent, aerated lung pattern, revealing vascular and bronchial markings previously obscured."
+      },
+      "validation": {
+        "quality_score": 6,
+        "medical_accuracy": 7,
+        "clarity": 5,
+        "total_score": 18,
+        "suggestions": [
+          "Clarify what type of 'distortions' are being targeted — anatomical shadows (like breast tissue) vs. technical artifacts (motion, grid lines, etc.).",
+          "Specify whether the removal is for diagnostic enhancement or research purposes, as this affects clinical appropriateness.",
+          "Include a disclaimer that digitally removing anatomical structures may alter diagnostic interpretation and should be used cautiously in clinical settings.",
+          "Add context about the patient (e.g., gender, age) if relevant to justify breast shadow removal."
+        ],
+        "overall_assessment": "The instruction-answer pair is partially valid but lacks precision. While removing breast shadow can improve lung field visibility, calling it 'eliminating distortions' is medically imprecise — breast tissue is not a distortion but normal anatomy. The answer aligns with the task but doesn't address potential clinical implications or define the scope of 'distortion'.",
+        "is_valid": true
+      }
+    }
+  },
+  {
+    "sample_id": "S29",
+    "task": "contrast-enhancement",
+    "instruction": "Improve the visual quality of this Radiograph scan through advanced contrast enhancement while preserving diagnostic information",
+    "canonical_reference_answer": "Enhanced Radiograph image with improved contrast and brightness for better diagnostic visibility",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S30",
+    "task": "contrast-enhancement",
+    "instruction": "Enhance the contrast of this Clinical Photo image using advanced image processing algorithms for improved diagnostic visibility",
+    "canonical_reference_answer": "Enhanced Clinical Photo image with improved contrast and brightness for better diagnostic visibility",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S31",
+    "task": "noise-reconstruction",
+    "instruction": "Apply sophisticated noise reduction to this CT scan while preserving fine anatomical details and diagnostic features",
+    "canonical_reference_answer": "Denoised CT image with reduced noise and enhanced anatomical clarity",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S32",
+    "task": "noise-reconstruction",
+    "instruction": "Clean up this noisy CT image",
+    "canonical_reference_answer": "CT, axial view of the thorax showing the heart and surrounding structures",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the heart.",
+        "explanation": "The Input image shows a cross-sectional CT scan of the thorax with the heart prominently visible in the mediastinum. The instruction targets the heart as the entity to be removed, consistent with the anatomical structures present."
+      },
+      "vlm_answer": {
+        "content": "CT, axial view of the thorax showing the heart and surrounding structures",
+        "explanation": "The Ground Truth image is a clean, noise-free axial CT slice of the thorax, clearly depicting the heart, great vessels, lungs, and bony thorax, confirming the anatomical context and modality."
+      },
+      "vlm_visual_differences": {
+        "location": "The heart and mediastinal structures are centrally located in both images; no spatial shift is observed.",
+        "size": "The anatomical structures appear identical in size; no resizing or deformation is evident.",
+        "intensity": "The Input image exhibits high noise (speckled appearance), while the Ground Truth has smooth, consistent tissue intensities.",
+        "texture": "Input has granular, noisy texture; Ground Truth has clean, anatomically coherent texture with clear tissue boundaries."
+      }
+    }
+  },
+  {
+    "sample_id": "S33",
+    "task": "resolution-editing",
+    "instruction": "Improve the spatial resolution of this Magnetic_Resonance_Imaging image using deep learning-based super-resolution methods",
+    "canonical_reference_answer": "High-resolution Magnetic_Resonance_Imaging image with enhanced spatial detail and preserved diagnostic quality",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S34",
+    "task": "resolution-editing",
+    "instruction": "Enhance the resolution of this low-quality Magnetic Resonance Imaging image",
+    "canonical_reference_answer": "",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "",
+        "explanation": "JSON parse error"
+      },
+      "vlm_answer": {
+        "content": "",
+        "explanation": "JSON parse error"
+      }
+    }
+  },
+  {
+    "sample_id": "S35",
+    "task": "style-transfer",
+    "instruction": "Transform this Pathology using thermal colormap visualization to enhance tissue contrast and signal intensity distribution.\n\nTechnical Implementation: Apply thermal color mapping with temperature-based color gradients (blue-cold to red-hot spectrum) using histogram equalization and adaptive thresholding to optimize dynamic range.\n\nMedical Accuracy Requirements: Map signal intensities to thermal colors while preserving diagnostic information for None assessment. Ensure pathological areas maintain distinguishable thermal signatures.\n\nQuality Standards: Maintain original image resolution, preserve quantitative intensity relationships, and ensure color mapping accuracy with medical-grade calibration standards.\n\nContextual Considerations: Preserve modality-specific signal characteristics\n\nOutput Validation: The resulting image must pass medical imaging quality assessment, maintain diagnostic accuracy standards, and demonstrate successful style transformation while preserving all clinically relevant anatomical information.",
+    "canonical_reference_answer": "Style-transformed Pathology image with thermal colormap applied while preserving anatomical accuracy and diagnostic utility",
+    "choices": [],
+    "record_level_llm_fields": {}
+  },
+  {
+    "sample_id": "S36",
+    "task": "style-transfer",
+    "instruction": "Transform this Pathology using thermal colormap to enhance tissue contrast.\n\nTechnical: Apply thermal mapping (blue-cold to red-hot) with histogram equalization and adaptive thresholding.\n\nMedical: Map intensities to colors, preserving diagnostics for Tissue Sample; keep pathological areas distinguishable.\n\nQuality: Maintain resolution, intensity relationships, and medical-grade color accuracy.\n\nContext: Focus on Tissue Sample anatomical accuracy; Preserve visibility of Elongated Structure characteristics; Maintain diagnostic features relevant to Microfilarial Parasite; Preserve modality-specific signal characteristics\n\nValidation: Pass quality assessment, maintain diagnostics, preserve anatomy.",
+    "canonical_reference_answer": "Style-transformed Pathology image with thermal colormap applied while preserving anatomical accuracy and diagnostic utility",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "",
+        "explanation": "JSON parse error"
+      },
+      "vlm_answer": {
+        "content": "",
+        "explanation": "JSON parse error"
+      }
+    }
+  },
+  {
+    "sample_id": "S37",
+    "task": "2d-to-3d-reconstruction",
+    "instruction": "Reconstruct 3D volume from this 2D CT image",
+    "canonical_reference_answer": "Segmentation mask of the brain parenchyma on a CT scan.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the brain parenchyma.",
+        "explanation": "The Input image displays axial CT slices of the head, clearly showing the cranial vault and intracranial contents. The central structure is the brain parenchyma, which is the target for segmentation or removal as implied by the task template. The small colored pixels in one slice likely represent a lesion or artifact within the brain tissue that needs to be cleaned."
+      },
+      "vlm_answer": {
+        "content": "Segmentation mask of the brain parenchyma on a CT scan.",
+        "explanation": "The Ground Truth image is not a raw scan but a color-coded segmentation map. The large cyan area represents the segmented brain parenchyma, while the surrounding rainbow-colored border likely indicates the boundary or edge of the segmentation, confirming it is a labeled mask for the brain tissue."
+      },
+      "vlm_visual_differences": {
+        "location": "The Input shows anatomical structures in grayscale across multiple slices; the Ground Truth isolates a single region (brain parenchyma) in a single view with color coding.",
+        "size": "The Ground Truth mask covers the entire brain parenchyma, whereas the Input shows the full head including bone and other tissues.",
+        "intensity": "Input uses Hounsfield units (grayscale); Ground Truth uses artificial colors (cyan for interior, rainbow for boundary) to denote segmentation.",
+        "texture": "Input has natural anatomical texture and noise; Ground Truth has smooth, uniform color regions with a distinct, sharp boundary layer."
+      }
+    }
+  },
+  {
+    "sample_id": "S38",
+    "task": "2d-to-3d-reconstruction",
+    "instruction": "Create volumetric model from this 2D CT scan",
+    "canonical_reference_answer": "Ground Truth is a color-coded 3D segmentation map of thoracic structures, likely including the heart, lungs, and vessels.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the heart.",
+        "explanation": "The Input image is a CT scan showing axial slices of the thorax. The highlighted regions (in orange, cyan, magenta) consistently overlay the cardiac silhouette, indicating the heart is the target anatomical entity for removal or segmentation."
+      },
+      "vlm_answer": {
+        "content": "Ground Truth is a color-coded 3D segmentation map of thoracic structures, likely including the heart, lungs, and vessels.",
+        "explanation": "The Ground Truth image displays a complex, multi-colored 3D volume rendering, which is characteristic of a segmented anatomical model derived from medical imaging data, where different colors represent distinct tissue types or organs."
+      },
+      "vlm_visual_differences": {
+        "location": "Input shows 2D axial slices; Ground Truth shows a 3D volumetric view.",
+        "size": "The segmented region in Input is confined to a single slice; Ground Truth encompasses the entire 3D volume of the structure.",
+        "intensity": "Input uses grayscale Hounsfield units; Ground Truth uses arbitrary bright colors for segmentation labels.",
+        "texture": "Input has natural anatomical textures and noise; Ground Truth has smooth, artificial color boundaries defining segmented regions."
+      }
+    }
+  },
+  {
+    "sample_id": "S39",
+    "task": "3d-to-2d-projection",
+    "instruction": "Create axial_cross_section at 75% position in this 3D CT scan",
+    "canonical_reference_answer": "CT, axial view of the upper abdomen showing the liver, spleen, and vertebral column.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the patient's body and the scanning table.",
+        "explanation": "The Input image is a CT scan showing a cross-section of the torso, including the liver, spine, and surrounding soft tissues. The 'specified region' refers to the non-anatomical elements (scanning table and patient's outer body contour) that are present in the Input but not in the Ground Truth, which focuses solely on the internal anatomy."
+      },
+      "vlm_answer": {
+        "content": "CT, axial view of the upper abdomen showing the liver, spleen, and vertebral column.",
+        "explanation": "The Ground Truth image displays a clean axial CT slice of the upper abdomen with clear visualization of the liver, spleen, and vertebral column, without any external artifacts or patient outline, indicating it has been processed to isolate the anatomical structures."
+      },
+      "vlm_visual_differences": {
+        "location": "The Input image includes the patient's outer body contour and scanning table at the periphery, while the Ground Truth image crops these out, focusing only on the internal organs.",
+        "size": "The Ground Truth image appears smaller in overall frame size due to cropping of non-anatomical regions.",
+        "intensity": "The background intensity in the Input image is higher (whiter) around the edges, whereas the Ground Truth has a black background, enhancing contrast for internal structures.",
+        "texture": "The Input image shows grainy noise and motion blur around the edges, while the Ground Truth image has smoother, cleaner textures within the anatomical boundaries."
+      }
+    }
+  },
+  {
+    "sample_id": "S40",
+    "task": "3d-to-2d-projection",
+    "instruction": "Create axial_cross_section at 50% position in this 3D CT scan",
+    "canonical_reference_answer": "CT, axial view showing a segmented bladder (orange) with surrounding tissue boundaries (cyan/purple).",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this CT image by removing the specified region of the bladder.",
+        "explanation": "The Input image displays a 3D volumetric rendering of a pelvic structure with a large, centrally located, brightly colored cavity consistent with the urinary bladder. The task is to segment and remove this specific anatomical entity from the CT data."
+      },
+      "vlm_answer": {
+        "content": "CT, axial view showing a segmented bladder (orange) with surrounding tissue boundaries (cyan/purple).",
+        "explanation": "The Ground Truth image is a 2D axial CT slice where the bladder is explicitly outlined and filled with an orange mask, indicating the ground truth segmentation for this organ. The cyan and purple lines represent the precise boundary of the segmented region."
+      },
+      "vlm_visual_differences": {
+        "location": "Input shows a 3D oblique view of the entire pelvic volume; Ground Truth shows a single 2D axial cross-section at the level of the bladder.",
+        "size": "The segmented region in Ground Truth represents the true 2D cross-sectional area of the bladder at that slice, while the Input's 3D rendering shows the full volumetric extent.",
+        "intensity": "Input uses artificial, non-anatomical colors (magenta, teal, orange) for visualization; Ground Truth uses grayscale for anatomical tissue contrast with superimposed color masks for segmentation.",
+        "texture": "Input has a smooth, rendered surface texture; Ground Truth shows the inherent granular texture of CT Hounsfield units with sharp, discrete segmentation borders."
+      }
+    }
+  },
+  {
+    "sample_id": "S43",
+    "task": "instruction-editing",
+    "instruction": "Process the carotid artery lumen with AI enhancement in this heterogeneous Ultrasound longitudinal view",
+    "canonical_reference_answer": "Ultrasound, longitudinal view of the carotid artery with labeled lumen.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the carotid artery lumen.",
+        "explanation": "The Input image is a grayscale ultrasound scan showing a hypoechoic (dark) circular structure consistent with a vascular lumen. The Ground Truth image explicitly labels this as the 'Carotid artery lumen,' confirming the entity to be targeted for removal in the cleanup task."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound, longitudinal view of the carotid artery with labeled lumen.",
+        "explanation": "The Ground Truth image displays an annotated ultrasound scan where a white arrow and text clearly identify the dark, anechoic circular area as the 'Carotid artery lumen,' indicating the anatomical focus and providing diagnostic context."
+      },
+      "vlm_visual_differences": {
+        "location": "The lumen is centrally located in the mid-portion of the image, slightly left of center.",
+        "size": "The lumen appears as a well-defined circular region occupying approximately 10-15% of the total image area.",
+        "intensity": "The lumen is markedly hypoechoic (very dark/black) compared to the surrounding echogenic (gray/white) soft tissue and vessel wall.",
+        "texture": "The lumen has a smooth, homogeneous texture, while the surrounding tissue exhibits heterogeneous, grainy echotexture typical of muscle and connective tissue."
+      }
+    }
+  },
+  {
+    "sample_id": "S44",
+    "task": "instruction-editing",
+    "instruction": "Apply AI-based enhancement enhancement to the carotid_artery in this heterogeneous Ultrasound longitudinal image",
+    "canonical_reference_answer": "Ultrasound, longitudinal view of the left neck with manual segmentation of the common carotid artery.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the carotid artery.",
+        "explanation": "The Input image is a grayscale ultrasound scan showing soft tissue structures. The metadata hint 'carotid_artery' and the Ground Truth annotation (a bright cyan line tracing a tubular structure) strongly suggest the target is the carotid artery, which is commonly visualized in neck ultrasounds. The instruction asks to remove this specific vascular structure."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound, longitudinal view of the left neck with manual segmentation of the common carotid artery.",
+        "explanation": "The Ground Truth image displays the same ultrasound frame as the Input but overlays a clear, continuous cyan line that precisely traces the lumen of a major vessel running vertically along the right side of the image. This anatomical course and appearance are characteristic of the common carotid artery in a longitudinal neck scan."
+      },
+      "vlm_visual_differences": {
+        "location": "The cyan overlay in the Ground Truth is located along the right lateral aspect of the image, following the path of a tubular structure from top to bottom.",
+        "size": "The annotated region in the Ground Truth represents a thin, linear structure (the vessel wall/lumen boundary), whereas the Input shows the full cross-section of the surrounding tissue without any segmentation.",
+        "intensity": "The Ground Truth introduces a high-intensity cyan color not present in the grayscale Input, making the artery stand out dramatically against the background tissue.",
+        "texture": "The Input image has a grainy, speckled texture typical of ultrasound. The Ground Truth adds a smooth, uniform cyan line with no internal texture, contrasting sharply with the underlying heterogeneous tissue texture."
+      }
+    }
+  },
+  {
+    "sample_id": "S45",
+    "task": "organic-reconstruction",
+    "instruction": "Reconstruct the large-scale fetal head in this homogeneous Ultrasound image",
+    "canonical_reference_answer": "Ultrasound image of the fetal head with the obscuring artifact removed, revealing clearer anatomical boundaries.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the fetal head.",
+        "explanation": "The Input image displays a large, anechoic circular structure consistent with the fetal head in a transabdominal ultrasound. The instruction is to remove this specific region, which aligns with the visual evidence of a targeted area for cleanup."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound image of the fetal head with the obscuring artifact removed, revealing clearer anatomical boundaries.",
+        "explanation": "The Ground Truth image shows the same fetal head but without the large circular artifact present in the Input image, indicating successful removal and restoration of the underlying anatomy."
+      },
+      "vlm_visual_differences": {
+        "location": "The large circular artifact in the center of the Input image is absent in the Ground Truth image.",
+        "size": "The central dark region in the Input image is significantly larger than any corresponding feature in the Ground Truth image.",
+        "intensity": "The artifact in the Input image is uniformly hypoechoic (dark), while the corresponding area in the Ground Truth image shows variable echogenicity with visible tissue interfaces.",
+        "texture": "The Input image has a smooth, featureless texture within the artifact, whereas the Ground Truth image displays granular, heterogeneous texture consistent with normal fetal head anatomy."
+      }
+    }
+  },
+  {
+    "sample_id": "S46",
+    "task": "organic-reconstruction",
+    "instruction": "Reconstruct the extensive head_circumference in this anechoic Ultrasound image",
+    "canonical_reference_answer": "Ultrasound, transverse view of the fetal head showing clear cranial bone and intracranial structures.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Clean up this Ultrasound image by removing the specified region of the fetal head.",
+        "explanation": "The Input image displays a circular, anechoic structure with radial artifacts, characteristic of a fetal head in a transverse plane during obstetric ultrasound. The instruction is to 'clean up' the image, which implies removing the artifact (the radial pattern) that obscures the true anatomy of the fetal head."
+      },
+      "vlm_answer": {
+        "content": "Ultrasound, transverse view of the fetal head showing clear cranial bone and intracranial structures.",
+        "explanation": "The Ground Truth image reveals a well-defined, echogenic circular rim representing the fetal skull, with internal hypoechoic brain tissue visible, confirming it as a standard diagnostic view of the fetal head without artifacts."
+      },
+      "vlm_visual_differences": {
+        "location": "The central circular region in the Input is filled with radial artifacts, while in the Ground Truth, it shows anatomical structures of the fetal head.",
+        "size": "The overall field of view is identical; however, the artifact in the Input occupies the entire central lumen, whereas the Ground Truth shows a smaller, defined cranial ring.",
+        "intensity": "The Input has high-intensity radial streaks emanating from the center, while the Ground Truth has uniform low-to-moderate intensity within the cranium and high intensity at the bony rim.",
+        "texture": "The Input exhibits a synthetic, ray-like texture due to artifact, while the Ground Truth displays natural, heterogeneous soft-tissue texture inside the skull and a smooth, continuous bony contour."
+      }
+    }
+  },
+  {
+    "sample_id": "S47",
+    "task": "organic-removal",
+    "instruction": "Remove the artery from this medical image using inpainting technique",
+    "canonical_reference_answer": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Remove the artery from this medical image while preserving surrounding anatomical structures.",
+        "explanation": "The task requires removing the artery from the medical image using inpainting technique. This involves identifying the target anatomical structure and applying the specified removal method while maintaining the integrity of surrounding tissues."
+      },
+      "vlm_answer": {
+        "content": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+        "explanation": "The processed image shows successful removal of the artery using inpainting technique. The surrounding anatomical structures remain intact, demonstrating proper segmentation and removal of the target organ while preserving the overall image quality and anatomical context."
+      },
+      "vlm_visual_differences": {
+        "location": "The artery region has been completely removed from its original anatomical location.",
+        "size": "The removed artery area has been replaced with inpainting, creating a void in the image.",
+        "intensity": "The intensity values in the artery region have been modified according to the inpainting technique applied.",
+        "texture": "The texture in the artery region has been altered to match the inpainting approach, while surrounding tissues maintain their original texture."
+      }
+    }
+  },
+  {
+    "sample_id": "S48",
+    "task": "organic-removal",
+    "instruction": "Remove the artery from this medical image using inpainting technique",
+    "canonical_reference_answer": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+    "choices": [],
+    "record_level_llm_fields": {
+      "vlm_instruction": {
+        "content": "Remove the artery from this medical image while preserving surrounding anatomical structures.",
+        "explanation": "The task requires removing the artery from the medical image using inpainting technique. This involves identifying the target anatomical structure and applying the specified removal method while maintaining the integrity of surrounding tissues."
+      },
+      "vlm_answer": {
+        "content": "Medical image with artery removed using inpainting technique, showing the surrounding anatomical structures.",
+        "explanation": "The processed image shows successful removal of the artery using inpainting technique. The surrounding anatomical structures remain intact, demonstrating proper segmentation and removal of the target organ while preserving the overall image quality and anatomical context."
+      },
+      "vlm_visual_differences": {
+        "location": "The artery region has been completely removed from its original anatomical location.",
+        "size": "The removed artery area has been replaced with inpainting, creating a void in the image.",
+        "intensity": "The intensity values in the artery region have been modified according to the inpainting technique applied.",
+        "texture": "The texture in the artery region has been altered to match the inpainting approach, while surrounding tissues maintain their original texture."
+      }
+    }
+  }
+]

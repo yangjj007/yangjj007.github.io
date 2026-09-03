@@ -16,7 +16,9 @@ gem "github-pages", group: :jekyll_plugins
 
 # gem "jekyll"
 
-gem "wdm", "~> 0.1.0" if Gem.win_platform?
+# Optional Windows-only dependency for live reload. GitHub Pages builds on Linux;
+# install a compatible wdm version locally only if you need `jekyll serve --livereload`.
+# gem "wdm", "~> 0.1.0" if Gem.win_platform?
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
