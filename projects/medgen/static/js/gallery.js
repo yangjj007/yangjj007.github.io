@@ -41,10 +41,15 @@
     .trim();
 
   const previewText = (text, maxLength) => {
-    if (text.length <= maxLength) return { value: text, truncated: false };
+    if (text.length <= maxLength) return { value: text, remainder: "", truncated: false };
 
-    const naturalBreak = text.slice(0, maxLength).replace(/\s+\S*$/, "").trimEnd();
-    return { value: `${naturalBreak || text.slice(0, maxLength).trimEnd()}…`, truncated: true };
+    const lastSpace = text.lastIndexOf(" ", maxLength);
+    const cutoff = lastSpace > maxLength * 0.6 ? lastSpace : maxLength;
+    return {
+      value: `${text.slice(0, cutoff).trimEnd()}…`,
+      remainder: text.slice(cutoff).trimStart(),
+      truncated: true
+    };
   };
 
   const randomSample = (records, count) => {
@@ -99,12 +104,12 @@
           <div class="sample-card-text">
             <strong>Instruction</strong>
             <span class="sample-card-text-preview">${escapeHtml(instructionPreview.value)}</span>
-            ${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary>Show full instruction</summary><p>${escapeHtml(instruction)}</p></details>` : ""}
+            ${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary>Show remaining instruction</summary><p>${escapeHtml(instructionPreview.remainder)}</p></details>` : ""}
           </div>
           <div class="sample-card-text sample-card-answer">
             <strong>Reviewer synopsis</strong>
             <span class="sample-card-text-preview">${escapeHtml(synopsisPreview.value)}</span>
-            ${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary>Show full synopsis</summary><p>${escapeHtml(synopsis)}</p></details>` : ""}
+            ${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary>Show remaining synopsis</summary><p>${escapeHtml(synopsisPreview.remainder)}</p></details>` : ""}
           </div>
           <details>
             <summary>Open record details</summary>
