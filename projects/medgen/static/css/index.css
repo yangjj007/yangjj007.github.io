@@ -547,6 +547,8 @@ a:focus-visible {
 }
 
 .gallery-intro {
+  font-size: 1.1rem;
+  line-height: 1.55;
   margin-bottom: 2.2rem;
   max-width: 920px;
 }
@@ -1344,7 +1346,7 @@ a:focus-visible {
 .sample-card-id,
 .sample-card-format {
   font-family: "Google Sans", "Noto Sans", sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1373,7 +1375,7 @@ a:focus-visible {
 .sample-card-heading h3 {
   color: #1d1d1d;
   font-family: "Google Sans", "Noto Sans", sans-serif;
-  font-size: 1rem;
+  font-size: 1.08rem;
   line-height: 1.2;
   margin: 0;
 }
@@ -1381,7 +1383,7 @@ a:focus-visible {
 .sample-card-heading > span {
   background: #f7efec;
   color: var(--accent);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   line-height: 1.2;
   padding: 0.3rem 0.4rem;
   text-align: right;
@@ -1430,21 +1432,25 @@ a:focus-visible {
 
 .sample-card-copy {
   color: #555;
-  font-size: 0.79rem;
-  line-height: 1.45;
+  font-size: 0.91rem;
+  line-height: 1.52;
   padding-bottom: 0.95rem;
   padding-top: 0.75rem;
 }
 
-.sample-card-copy p {
+.sample-card-text {
   margin: 0 0 0.62rem;
+}
+
+.sample-card-text-preview {
+  display: block;
 }
 
 .sample-card-copy strong {
   color: #333;
   display: block;
   font-family: "Google Sans", "Noto Sans", sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   margin-bottom: 0.18rem;
   text-transform: uppercase;
@@ -1455,7 +1461,24 @@ a:focus-visible {
   padding-left: 0.55rem;
 }
 
-.sample-card-copy details {
+.sample-text-toggle {
+  margin-top: 0.38rem;
+}
+
+.sample-text-toggle summary {
+  color: var(--accent);
+  cursor: pointer;
+  font-family: "Google Sans", "Noto Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.sample-text-toggle p {
+  color: #555;
+  margin: 0.42rem 0 0;
+}
+
+.sample-card-copy > details {
   border-top: 1px solid #eee9e5;
   color: var(--muted);
   font-size: 0.73rem;
@@ -1463,26 +1486,26 @@ a:focus-visible {
   padding-top: 0.55rem;
 }
 
-.sample-card-copy summary {
+.sample-card-copy > details > summary {
   color: #666;
   cursor: pointer;
   font-family: "Google Sans", "Noto Sans", sans-serif;
   font-weight: 600;
 }
 
-.sample-card-copy dl {
+.sample-card-copy > details dl {
   display: grid;
   gap: 0.25rem 0.55rem;
   grid-template-columns: auto 1fr;
   margin: 0.55rem 0 0;
 }
 
-.sample-card-copy dt {
+.sample-card-copy > details dt {
   color: #444;
   font-weight: 700;
 }
 
-.sample-card-copy dd {
+.sample-card-copy > details dd {
   margin: 0;
 }
 

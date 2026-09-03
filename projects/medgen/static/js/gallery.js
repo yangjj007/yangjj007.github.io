@@ -40,6 +40,13 @@
     .replace(/\s+/g, " ")
     .trim();
 
+  const previewText = (text, maxLength) => {
+    if (text.length <= maxLength) return { value: text, truncated: false };
+
+    const naturalBreak = text.slice(0, maxLength).replace(/\s+\S*$/, "").trimEnd();
+    return { value: `${naturalBreak || text.slice(0, maxLength).trimEnd()}…`, truncated: true };
+  };
+
   const randomSample = (records, count) => {
     const shuffled = [...records];
     for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -70,10 +77,9 @@
     const task = taskLabels[record.task] || record.task;
     const format = formatLabels[record.format] || record.format;
     const instruction = compactText(record.instruction);
-    const instructionPreview = instruction.length > 220
-      ? `${instruction.slice(0, 217).trimEnd()}…`
-      : instruction;
     const synopsis = compactText(record.reviewer_synopsis || record.answer);
+    const instructionPreview = previewText(instruction, 180);
+    const synopsisPreview = previewText(synopsis, 145);
     const selection = compactText(record.selection_summary);
     const source = compactText(record.source_dataset_label);
     const hasReference = (record.reference_files || []).length > 0;
@@ -90,12 +96,19 @@
         </div>
         <div class="sample-card-media-grid">${sampleMedia(record)}</div>
         <div class="sample-card-copy">
-          <p><strong>Instruction</strong>${escapeHtml(instructionPreview)}</p>
-          <p class="sample-card-answer"><strong>Reviewer synopsis</strong>${escapeHtml(synopsis)}</p>
+          <div class="sample-card-text">
+            <strong>Instruction</strong>
+            <span class="sample-card-text-preview">${escapeHtml(instructionPreview.value)}</span>
+            ${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary>Show full instruction</summary><p>${escapeHtml(instruction)}</p></details>` : ""}
+          </div>
+          <div class="sample-card-text sample-card-answer">
+            <strong>Reviewer synopsis</strong>
+            <span class="sample-card-text-preview">${escapeHtml(synopsisPreview.value)}</span>
+            ${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary>Show full synopsis</summary><p>${escapeHtml(synopsis)}</p></details>` : ""}
+          </div>
           <details>
             <summary>Open record details</summary>
             <dl>
-              ${instructionPreview !== instruction ? `<dt>Full instruction</dt><dd>${escapeHtml(instruction)}</dd>` : ""}
               <dt>Source label</dt><dd>${escapeHtml(source || "Not specified")}</dd>
               <dt>Selection note</dt><dd>${escapeHtml(selection || "Curated benchmark record")}</dd>
             </dl>
