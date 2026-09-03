@@ -1462,20 +1462,25 @@ a:focus-visible {
 }
 
 .sample-text-toggle {
-  margin-top: 0.38rem;
+  display: inline;
+  margin: 0;
 }
 
 .sample-text-toggle summary {
+  display: inline;
   color: var(--accent);
   cursor: pointer;
-  font-family: "Google Sans", "Noto Sans", sans-serif;
-  font-size: 0.78rem;
   font-weight: 600;
+  list-style: none;
 }
 
-.sample-text-toggle p {
+.sample-text-toggle summary::-webkit-details-marker {
+  display: none;
+}
+
+.sample-text-toggle span {
   color: #555;
-  margin: 0.42rem 0 0;
+  display: inline;
 }
 
 .sample-card-copy > details {

@@ -46,7 +46,7 @@
     const lastSpace = text.lastIndexOf(" ", maxLength);
     const cutoff = lastSpace > maxLength * 0.6 ? lastSpace : maxLength;
     return {
-      value: `${text.slice(0, cutoff).trimEnd()}…`,
+      value: text.slice(0, cutoff).trimEnd(),
       remainder: text.slice(cutoff).trimStart(),
       truncated: true
     };
@@ -104,12 +104,12 @@
           <div class="sample-card-text">
             <strong>Instruction</strong>
             <span class="sample-card-text-preview">${escapeHtml(instructionPreview.value)}</span>
-            ${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary>Show remaining instruction</summary><p>${escapeHtml(instructionPreview.remainder)}</p></details>` : ""}
+            ${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary aria-label="Show remaining instruction">…</summary><span>${escapeHtml(instructionPreview.remainder)}</span></details>` : ""}
           </div>
           <div class="sample-card-text sample-card-answer">
             <strong>Reviewer synopsis</strong>
             <span class="sample-card-text-preview">${escapeHtml(synopsisPreview.value)}</span>
-            ${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary>Show remaining synopsis</summary><p>${escapeHtml(synopsisPreview.remainder)}</p></details>` : ""}
+            ${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary aria-label="Show remaining synopsis">…</summary><span>${escapeHtml(synopsisPreview.remainder)}</span></details>` : ""}
           </div>
           <details>
             <summary>Open record details</summary>
