@@ -40,6 +40,20 @@
     .replace(/\s+/g, " ")
     .trim();
 
+  const randomSample = (records, count) => {
+    const shuffled = [...records];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+    }
+    return shuffled.slice(0, Math.min(count, shuffled.length));
+  };
+
+  const chunk = (items, size) => Array.from(
+    { length: Math.ceil(items.length / size) },
+    (_, index) => items.slice(index * size, (index + 1) * size)
+  );
+
   const sampleImageUrl = (file) => `static/data/review-sample/${String(file).replace(/^\.\//, "")}`;
 
   const sampleMedia = (record) => [
@@ -56,6 +70,9 @@
     const task = taskLabels[record.task] || record.task;
     const format = formatLabels[record.format] || record.format;
     const instruction = compactText(record.instruction);
+    const instructionPreview = instruction.length > 220
+      ? `${instruction.slice(0, 217).trimEnd()}…`
+      : instruction;
     const synopsis = compactText(record.reviewer_synopsis || record.answer);
     const selection = compactText(record.selection_summary);
     const source = compactText(record.source_dataset_label);
@@ -73,11 +90,12 @@
         </div>
         <div class="sample-card-media-grid">${sampleMedia(record)}</div>
         <div class="sample-card-copy">
-          <p><strong>Instruction</strong>${escapeHtml(instruction)}</p>
+          <p><strong>Instruction</strong>${escapeHtml(instructionPreview)}</p>
           <p class="sample-card-answer"><strong>Reviewer synopsis</strong>${escapeHtml(synopsis)}</p>
           <details>
-            <summary>Record details</summary>
+            <summary>Open record details</summary>
             <dl>
+              ${instructionPreview !== instruction ? `<dt>Full instruction</dt><dd>${escapeHtml(instruction)}</dd>` : ""}
               <dt>Source label</dt><dd>${escapeHtml(source || "Not specified")}</dd>
               <dt>Selection note</dt><dd>${escapeHtml(selection || "Curated benchmark record")}</dd>
             </dl>
@@ -97,64 +115,40 @@
         .split(/\r?\n/)
         .filter((line) => line.trim())
         .map((line) => JSON.parse(line));
-      const modalities = [...new Set(records.map((record) => record.canonical_modality))].sort();
-      const tasks = [...new Set(records.map((record) => record.task))].sort();
-      const formats = [...new Set(records.map((record) => record.format))].sort();
+      const selectedRecords = randomSample(records, 9);
+      const pages = chunk(selectedRecords, 3);
 
       gallery.innerHTML = `
         <div class="sample-gallery-shell">
-          <div class="sample-gallery-stats" aria-label="Review sample coverage">
-            <div><strong>${records.length}</strong><span>curated records</span></div>
-            <div><strong>${tasks.length}</strong><span>named tasks</span></div>
-            <div><strong>${modalities.length}</strong><span>modalities</span></div>
-            <div><strong>${formats.length}</strong><span>output formats</span></div>
+          <div class="sample-gallery-topline">
+            <span><strong>${selectedRecords.length}</strong> randomly selected examples from ${records.length} records</span>
+            <span>Refresh the page for a new selection · Click an image for full resolution</span>
           </div>
-          <div class="sample-gallery-filters" aria-label="Filter gallery records">
-            <label>Search<input type="search" data-sample-search placeholder="Search task, anatomy, or sample ID"></label>
-            <label>Modality<select data-sample-modality><option value="">All modalities</option>${modalities.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join("")}</select></label>
-            <label>Task<select data-sample-task><option value="">All tasks</option>${tasks.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(taskLabels[value] || value)}</option>`).join("")}</select></label>
-            <label>Format<select data-sample-format><option value="">All formats</option>${formats.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(formatLabels[value] || value)}</option>`).join("")}</select></label>
-            <button class="sample-gallery-reset" type="button" data-sample-reset>Reset</button>
+          <div class="sample-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Random MedGEN-Bench examples" tabindex="0">
+            <div class="sample-carousel-frame">
+              <button class="sample-carousel-arrow sample-carousel-prev" type="button" data-carousel-prev aria-label="Previous examples">‹</button>
+              <div class="sample-carousel-viewport">
+                ${pages.map((page, pageIndex) => `
+                  <div class="sample-carousel-slide${pageIndex === 0 ? " is-active" : ""}" data-carousel-slide data-carousel-label="Examples ${pageIndex * 3 + 1}–${pageIndex * 3 + page.length}" role="group" aria-roledescription="slide" aria-label="Example page ${pageIndex + 1} of ${pages.length}"${pageIndex === 0 ? "" : " hidden"}>
+                    <div class="sample-gallery-grid">${page.map(sampleCard).join("")}</div>
+                  </div>
+                `).join("")}
+              </div>
+              <button class="sample-carousel-arrow sample-carousel-next" type="button" data-carousel-next aria-label="Next examples">›</button>
+            </div>
+            <div class="sample-carousel-navigation">
+              <div class="gallery-dots" role="group" aria-label="Choose an example page">
+                ${pages.map((_, pageIndex) => `<button class="gallery-dot${pageIndex === 0 ? " is-active" : ""}" type="button" data-carousel-dot="${pageIndex}" aria-label="Show example page ${pageIndex + 1}" aria-pressed="${pageIndex === 0}"${pageIndex === 0 ? ' aria-current="true"' : ""}></button>`).join("")}
+              </div>
+              <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / ${pages.length} · Examples 1–3</p>
+            </div>
           </div>
-          <div class="sample-gallery-resultbar"><span data-sample-count></span><span>Click any image to open its native-resolution file.</span></div>
-          <div class="sample-gallery-grid" data-sample-grid></div>
-          <p class="sample-gallery-empty" data-sample-empty hidden>No records match these filters.</p>
           <p class="sample-gallery-license">This gallery is a review-only sample for inspection. It is not a clinical dataset release; reuse remains subject to the source-data terms and approvals. <a href="static/data/review-sample/README.md" target="_blank" rel="noopener">Read the sample documentation</a>.</p>
         </div>
       `;
 
-      const search = gallery.querySelector("[data-sample-search]");
-      const modality = gallery.querySelector("[data-sample-modality]");
-      const task = gallery.querySelector("[data-sample-task]");
-      const format = gallery.querySelector("[data-sample-format]");
-      const reset = gallery.querySelector("[data-sample-reset]");
-      const grid = gallery.querySelector("[data-sample-grid]");
-      const count = gallery.querySelector("[data-sample-count]");
-      const empty = gallery.querySelector("[data-sample-empty]");
-
-      const update = () => {
-        const query = compactText(search.value).toLowerCase();
-        const filtered = records.filter((record) => (
-          (!query || `${record.sample_id} ${taskLabels[record.task] || record.task} ${record.canonical_modality} ${formatLabels[record.format] || record.format} ${record.instruction} ${record.reviewer_synopsis}`.toLowerCase().includes(query))
-          && (!modality.value || record.canonical_modality === modality.value)
-          && (!task.value || record.task === task.value)
-          && (!format.value || record.format === format.value)
-        ));
-        grid.innerHTML = filtered.map(sampleCard).join("");
-        count.textContent = `${filtered.length} of ${records.length} records shown`;
-        empty.hidden = filtered.length !== 0;
-      };
-
-      [search, modality, task, format].forEach((control) => control.addEventListener("input", update));
-      [modality, task, format].forEach((control) => control.addEventListener("change", update));
-      reset.addEventListener("click", () => {
-        search.value = "";
-        modality.value = "";
-        task.value = "";
-        format.value = "";
-        update();
-      });
-      update();
+      const controller = initializeCarousel(gallery.querySelector("[data-carousel]"));
+      if (controller) carouselControllers.push(controller);
     } catch (error) {
       gallery.innerHTML = '<p class="sample-gallery-state sample-gallery-error">The sample gallery could not be loaded. Please serve the project from a local web server so the JSONL asset can be fetched.</p>';
       console.error("MedGEN-Bench sample gallery", error);
@@ -168,9 +162,10 @@
     element.closest("[data-carousel]") === carousel
   );
 
-  const carouselControllers = Array.from(
-    document.querySelectorAll("[data-carousel]")
-  ).map((carousel) => {
+  const carouselControllers = [];
+
+  const initializeCarousel = (carousel) => {
+    if (!carousel) return null;
     const isOwned = belongsTo(carousel);
     const findAll = (selector) => Array.from(
       carousel.querySelectorAll(selector)
@@ -380,7 +375,12 @@
     scheduleAutoplay();
 
     return { refreshAutoplay };
-  }).filter(Boolean);
+  };
+
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const controller = initializeCarousel(carousel);
+    if (controller) carouselControllers.push(controller);
+  });
 
   if (carouselControllers.length === 0) return;
 

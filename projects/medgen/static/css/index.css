@@ -1088,6 +1088,90 @@ a:focus-visible {
   padding: clamp(1rem, 2.4vw, 1.7rem);
 }
 
+.sample-gallery-topline {
+  align-items: baseline;
+  color: var(--muted);
+  display: flex;
+  font-size: 0.78rem;
+  justify-content: space-between;
+  margin: 0 3rem 0.9rem;
+}
+
+.sample-gallery-topline strong {
+  color: var(--accent);
+  font-family: "Google Sans", "Noto Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.sample-carousel {
+  outline: none;
+}
+
+.sample-carousel:focus-visible {
+  outline: 3px solid rgba(163, 31, 52, 0.25);
+  outline-offset: 6px;
+}
+
+.sample-carousel-frame {
+  padding: 0 3rem;
+  position: relative;
+}
+
+.sample-carousel-viewport {
+  min-width: 0;
+}
+
+.sample-carousel-slide[hidden] {
+  display: none;
+}
+
+.sample-carousel-slide.is-active {
+  animation: gallery-fade-in 320ms ease-out;
+}
+
+.sample-carousel-arrow {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e3ded9;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(45, 27, 19, 0.08);
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  font: 400 1.55rem/1 Arial, sans-serif;
+  height: 2.25rem;
+  justify-content: center;
+  padding: 0 0 0.1rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  width: 2.25rem;
+  z-index: 2;
+}
+
+.sample-carousel-arrow:hover,
+.sample-carousel-arrow:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.sample-carousel-prev {
+  left: 0.15rem;
+}
+
+.sample-carousel-next {
+  right: 0.15rem;
+}
+
+.sample-carousel-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
 .sample-gallery-stats {
   display: grid;
   gap: 0.75rem;
@@ -1411,8 +1495,9 @@ a:focus-visible {
     min-width: 6rem;
   }
 
-  .sample-gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .sample-carousel-frame {
+    padding-left: 2.65rem;
+    padding-right: 2.65rem;
   }
 }
 
@@ -1431,6 +1516,24 @@ a:focus-visible {
 
   .sample-gallery-grid {
     grid-template-columns: 1fr;
+  }
+
+  .sample-gallery-topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-left: 2.35rem;
+    margin-right: 2.35rem;
+  }
+
+  .sample-carousel-frame {
+    padding-left: 2.3rem;
+    padding-right: 2.3rem;
+  }
+
+  .sample-carousel-arrow {
+    height: 2rem;
+    width: 2rem;
   }
 
   .sample-gallery-resultbar {

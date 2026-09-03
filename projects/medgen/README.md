@@ -14,7 +14,7 @@ Website code is available under CC BY-SA 4.0. Dataset reuse is governed separate
 
 ## Curated sample gallery
 
-The project page includes the extracted review-only sample at `static/data/review-sample/`. It contains 45 manually selected records covering all 15 named tasks, seven sample modalities, and the VQA, image-editing, and multimodal-generation formats. The gallery reads `records.jsonl` and supports search plus modality, task, and format filters.
+The project page includes the extracted review-only sample at `static/data/review-sample/`. It contains 45 manually selected records covering all 15 named tasks, seven sample modalities, and the VQA, image-editing, and multimodal-generation formats. On every visit, the gallery randomly selects nine records and presents them as three auto-playing pages with three example cards per page.
 
 To preview the page locally, serve this directory over HTTP so the JSONL asset can be fetched:
 
