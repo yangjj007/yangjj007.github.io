@@ -156,7 +156,8 @@
         .split(/\r?\n/)
         .filter((line) => line.trim())
         .map((line) => JSON.parse(line));
-      const selectedRecords = randomSample(records, 10);
+      const imageTargetRecords = records.filter((record) => record.format !== "VQA");
+      const selectedRecords = randomSample(imageTargetRecords, 10);
       const pages = chunk(selectedRecords, 2);
 
       gallery.innerHTML = `
