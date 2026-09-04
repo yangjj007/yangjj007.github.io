@@ -46,8 +46,8 @@
     const lastSpace = text.lastIndexOf(" ", maxLength);
     const cutoff = lastSpace > maxLength * 0.6 ? lastSpace : maxLength;
     return {
-      value: text.slice(0, cutoff).trimEnd(),
-      remainder: text.slice(cutoff).trimStart(),
+      value: text.slice(0, cutoff),
+      remainder: text.slice(cutoff),
       truncated: true
     };
   };

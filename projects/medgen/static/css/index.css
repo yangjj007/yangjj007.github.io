@@ -1474,6 +1474,10 @@ a:focus-visible {
   list-style: none;
 }
 
+.sample-text-toggle[open] summary {
+  display: none;
+}
+
 .sample-text-toggle summary::-webkit-details-marker {
   display: none;
 }
