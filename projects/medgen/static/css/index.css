@@ -1443,7 +1443,7 @@ a:focus-visible {
 }
 
 .sample-card-text-preview {
-  display: block;
+  display: inline;
 }
 
 .sample-card-copy strong {
