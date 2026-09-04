@@ -23,12 +23,6 @@
     "resolution-editing": "Resolution editing",
     "style-transfer": "Style transfer"
   };
-  const formatLabels = {
-    VQA: "Visual question answering",
-    ImageEditing: "Image editing",
-    MultimodalGeneration: "Multimodal generation"
-  };
-
   const escapeHtml = (value) => String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -63,8 +57,8 @@
     return `
       <div class="sample-image-mosaic sample-image-mosaic-${Math.min(images.length, 3)}">
         ${images.map((file, index) => `
-          <a class="sample-image-link" href="${escapeHtml(sampleImageUrl(file))}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(record.sample_id)} ${labelRoot.toLowerCase()} image ${index + 1} at full resolution">
-            <img src="${escapeHtml(sampleImageUrl(file))}" alt="${escapeHtml(record.sample_id)} ${labelRoot} ${index + 1}" loading="lazy">
+          <a class="sample-image-link" href="${escapeHtml(sampleImageUrl(file))}" target="_blank" rel="noopener" aria-label="Open ${labelRoot.toLowerCase()} image ${index + 1} at full resolution">
+            <img src="${escapeHtml(sampleImageUrl(file))}" alt="${labelRoot} ${index + 1}, ${escapeHtml(record.canonical_modality || "medical image")}" loading="lazy">
             ${images.length > 1 ? `<span class="sample-image-index">${labelRoot} ${index + 1}</span>` : ""}
           </a>
         `).join("")}
@@ -81,8 +75,6 @@
   `;
 
   const sampleVisualPanel = ({ record, files, type, overlay }) => {
-    const modality = compactText(record.canonical_modality) || "Medical imaging";
-    const format = formatLabels[record.format] || record.format;
     const panelLabel = type === "input" ? "Benchmark Input" : "Reference Target";
 
     return `
@@ -92,41 +84,30 @@
           ${sampleImageMosaic(record, files, type)}
           ${sampleOverlay(overlay)}
         </div>
-        <figcaption>
-          <span>${escapeHtml(modality)}</span>
-          <span>${escapeHtml(record.sample_id)} · ${escapeHtml(format)}</span>
-        </figcaption>
       </figure>
     `;
   };
 
   const sampleTextTarget = (record, task, synopsis) => {
-    const format = formatLabels[record.format] || record.format;
-
     return `
       <figure class="sample-visual-panel sample-text-target" data-panel-label="Reference Target">
         <h3 class="sample-mobile-panel-title">Reference Target</h3>
-        <div class="sample-visual-stage sample-text-stage" tabindex="0" aria-label="${escapeHtml(record.sample_id)} text response. Focus or hover to read the reviewer synopsis.">
+        <div class="sample-visual-stage sample-text-stage" tabindex="0" aria-label="Text response. Focus or hover to read the reviewer synopsis.">
           <span class="sample-text-stage-label">Text response</span>
           <span class="sample-text-stage-mark" aria-hidden="true">Aa</span>
           ${sampleOverlay({
-            kicker: `${record.sample_id} · Text response`,
+            kicker: "Text response",
             title: task,
             label: "Reviewer synopsis",
             text: synopsis
           })}
         </div>
-        <figcaption>
-          <span>${escapeHtml(record.canonical_modality || "Medical imaging")}</span>
-          <span>${escapeHtml(record.sample_id)} · ${escapeHtml(format)}</span>
-        </figcaption>
       </figure>
     `;
   };
 
   const sampleShowcase = (record) => {
     const task = taskLabels[record.task] || record.task;
-    const format = formatLabels[record.format] || record.format;
     const instruction = compactText(record.instruction);
     const synopsis = compactText(record.reviewer_synopsis || record.answer);
     const subtask = compactText(record.named_subtask) || task;
@@ -134,14 +115,14 @@
     const referenceFiles = record.reference_files || [];
 
     return `
-      <article class="sample-showcase" aria-label="${escapeHtml(record.sample_id)}: ${escapeHtml(task)}">
+      <article class="sample-showcase" aria-label="${escapeHtml(task)} example">
         <div class="sample-showcase-grid">
           ${sampleVisualPanel({
             record,
             files: inputFiles,
             type: "input",
             overlay: {
-              kicker: `${record.sample_id} · ${task}`,
+              kicker: task,
               title: subtask,
               label: "Instruction",
               text: instruction
@@ -152,7 +133,7 @@
             files: referenceFiles,
             type: "reference",
             overlay: {
-              kicker: `${record.sample_id} · Reference target`,
+              kicker: "Reference target",
               title: task,
               label: "Reviewer synopsis",
               text: synopsis
