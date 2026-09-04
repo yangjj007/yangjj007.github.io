@@ -1391,28 +1391,33 @@ a:focus-visible {
     linear-gradient(145deg, #171719, #070708 68%);
   display: flex;
   justify-content: center;
+  padding: 1.2rem;
 }
 
-.sample-text-stage-label {
+.sample-text-stage-summary {
+  color: rgba(255, 255, 255, 0.84);
+  max-width: 24rem;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.sample-text-stage-summary > span {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.24);
   color: rgba(255, 255, 255, 0.86);
+  display: inline-block;
   font-family: "Google Sans", "Noto Sans", sans-serif;
   font-size: 0.76rem;
-  left: 0.75rem;
   letter-spacing: 0.04em;
   padding: 0.32rem 0.52rem;
-  position: absolute;
   text-transform: uppercase;
-  top: 0.75rem;
 }
 
-.sample-text-stage-mark {
-  color: rgba(255, 255, 255, 0.2);
-  font-family: "Castoro", Georgia, serif;
-  font-size: clamp(4.2rem, 8vw, 6.6rem);
-  line-height: 1;
-  user-select: none;
+.sample-text-stage-summary p {
+  font-size: clamp(0.95rem, 1.35vw, 1.1rem);
+  line-height: 1.52;
+  margin: 0.8rem 0 0;
 }
 
 .sample-gallery-license,

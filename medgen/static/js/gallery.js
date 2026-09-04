@@ -93,8 +93,10 @@
       <figure class="sample-visual-panel sample-text-target" data-panel-label="Reference Target">
         <h3 class="sample-mobile-panel-title">Reference Target</h3>
         <div class="sample-visual-stage sample-text-stage" tabindex="0" aria-label="Text response. Focus or hover to read the reviewer synopsis.">
-          <span class="sample-text-stage-label">Text response</span>
-          <span class="sample-text-stage-mark" aria-hidden="true">Aa</span>
+          <div class="sample-text-stage-summary">
+            <span>Text-only target</span>
+            <p>This VQA example has no reference image. Its target is a short text response.</p>
+          </div>
           ${sampleOverlay({
             kicker: "Text response",
             title: task,
