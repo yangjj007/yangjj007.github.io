@@ -40,18 +40,6 @@
     .replace(/\s+/g, " ")
     .trim();
 
-  const previewText = (text, maxLength) => {
-    if (text.length <= maxLength) return { value: text, remainder: "", truncated: false };
-
-    const lastSpace = text.lastIndexOf(" ", maxLength);
-    const cutoff = lastSpace > maxLength * 0.6 ? lastSpace : maxLength;
-    return {
-      value: text.slice(0, cutoff).trimEnd(),
-      remainder: text.slice(cutoff).trimStart(),
-      truncated: true
-    };
-  };
-
   const randomSample = (records, count) => {
     const shuffled = [...records];
     for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -68,54 +56,108 @@
 
   const sampleImageUrl = (file) => `static/data/review-sample/${String(file).replace(/^\.\//, "")}`;
 
-  const sampleMedia = (record) => [
-    ...(record.input_files || []).map((file, index) => ({ file, label: `Input ${index + 1}` })),
-    ...(record.reference_files || []).map((file, index) => ({ file, label: `Reference ${index + 1}` }))
-  ].map(({ file, label }) => `
-    <a class="sample-card-media" href="${escapeHtml(sampleImageUrl(file))}" target="_blank" rel="noopener">
-      <img src="${escapeHtml(sampleImageUrl(file))}" alt="${escapeHtml(record.sample_id)} ${escapeHtml(label)}" loading="lazy">
-      <span>${escapeHtml(label)}</span>
-    </a>
-  `).join("");
+  const sampleImageMosaic = (record, files, type) => {
+    const images = files.length > 0 ? files : [];
+    const labelRoot = type === "input" ? "Input" : "Reference";
 
-  const sampleCard = (record) => {
+    return `
+      <div class="sample-image-mosaic sample-image-mosaic-${Math.min(images.length, 3)}">
+        ${images.map((file, index) => `
+          <a class="sample-image-link" href="${escapeHtml(sampleImageUrl(file))}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(record.sample_id)} ${labelRoot.toLowerCase()} image ${index + 1} at full resolution">
+            <img src="${escapeHtml(sampleImageUrl(file))}" alt="${escapeHtml(record.sample_id)} ${labelRoot} ${index + 1}" loading="lazy">
+            ${images.length > 1 ? `<span class="sample-image-index">${labelRoot} ${index + 1}</span>` : ""}
+          </a>
+        `).join("")}
+      </div>
+    `;
+  };
+
+  const sampleOverlay = ({ kicker, title, label, text }) => `
+    <div class="sample-hover-overlay" tabindex="0">
+      <span class="sample-hover-kicker">${escapeHtml(kicker)}</span>
+      <strong>${escapeHtml(title)}</strong>
+      <span class="sample-hover-copy"><b>${escapeHtml(label)}</b>${escapeHtml(text)}</span>
+    </div>
+  `;
+
+  const sampleVisualPanel = ({ record, files, type, overlay }) => {
+    const modality = compactText(record.canonical_modality) || "Medical imaging";
+    const format = formatLabels[record.format] || record.format;
+    const panelLabel = type === "input" ? "Benchmark Input" : "Reference Target";
+
+    return `
+      <figure class="sample-visual-panel" data-panel-label="${escapeHtml(panelLabel)}">
+        <h3 class="sample-mobile-panel-title">${escapeHtml(panelLabel)}</h3>
+        <div class="sample-visual-stage">
+          ${sampleImageMosaic(record, files, type)}
+          ${sampleOverlay(overlay)}
+        </div>
+        <figcaption>
+          <span>${escapeHtml(modality)}</span>
+          <span>${escapeHtml(record.sample_id)} · ${escapeHtml(format)}</span>
+        </figcaption>
+      </figure>
+    `;
+  };
+
+  const sampleTextTarget = (record, task, synopsis) => {
+    const format = formatLabels[record.format] || record.format;
+
+    return `
+      <figure class="sample-visual-panel sample-text-target" data-panel-label="Reference Target">
+        <h3 class="sample-mobile-panel-title">Reference Target</h3>
+        <div class="sample-visual-stage sample-text-stage" tabindex="0" aria-label="${escapeHtml(record.sample_id)} text response. Focus or hover to read the reviewer synopsis.">
+          <span class="sample-text-stage-label">Text response</span>
+          <span class="sample-text-stage-mark" aria-hidden="true">Aa</span>
+          ${sampleOverlay({
+            kicker: `${record.sample_id} · Text response`,
+            title: task,
+            label: "Reviewer synopsis",
+            text: synopsis
+          })}
+        </div>
+        <figcaption>
+          <span>${escapeHtml(record.canonical_modality || "Medical imaging")}</span>
+          <span>${escapeHtml(record.sample_id)} · ${escapeHtml(format)}</span>
+        </figcaption>
+      </figure>
+    `;
+  };
+
+  const sampleShowcase = (record) => {
     const task = taskLabels[record.task] || record.task;
     const format = formatLabels[record.format] || record.format;
     const instruction = compactText(record.instruction);
     const synopsis = compactText(record.reviewer_synopsis || record.answer);
-    const instructionPreview = previewText(instruction, 180);
-    const synopsisPreview = previewText(synopsis, 145);
-    const selection = compactText(record.selection_summary);
-    const source = compactText(record.source_dataset_label);
-    const hasReference = (record.reference_files || []).length > 0;
+    const subtask = compactText(record.named_subtask) || task;
+    const inputFiles = record.input_files || [];
+    const referenceFiles = record.reference_files || [];
 
     return `
-      <article class="sample-card${hasReference ? " has-reference" : ""}" data-task="${escapeHtml(record.task)}" data-modality="${escapeHtml(record.canonical_modality)}" data-format="${escapeHtml(record.format)}" data-search="${escapeHtml(`${record.sample_id} ${task} ${record.canonical_modality} ${format} ${instruction} ${synopsis}`.toLowerCase())}">
-        <div class="sample-card-topline">
-          <span class="sample-card-id">${escapeHtml(record.sample_id)}</span>
-          <span class="sample-card-format">${escapeHtml(format)}</span>
-        </div>
-        <div class="sample-card-heading">
-          <h3>${escapeHtml(task)}</h3>
-          <span>${escapeHtml(record.canonical_modality)}</span>
-        </div>
-        <div class="sample-card-media-grid">${sampleMedia(record)}</div>
-        <div class="sample-card-copy">
-          <div class="sample-card-text">
-            <strong>Instruction</strong>
-            <span class="sample-card-text-preview">${escapeHtml(instructionPreview.value)}${instructionPreview.truncated ? `<details class="sample-text-toggle"><summary aria-label="Show remaining instruction">…</summary><span> ${escapeHtml(instructionPreview.remainder)}</span></details>` : ""}</span>
-          </div>
-          <div class="sample-card-text sample-card-answer">
-            <strong>Reviewer synopsis</strong>
-            <span class="sample-card-text-preview">${escapeHtml(synopsisPreview.value)}${synopsisPreview.truncated ? `<details class="sample-text-toggle"><summary aria-label="Show remaining synopsis">…</summary><span> ${escapeHtml(synopsisPreview.remainder)}</span></details>` : ""}</span>
-          </div>
-          <details>
-            <summary>Open record details</summary>
-            <dl>
-              <dt>Source label</dt><dd>${escapeHtml(source || "Not specified")}</dd>
-              <dt>Selection note</dt><dd>${escapeHtml(selection || "Curated benchmark record")}</dd>
-            </dl>
-          </details>
+      <article class="sample-showcase" aria-label="${escapeHtml(record.sample_id)}: ${escapeHtml(task)}">
+        <div class="sample-showcase-grid">
+          ${sampleVisualPanel({
+            record,
+            files: inputFiles,
+            type: "input",
+            overlay: {
+              kicker: `${record.sample_id} · ${task}`,
+              title: subtask,
+              label: "Instruction",
+              text: instruction
+            }
+          })}
+          ${referenceFiles.length > 0 ? sampleVisualPanel({
+            record,
+            files: referenceFiles,
+            type: "reference",
+            overlay: {
+              kicker: `${record.sample_id} · Reference target`,
+              title: task,
+              label: "Reviewer synopsis",
+              text: synopsis
+            }
+          }) : sampleTextTarget(record, task, synopsis)}
         </div>
       </article>
     `;
@@ -131,8 +173,8 @@
         .split(/\r?\n/)
         .filter((line) => line.trim())
         .map((line) => JSON.parse(line));
-      const selectedRecords = randomSample(records, 9);
-      const pages = chunk(selectedRecords, 3);
+      const selectedRecords = randomSample(records, 10);
+      const pages = chunk(selectedRecords, 2);
 
       gallery.innerHTML = `
         <div class="sample-gallery-shell">
@@ -141,8 +183,12 @@
               <button class="sample-carousel-arrow sample-carousel-prev" type="button" data-carousel-prev aria-label="Previous examples">‹</button>
               <div class="sample-carousel-viewport">
                 ${pages.map((page, pageIndex) => `
-                  <div class="sample-carousel-slide${pageIndex === 0 ? " is-active" : ""}" data-carousel-slide data-carousel-label="Examples ${pageIndex * 3 + 1}–${pageIndex * 3 + page.length}" role="group" aria-roledescription="slide" aria-label="Example page ${pageIndex + 1} of ${pages.length}"${pageIndex === 0 ? "" : " hidden"}>
-                    <div class="sample-gallery-grid">${page.map(sampleCard).join("")}</div>
+                  <div class="sample-carousel-slide${pageIndex === 0 ? " is-active" : ""}" data-carousel-slide data-carousel-label="Examples ${pageIndex * 2 + 1}–${pageIndex * 2 + page.length}" role="group" aria-roledescription="slide" aria-label="Example page ${pageIndex + 1} of ${pages.length}"${pageIndex === 0 ? "" : " hidden"}>
+                    <div class="sample-gallery-column-head" aria-hidden="true">
+                      <span>Benchmark Input</span>
+                      <span>Reference Target</span>
+                    </div>
+                    <div class="sample-showcase-list">${page.map(sampleShowcase).join("")}</div>
                   </div>
                 `).join("")}
               </div>
@@ -152,7 +198,7 @@
               <div class="gallery-dots" role="group" aria-label="Choose an example page">
                 ${pages.map((_, pageIndex) => `<button class="gallery-dot${pageIndex === 0 ? " is-active" : ""}" type="button" data-carousel-dot="${pageIndex}" aria-label="Show example page ${pageIndex + 1}" aria-pressed="${pageIndex === 0}"${pageIndex === 0 ? ' aria-current="true"' : ""}></button>`).join("")}
               </div>
-              <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / ${pages.length} · Examples 1–3</p>
+              <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / ${pages.length} · Examples 1–2</p>
             </div>
           </div>
         </div>
