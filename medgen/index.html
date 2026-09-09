@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MedGEN-Bench is an expert-reviewed benchmark for open-ended multimodal medical generation, with 6,422 image-text pairs across six modalities, 15 clinical tasks, and 26 named subtasks.">
+  <meta name="description" content="MedGEN-Bench is an expert-reviewed benchmark for open-ended multimodal medical generation, with 6,422 image-text pairs across six modalities, 15 clinical tasks, and 27 named subtasks.">
   <meta name="keywords" content="MedGEN-Bench, multimodal medical generation, medical image editing, medical VQA, benchmark, vision-language models">
   <meta property="og:title" content="MedGEN-Bench">
   <meta property="og:description" content="A contextually entangled benchmark for open-ended multimodal medical generation.">
@@ -106,22 +106,28 @@
           <div class="gallery-frame">
             <button class="gallery-arrow gallery-prev" type="button" data-carousel-prev aria-label="Previous overview figure">‹</button>
             <div class="gallery-slides">
-              <div class="gallery-slide is-active" data-carousel-slide data-carousel-label="Figure 1 · Representative tasks" role="group" aria-roledescription="slide" aria-label="Overview figure 1 of 3">
+              <div class="gallery-slide is-active" data-carousel-slide data-carousel-label="Figure 1 · Benchmark motivation" role="group" aria-roledescription="slide" aria-label="Overview figure 1 of 4">
                 <figure class="overview-figure">
-                  <img src="static/images/figures/benchmark-overview.png" width="1666" height="859" alt="Representative MedGEN-Bench task cards arranged around an anatomical figure, spanning restoration, organ manipulation, cross-dimensional reconstruction, disease prediction, anatomical annotation, instruction-guided editing, and style transfer.">
-                  <figcaption><strong>Figure 1.</strong> MedGEN-Bench organizes image-grounded clinical tasks around six imaging modalities, pairing each input with an open-ended instruction and a reference output.</figcaption>
+                  <img src="static/images/paper/overview-fig1.png?v=20260909" width="1800" height="670" alt="Three recurring limitations of medical visual benchmarks: query-image misalignment, closed-ended formats, and text-centric output paradigms.">
+                  <figcaption><strong>Figure 1.</strong> Three recurring limitations of existing medical visual benchmarks motivate image-grounded, open-ended multimodal evaluation.</figcaption>
                 </figure>
               </div>
-              <div class="gallery-slide" data-carousel-slide data-carousel-label="Figure 2 · Benchmark motivation" role="group" aria-roledescription="slide" aria-label="Overview figure 2 of 3" hidden>
+              <div class="gallery-slide" data-carousel-slide data-carousel-label="Figure 2 · Representative tasks" role="group" aria-roledescription="slide" aria-label="Overview figure 2 of 4" hidden>
                 <figure class="overview-figure">
-                  <img src="static/images/paper/overview-fig1.png" width="1440" height="520" alt="Three recurring limitations of medical visual benchmarks: query-image misalignment, closed-ended formats, and text-centric output paradigms.">
-                  <figcaption><strong>Figure 2.</strong> Three recurring limitations of existing medical visual benchmarks motivate image-grounded, open-ended multimodal evaluation.</figcaption>
+                  <img src="static/images/figures/benchmark-overview.png?v=20260909" width="1473" height="741" alt="Representative MedGEN-Bench task cards arranged around an anatomical figure, spanning restoration, organ manipulation, cross-dimensional reconstruction, anatomical annotation, instruction-guided editing, and style transfer.">
+                  <figcaption><strong>Figure 2.</strong> MedGEN-Bench organizes image-grounded clinical tasks around six imaging modalities, pairing each input with an open-ended instruction and a reference output.</figcaption>
                 </figure>
               </div>
-              <div class="gallery-slide" data-carousel-slide data-carousel-label="Figure 3 · Benchmark statistics" role="group" aria-roledescription="slide" aria-label="Overview figure 3 of 3" hidden>
+              <div class="gallery-slide" data-carousel-slide data-carousel-label="Figure 3 · Benchmark statistics" role="group" aria-roledescription="slide" aria-label="Overview figure 3 of 4" hidden>
                 <figure class="overview-figure">
-                  <img src="static/images/paper/overview-fig3.png" width="1438" height="702" alt="MedGEN-Bench task and modality statistics with instruction and answer length distributions.">
+                  <img src="static/images/paper/overview-fig3.png?v=20260909" width="1320" height="763" alt="MedGEN-Bench task and modality statistics with instruction and answer length distributions.">
                   <figcaption><strong>Figure 3.</strong> Benchmark composition by task and modality, with instruction- and answer-length distributions.</figcaption>
+                </figure>
+              </div>
+              <div class="gallery-slide" data-carousel-slide data-carousel-label="Figure 4 · Construction pipeline" role="group" aria-roledescription="slide" aria-label="Overview figure 4 of 4" hidden>
+                <figure class="overview-figure">
+                  <img src="static/images/figures/construction-pipeline.png?v=20260909" width="1730" height="773" alt="MedGEN-Bench construction pipeline showing preprocessing, image-pair synthesis, text-pair synthesis, and post-processing through automatic review and human refinement.">
+                  <figcaption><strong>Figure 4.</strong> MedGEN-Bench construction pipeline: preprocessing, image-pair synthesis, context-augmented text-pair synthesis, and post-processing through automatic checks and expert review.</figcaption>
                 </figure>
               </div>
             </div>
@@ -133,9 +139,10 @@
                 <button class="gallery-dot is-active" type="button" data-carousel-dot="0" aria-label="Show overview figure 1" aria-pressed="true" aria-current="true"></button>
                 <button class="gallery-dot" type="button" data-carousel-dot="1" aria-label="Show overview figure 2" aria-pressed="false"></button>
                 <button class="gallery-dot" type="button" data-carousel-dot="2" aria-label="Show overview figure 3" aria-pressed="false"></button>
+                <button class="gallery-dot" type="button" data-carousel-dot="3" aria-label="Show overview figure 4" aria-pressed="false"></button>
               </div>
             </div>
-            <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / 3 · Figure 1 · Representative tasks</p>
+            <p class="gallery-status visually-hidden" data-carousel-status aria-live="polite">1 / 4 · Figure 1 · Benchmark motivation</p>
           </div>
         </div>
       </div>
@@ -145,7 +152,7 @@
       <div class="container project-column">
         <h2 class="title is-3 has-text-centered">Abstract</h2>
         <div class="content project-summary">
-          <p>Medical vision-language models (VLMs) are increasingly expected to support clinical workflows through the generation of diagnostic text and relevant medical images. However, existing medical visual benchmarks exhibit three recurring limitations: query–image misalignment arising from queries that are weakly grounded in specific image instances, closed-ended formats that narrow the answer space and encourage shortcut-based prediction, and text-centric output paradigms that limit the evaluation of image-generation and image-editing capabilities. To address these limitations, we introduce MEDGEN-BENCH, a benchmark for open-ended multimodal medical generation. The evaluation snapshot reported in this manuscript comprises 6,422 expert-reviewed image–text pairs spanning 6 canonical imaging modalities, 15 clinical tasks, and 26 named subtasks. It includes 1,100 Visual Question Answering (VQA) pairs, 3,872 Image Editing pairs, and 1,450 Contextual Multimodal Generation pairs. MEDGEN-BENCH centers on contextual entanglement, defined as the dependence of an instruction’s intended output on the particular image instance rather than on task wording alone. The benchmark operationalizes this concept through image-grounded instructions and extends evaluation to open-ended multimodal outputs. Its tiered evaluation protocol combines reproducible, reference-based fidelity and similarity measures with a structured, checklist-guided assessment by a medical VLM judge. Neither global similarity scores nor VLM-based judgments are treated as evidence of clinical correctness. We evaluate 10 compositional frameworks, 2 dedicated image-editing models, 3 unified models, and 5 VLMs. The results show that image-output tasks remain unsaturated, with contextual multimodal generation appearing more challenging than image editing under the reported metrics. Contextual augmentation increases the mean image–instruction similarity from 0.273 to 0.372, while a 1,000-case medical-expert audit shows moderate agreement between the judge scores and clinician ratings. The source code and manifest for the reported evaluation snapshot will be made publicly available on GitHub.</p>
+          <p>Medical vision-language models (VLMs) are increasingly expected to support clinical workflows through the generation of diagnostic text and relevant medical images. However, existing medical visual benchmarks exhibit three recurring limitations: query–image misalignment arising from queries that are weakly grounded in specific image instances, closed-ended formats that narrow the answer space and encourage shortcut-based prediction, and text-centric output paradigms that limit the evaluation of image-generation and image-editing capabilities. To address these limitations, we introduce MEDGEN-BENCH, a benchmark for open-ended multimodal medical generation. The evaluation snapshot reported in this manuscript comprises 6,422 expert-reviewed image–text pairs spanning 6 canonical imaging modalities, 15 clinical tasks, and 27 named subtasks. It includes 1,100 Visual Question Answering (VQA) pairs, 3,872 Image Editing pairs, and 1,450 Contextual Multimodal Generation pairs. MEDGEN-BENCH centers on contextual entanglement, defined as the dependence of an instruction’s intended output on the particular image instance rather than on task wording alone. The benchmark operationalizes this concept through image-grounded instructions and extends evaluation to open-ended multimodal outputs. Its tiered evaluation protocol combines reproducible, reference-based fidelity and similarity measures with a structured, checklist-guided assessment by a medical VLM judge. Neither global similarity scores nor VLM-based judgments are treated as evidence of clinical correctness. We evaluate 10 compositional frameworks, 2 dedicated image-editing models, 3 unified models, and 5 VLMs. The results show that image-output tasks remain unsaturated, with contextual multimodal generation appearing more challenging than image editing under the reported metrics. Contextual augmentation increases the mean image–instruction similarity from 0.273 to 0.372, while a 1,000-case medical-expert audit shows moderate agreement between the judge scores and clinician ratings. The source code and manifest for the reported evaluation snapshot will be made publicly available on GitHub.</p>
         </div>
       </div>
     </section>
@@ -153,7 +160,7 @@
     <section class="section content-section examples-section" id="examples">
       <div class="container project-column">
         <h2 class="title is-3 has-text-centered">Representative Examples</h2>
-        <p class="section-deck gallery-intro has-text-centered">MedGEN-Bench evaluates open-ended multimodal medical generation through image-grounded, contextually entangled instructions: the intended answer or transformation depends on the particular input image rather than task wording alone. Its 6,422 expert-reviewed pairs reference 10,703 unique images across six canonical modalities, 15 clinical tasks, and 26 named subtasks, unifying visual question answering, instruction-guided image editing, and contextual multimodal generation.</p>
+        <p class="section-deck gallery-intro has-text-centered">MedGEN-Bench evaluates open-ended multimodal medical generation through image-grounded, contextually entangled instructions: the intended answer or transformation depends on the particular input image rather than task wording alone. Its 6,422 expert-reviewed pairs reference 10,703 unique images across six canonical modalities, 15 clinical tasks, and 27 named subtasks, unifying visual question answering, instruction-guided image editing, and contextual multimodal generation.</p>
 
         <div class="benchmark-gallery sample-gallery" data-sample-gallery role="region" aria-label="Curated MedGEN-Bench review sample gallery" tabindex="0">
           <p class="visually-hidden">Ten records are selected at random when the page loads. The five-page gallery rotates automatically and shows two examples per page. Hover or focus an image to reveal its text, and use the previous and next buttons, page selectors, or left and right arrow keys to browse.</p>
@@ -876,8 +883,8 @@
 
         <div class="finding-grid">
           <figure class="paper-figure ablation-figure">
-            <img src="static/images/figures/contextual-augmentation.png" alt="Semantic-alignment analysis showing similarity gains across six benchmarks and a shift in mean image-instruction similarity from 0.273 to 0.372.">
-            <figcaption><strong>Figure 4.</strong> Semantic-alignment analysis on 985 complete pairs. The upper panel reports gains against six VQA benchmarks, and the lower panel compares templates with augmented instructions. PR denotes pass rate; μ and σ denote mean and standard deviation.</figcaption>
+            <img src="static/images/figures/contextual-augmentation.png?v=20260909" alt="Semantic-alignment analysis showing similarity gains across six benchmarks and a shift in mean image-instruction similarity from 0.273 to 0.372.">
+            <figcaption><strong>Figure 5.</strong> Semantic-alignment analysis on 985 complete pairs. The upper panel reports gains against six VQA benchmarks, and the lower panel compares templates with augmented instructions. PR denotes pass rate; μ and σ denote mean and standard deviation.</figcaption>
           </figure>
 
           <div class="content findings-copy">
