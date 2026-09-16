@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Junjie Yang"
-description              : "Junjie Yang's academic homepage and research projects in multimodal medical AI."
+description              : "26 SCUT CS -> 28 UMD  \nContact: yangjj.jack@gmail.com"
 repository               : "yangjj007/yangjj007.github.io"
 url                      : "https://yangjj007.github.io"
 baseurl                  : ""
@@ -29,7 +29,7 @@ author:
   location         : ""
   employer         :
   pubmed           : 
-  googlescholar    :
+  googlescholar    : "https://scholar.google.com/citations?user=njiply0AAAAJ&hl=en"
   email            :
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
@@ -45,7 +45,7 @@ author:
   instagram        :
   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : # e.g., "linkedin username"
+  linkedin         : "www.linkedin.com/in/junjie-yang-a81a78427"
   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
   orcid            : # e.g., "https://orcid.org/xxxx"
   pinterest        :

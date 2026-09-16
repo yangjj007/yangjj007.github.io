@@ -10,9 +10,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Junjie Yang**, a researcher working on multimodal medical AI, medical image understanding, and open-ended visual generation. My current work focuses on building image-grounded benchmarks that measure whether models can follow clinically meaningful instructions and produce faithful text or image outputs.
+I am **Junjie Yang**, currently pursuing a master’s degree in Applied Machine Learning at the University of Maryland, College Park. I earned my bachelor’s degree in Computer Science and Engineering from South China University of Technology (SCUT), where I studied in the English-Taught Innovation Class. My academic work has included collaborations with [Weiwei Lin](https://www.scholat.com/linweiwei), [Changmiao Wang](https://jiandanjinxin.github.io/changmiaowang/), and [Yao Wan](http://wanyao.me/).
 
-My research interests include medical vision-language models, medical image editing, multimodal generation, 3D medical vision, and evaluation of contextual alignment.
+My research interests include computer vision, medical AI, 3D vision, and agentic reinforcement learning.
 
 <span class='anchor' id='selected-projects'></span>
 
@@ -33,8 +33,8 @@ MedGEN-Bench is a benchmark for open-ended multimodal medical generation. The re
 
 # Publications
 
-- **MedGEN-Bench: Contextually entangled benchmark for open-ended multimodal medical generation**, Junjie Yang, Yuhao Yan, Gang Wu, et al. [**arXiv**](https://arxiv.org/abs/2511.13135) · [**Project page**](/medgen/)
+- **MedGEN-Bench: Contextually entangled benchmark for open-ended multimodal medical generation**, Junjie Yang, Yuhao Yan, Rui Qian, et al. [**arXiv**](https://arxiv.org/abs/2511.13135) · [**Project page**](/medgen/)
 
 # News
 
-- *2026*: Integrated the MedGEN-Bench project page and its curated multimodal task gallery into this academic homepage.
+- *2026*: MedGEN-Bench open source at [**Project page**](/medgen/)!
