@@ -33,6 +33,8 @@ MedGEN-Bench is a benchmark for open-ended multimodal medical generation. The re
 
 # Publications
 
+- **VERPO: Verified Evidence Regularized Policy Optimization**, Haijiang Li, Chengyu Lv, Yi Zhang, Rui Qian, Zhibing Zhang, Xiangqing Shen, **Junjie Yang**, et al. [**arXiv**](https://arxiv.org/abs/2609.06100) · [**Code**](https://github.com/hamsterjiang23/VERPO)
+
 - **MedGEN-Bench: Contextually entangled benchmark for open-ended multimodal medical generation**, Junjie Yang, Yuhao Yan, Rui Qian, et al. [**arXiv**](https://arxiv.org/abs/2511.13135) · [**Project page**](/medgen/)
 
 # News
