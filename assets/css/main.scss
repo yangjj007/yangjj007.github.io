@@ -60,8 +60,11 @@
             box-shadow: 3px 3px 6px #888;
             object-fit: cover;
         }
-        svg {
+        .verpo-thumbnail {
             max-width: 400px;
+            width: 100%;
+            aspect-ratio: 2 / 1;
+            object-fit: cover;
         }
     }
     
