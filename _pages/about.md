@@ -18,7 +18,7 @@ My research interests include computer vision, medical AI, 3D vision, and agenti
 
 # Selected Projects
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">VERPO</div><a href='https://github.com/hamsterjiang23/VERPO'><img class="verpo-thumbnail" src='/images/projects/verpo-overview.png' alt="VERPO method overview" width="400" height="200"></a></div></div>
+<div class='paper-box'><div class='paper-box-image verpo-image'><div class="verpo-thumbnail-wrap"><div class="badge">VERPO</div><a href='https://github.com/hamsterjiang23/VERPO'><img class="verpo-thumbnail" src='/images/projects/verpo-overview.png' alt="VERPO method overview" width="100%" height="100%"></a></div></div>
 <div class='paper-box-text' markdown="1">
 
 ### [VERPO: Verified Evidence Regularized Policy Optimization](https://github.com/hamsterjiang23/VERPO)
