@@ -18,7 +18,18 @@ My research interests include computer vision, medical AI, 3D vision, and agenti
 
 # Selected Projects
 
-<div class='paper-box'><div class='paper-box-image verpo-image'><div class="verpo-thumbnail-wrap"><div class="badge">VERPO</div><a href='https://github.com/hamsterjiang23/VERPO'><img class="verpo-thumbnail" src='/images/projects/verpo-overview.png' alt="VERPO method overview" width="100%" height="100%"></a></div></div>
+<div class='paper-box'><div class='paper-box-image'><div class="project-thumbnail"><div class="badge">TEF</div><a href='https://github.com/Kzczc/ICASSP2027-TEF'><img src='/images/projects/tef-teaser.png' alt="TEF overview comparing direct prediction, voting, and evidence fusion"></a></div></div>
+<div class='paper-box-text' markdown="1">
+
+### [TEF: Count Evidence, Not Sentences](https://github.com/Kzczc/ICASSP2027-TEF)
+
+Tempered Evidence Fusion (TEF) is a **training-free method for measuring value orientations in long text**. It gives more weight to decisive sentence-level LLM judgments and discounts uncertain ones. The work also introduces MIND, a benchmark of 8,358 Chinese and English posts across six value dimensions.
+
+[**Paper**](https://arxiv.org/abs/2609.27165) · [**Code**](https://github.com/Kzczc/ICASSP2027-TEF)
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div class="project-thumbnail"><div class="badge">VERPO</div><a href='https://github.com/hamsterjiang23/VERPO'><img src='/images/projects/verpo-overview.png' alt="VERPO method overview"></a></div></div>
 <div class='paper-box-text' markdown="1">
 
 ### [VERPO: Verified Evidence Regularized Policy Optimization](https://github.com/hamsterjiang23/VERPO)
@@ -43,6 +54,8 @@ MedGEN-Bench is a benchmark for open-ended multimodal medical generation. The re
 <span class='anchor' id='publications'></span>
 
 # Publications
+
+- **Count Evidence, Not Sentences: Tempered Evidence Fusion of LLM Judgments for Long-Text Value Measurement**, Yuhe Wu, Rui Qian, Guangyu Wang, Yuran Chen, Yuanchao Zhu, **Junjie Yang**, et al. [**arXiv**](https://arxiv.org/abs/2609.27165) · [**Code**](https://github.com/Kzczc/ICASSP2027-TEF)
 
 - **VERPO: Verified Evidence Regularized Policy Optimization**, Haijiang Li, Chengyu Lv, Yi Zhang, Rui Qian, Zhibing Zhang, Xiangqing Shen, **Junjie Yang**, et al. [**arXiv**](https://arxiv.org/abs/2609.06100) · [**Code**](https://github.com/hamsterjiang23/VERPO)
 
