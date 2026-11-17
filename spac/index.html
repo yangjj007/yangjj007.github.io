@@ -8,6 +8,7 @@
   <meta property="og:title" content="From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation">
   <meta property="og:description" content="A shared sparse geometry vocabulary for 3D captioning and text-conditioned mesh generation.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://yangjj007.github.io/spac/assets/overview.webp">
   <meta name="citation_title" content="From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation">
   <meta name="citation_author" content="Junjie Yang">
   <meta name="citation_author" content="Rui Qian">
@@ -23,16 +24,18 @@
   <meta name="citation_author" content="Ahmed Elazab">
   <meta name="citation_author" content="Changmiao Wang">
   <link rel="canonical" href="https://yangjj007.github.io/spac/">
-  <link rel="stylesheet" href="../assets/css/project.css">
-  <script defer src="../assets/js/project.js"></script>
+  <link rel="stylesheet" href="../assets/css/project.css?v=2">
+  <link rel="stylesheet" href="page.css">
+  <script defer src="../assets/js/project.js?v=2"></script>
 </head>
 
-<body class="project-page theme-spac">
+<body class="project-page theme-spac" id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="site-name" href="../">← Junjie Yang</a>
+      <a class="site-name" href="../" aria-label="Junjie Yang’s homepage">← <span class="home-name">Junjie Yang</span><span class="home-short">Home</span></a>
       <nav class="section-nav" aria-label="On this page">
+        <a href="#examples">Examples</a>
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
@@ -41,9 +44,9 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="hero shell" aria-labelledby="project-title">
-      <h1 id="project-title" class="project-title"><span class="project-accent">From Dense to Sparse:</span> Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation</h1>
+      <h1 id="project-title" class="project-title"><span class="project-accent">SPAC</span> <span class="title-subject">From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation</span></h1>
       <div class="authors" role="group" aria-label="Authors">
         <span>Junjie Yang<sup>1</sup>,</span>
         <span>Rui Qian<sup>2</sup>,</span>
@@ -59,45 +62,134 @@
         <span>Ahmed Elazab<sup>11</sup>,</span>
         <span>Changmiao Wang<sup>8</sup></span>
       </div>
-      <div class="affiliations" role="group" aria-label="Affiliations">
-        <span><sup>1</sup>University of Maryland, College Park</span>
-        <span><sup>2</sup>Fudan University</span>
-        <span><sup>3</sup>University of California, San Diego</span>
-        <span><sup>4</sup>Beihang University</span>
-        <span><sup>5</sup>Zhejiang University</span>
-        <span><sup>6</sup>Southeast University</span>
-        <span><sup>7</sup>Macao Polytechnic University</span>
-        <span><sup>8</sup>Shenzhen Research Institute of Big Data</span>
-        <span><sup>9</sup>The Chinese University of Hong Kong Shenzhen</span>
-        <span><sup>10</sup>National Health Institute of Big Data, Shenzhen</span>
-        <span><sup>11</sup>Tsinghua University</span>
-      </div>
+      <details class="affiliation-details">
+        <summary>11 affiliations</summary>
+        <div class="affiliations" role="group" aria-label="Affiliations">
+          <span><sup>1</sup>University of Maryland, College Park</span>
+          <span><sup>2</sup>Fudan University</span>
+          <span><sup>3</sup>University of California, San Diego</span>
+          <span><sup>4</sup>Beihang University</span>
+          <span><sup>5</sup>Zhejiang University</span>
+          <span><sup>6</sup>Southeast University</span>
+          <span><sup>7</sup>Macao Polytechnic University</span>
+          <span><sup>8</sup>Shenzhen Research Institute of Big Data</span>
+          <span><sup>9</sup>The Chinese University of Hong Kong Shenzhen</span>
+          <span><sup>10</sup>National Health Institute of Big Data, Shenzhen</span>
+          <span><sup>11</sup>Tsinghua University</span>
+        </div>
+      </details>
       <nav class="hero-actions" aria-label="Project resources">
-        <a class="button primary" href="https://huggingface.co/Jack04810/SPAC-4B">Model on Hugging Face</a>
-        <a class="button" href="#method">Explore the method</a>
-        <a class="button" href="#citation">Cite this work</a>
+        <a class="button primary" href="https://huggingface.co/Jack04810/SPAC-4B" aria-label="SPAC-4B model on Hugging Face">SPAC-4B</a>
+        <a class="button" href="https://huggingface.co/datasets/Jack04810/bpe-mix-dataset" aria-label="Training dataset on Hugging Face">Dataset</a>
+        <a class="button" href="#citation">BibTeX</a>
       </nav>
     </section>
 
-    <figure class="hero-figure shell">
-      <a href="assets/overview.webp" aria-label="Open the full-size SPAC overview">
-        <img src="assets/overview.webp" width="2160" height="965" fetchpriority="high" alt="SPAC’s shared language model describes an input treasure-chest mesh and generates a treasure-chest mesh from a text prompt.">
-      </a>
-      <figcaption><strong>SPAC at a glance.</strong> A shared geometry vocabulary connects 3D understanding and text-conditioned mesh generation in one autoregressive model.</figcaption>
-    </figure>
+    <section class="mesh-gallery shell" id="examples" aria-label="Text-to-mesh gallery">
+      <fieldset class="mesh-picker">
+        <legend class="mesh-visually-hidden">Choose a text-to-mesh example</legend>
+        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-theropod" aria-controls="view-theropod" checked>
+        <label class="mesh-tab" for="mesh-theropod">
+          <img src="assets/theropod-1.webp" width="592" height="259" alt="">
+          <span>Theropod</span>
+        </label>
+        <figure class="mesh-example" id="view-theropod">
+          <figcaption class="mesh-prompt">
+            <span>Generation prompt</span>
+            <p>“A brown theropod dinosaur with a large head, short arms, strong legs and a long tapered tail.”</p>
+          </figcaption>
+          <div class="mesh-main-view">
+            <img src="assets/theropod-1.webp" width="592" height="259" alt="A textured brown theropod in profile, showing its tapered tail and two hind legs." fetchpriority="high">
+          </div>
+          <div class="mesh-more-views" role="group" aria-label="Two more views of the theropod">
+            <span aria-hidden="true">Other views</span>
+            <img src="assets/theropod-2.webp" width="320" height="219" alt="Rear three-quarter view of the dinosaur.">
+            <img src="assets/theropod-3.webp" width="222" height="240" alt="Front view with the head above the small arms.">
+          </div>
+        </figure>
+        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-butterfly" aria-controls="view-butterfly">
+        <label class="mesh-tab" for="mesh-butterfly">
+          <img src="assets/butterfly-1.webp" width="545" height="513" alt="">
+          <span>Butterfly</span>
+        </label>
+        <figure class="mesh-example" id="view-butterfly">
+          <figcaption class="mesh-prompt">
+            <span>Generation prompt</span>
+            <p>“Green butterfly with slanted wings.”</p>
+          </figcaption>
+          <div class="mesh-main-view">
+            <img src="assets/butterfly-1.webp" width="545" height="513" alt="A green butterfly with four angular wings spread around its central body.">
+          </div>
+          <div class="mesh-more-views" role="group" aria-label="Two more views of the butterfly">
+            <span aria-hidden="true">Other views</span>
+            <img src="assets/butterfly-2.webp" width="54" height="240" alt="A side view shows the thin edge of the wings.">
+            <img src="assets/butterfly-3.webp" width="263" height="240" alt="Reverse view showing both pairs of wings.">
+          </div>
+        </figure>
+        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-whale" aria-controls="view-whale">
+        <label class="mesh-tab" for="mesh-whale">
+          <img src="assets/whale-1.webp" width="592" height="128" alt="">
+          <span>Whale</span>
+        </label>
+        <figure class="mesh-example" id="view-whale">
+          <figcaption class="mesh-prompt">
+            <span>Generation prompt</span>
+            <p>“A long blue-gray whale with a streamlined body, small pectoral fins and a wide fluke.”</p>
+          </figcaption>
+          <div class="mesh-main-view">
+            <img src="assets/whale-1.webp" width="592" height="128" alt="A long blue-gray whale in profile, with a fin below its body.">
+          </div>
+          <div class="mesh-more-views" role="group" aria-label="Two more views of the whale">
+            <span aria-hidden="true">Other views</span>
+            <img src="assets/whale-2.webp" width="315" height="186" alt="The whale seen diagonally from above.">
+            <img src="assets/whale-3.webp" width="316" height="192" alt="An angled view of the opposite side of the whale.">
+          </div>
+        </figure>
+        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-raft" aria-controls="view-raft">
+        <label class="mesh-tab" for="mesh-raft">
+          <img src="assets/raft-1.webp" width="443" height="269" alt="">
+          <span>Raft</span>
+        </label>
+        <figure class="mesh-example" id="view-raft">
+          <figcaption class="mesh-prompt">
+            <span>Generation prompt</span>
+            <p>“An inflatable yellow oval raft with an outer ring, flat inner base and two white oars.”</p>
+          </figcaption>
+          <div class="mesh-main-view">
+            <img src="assets/raft-1.webp" width="443" height="269" alt="A yellow raft seen from above at an angle, with two long oars across its open interior.">
+          </div>
+          <div class="mesh-more-views" role="group" aria-label="Two more views of the raft">
+            <span aria-hidden="true">Other views</span>
+            <img src="assets/raft-2.webp" width="320" height="147" alt="Side view of the raised rim.">
+            <img src="assets/raft-3.webp" width="320" height="220" alt="Another angled view into the open raft.">
+          </div>
+        </figure>
+      </fieldset>
+      <p class="mesh-credit">SPAC generates the geometry. TRELLIS adds surface appearance. Shown here are three views per mesh and shortened prompts from the paper’s training-set examples.</p>
+    </section>
 
     <section id="abstract" class="section shell">
       <div class="reading">
         <h2>Abstract</h2>
-        <p>Unified 3D understanding and generation require compact sequences that preserve spatial structure. Dense grids yield long sequences, and serialization can separate spatial neighbors. Sparse Proximity Aware Compression (SPAC) combines near-surface encoding with reversible spatial merging in a shared signed distance field (SDF) vocabulary. A Sparse SDF VQ-VAE quantizes near-surface features with explicit coordinates, while 3D Byte-Pair Encoding (3D-BPE) merges recurring face-adjacent patterns using relative offsets. The resulting macro tokens recover the original leaf tokens and coordinates exactly. After Morton serialization, a shared language model reads geometry for captioning and predicts tokens that decode into meshes for text-conditioned generation. Across 43,180 text-to-3D records, 3D-BPE reduces mean complete reference sequence length by 45.4%.</p>
+        <p>Generating a mesh and describing one both require a short token sequence that preserves the shape. Dense grids spend tokens on empty space, and serializing a grid can split neighboring features apart.</p>
+        <p>Sparse Proximity Aware Compression (SPAC) encodes the region near a surface, merges recurring three-dimensional patterns, and orders the resulting tokens along a Morton curve. A single autoregressive model can then read these tokens to caption an object or predict them to generate a mesh from text.</p>
       </div>
     </section>
 
     <section id="method" class="section shell">
       <div class="reading">
-        <h2>Method</h2>
-        <p>The Sparse SDF VQ-VAE encodes geometry near the surface as discrete leaf tokens with explicit coordinates. 3D-BPE learns a merge table over recurring face-adjacent patterns before serialization. Each merge records its relative offset, so the model can expand a macro token back into its constituent leaf codes and their coordinates.</p>
-        <p>Morton order provides a sequence of coordinate–macro pairs for the shared language model. For captioning, the model reads that sequence. For generation, it predicts the sequence, expands the macro tokens, and reconstructs a sparse SDF for mesh extraction using Marching Cubes.</p>
+        <h2>How SPAC represents a mesh</h2>
+        <p>The sparse signed distance field (SDF) encoder quantizes features close to the surface. It keeps the spatial coordinate of each leaf token so the language model can connect words to geometry in both directions.</p>
+      </div>
+      <figure class="figure-frame">
+        <a href="assets/overview.webp" aria-label="Open the full-size SPAC overview">
+          <img src="assets/overview.webp" width="2160" height="965" loading="lazy" alt="SPAC’s shared language model describes an input treasure-chest mesh and generates a treasure-chest mesh from a text prompt.">
+        </a>
+        <figcaption><strong>Geometry and language share a model.</strong> A shared geometry vocabulary connects 3D understanding and text-conditioned mesh generation in one autoregressive model.</figcaption>
+      </figure>
+      <div class="reading spac-subsection">
+        <h3>Merge spatial neighbors before serialization</h3>
+        <p>3D Byte-Pair Encoding (3D-BPE) learns recurring patterns of face-adjacent tokens. Each merge records the relative offset of its parts, so the shared merge table can recover the original leaf codes and coordinates exactly. The model reads the merged tokens in Morton order for captioning. For generation, it predicts the sequence, expands the tokens, and extracts a mesh with Marching Cubes.</p>
       </div>
       <figure class="figure-frame">
         <a href="assets/spatial-bpe.webp" aria-label="Open the full-size 3D-BPE data flow">
@@ -109,14 +201,14 @@
 
     <section id="results" class="section shell">
       <div class="reading">
-        <h2>Results</h2>
-        <p>With 8,192 learned merge rules, the mean complete reference sequence falls from 6,873.2 to 3,753.1 tokens, including coordinates, text, and control tokens. SPAC scores 21.50 METEOR on Objaverse captioning, compared with 20.91 for LEO. In the text-to-3D comparison, its Fréchet distance is 23.7 versus 25.9 for ShapeLLM-Omni.</p>
+        <h2>Compression and generation results</h2>
+        <p>With 8,192 merge rules, SPAC reduces the length of the sequence processed by the language model. The comparison counts geometry, coordinates, text, and control tokens across 43,180 text-to-3D records.</p>
       </div>
-      <div class="metrics" role="group" aria-label="Selected experimental results">
-        <div class="metric"><strong class="metric-value">45.4%</strong><span>shorter mean reference sequences</span></div>
-        <div class="metric"><strong class="metric-value">21.50</strong><span>METEOR on Objaverse captioning</span></div>
-        <div class="metric"><strong class="metric-value">23.7</strong><span>Fréchet distance on text-to-3D</span></div>
-      </div>
+      <dl class="metrics" aria-label="Selected experimental results">
+        <div class="metric"><dt>Mean reference length</dt><dd class="metric-value">−45.4%</dd><dd>6,873.2 → 3,753.1 tokens</dd></div>
+        <div class="metric"><dt>Objaverse captioning</dt><dd class="metric-value">21.50</dd><dd>METEOR, compared with 20.91 for LEO</dd></div>
+        <div class="metric"><dt>Text-to-3D generation</dt><dd class="metric-value">23.7</dd><dd>Fréchet distance, compared with 25.9 for ShapeLLM-Omni</dd></div>
+      </dl>
 
       <figure class="figure-frame">
         <a href="assets/generation-case-study.webp" aria-label="Open the full-size text-to-3D examples">
@@ -125,17 +217,23 @@
         <figcaption><strong>Text-to-3D examples.</strong> SPAC generates untextured meshes. The paper uses TRELLIS to add surface appearance to the SPAC results displayed here.</figcaption>
       </figure>
 
-      <figure class="figure-frame">
-        <a href="assets/encoder-scaling.webp" aria-label="Open the full-size encoder efficiency charts">
-          <img src="assets/encoder-scaling.webp" width="1440" height="992" loading="lazy" alt="Four charts compare forward FLOPs, inference latency, prepared-input wall time, and peak VRAM as input resolution increases.">
-        </a>
-        <figcaption><strong>Encoder efficiency across resolutions.</strong> With geometry, architecture, and voxel-band width held fixed, SPAC’s sparse encoder cost grows approximately quadratically with input resolution.</figcaption>
-      </figure>
+      <div class="spac-scaling">
+        <div class="spac-scaling-copy">
+          <h3>Encoder cost across resolutions</h3>
+          <p>Holding the surface area and voxel-band width fixed, the sparse encoder processes a narrow band around the surface. Its measured forward cost grows approximately quadratically with input resolution.</p>
+        </div>
+        <figure class="figure-frame">
+          <a href="assets/encoder-scaling.webp" aria-label="Open the full-size encoder efficiency charts">
+            <img src="assets/encoder-scaling.webp" width="1440" height="992" loading="lazy" alt="Four charts compare forward FLOPs, inference latency, prepared-input wall time, and peak VRAM as input resolution increases.">
+          </a>
+          <figcaption>Forward FLOPs, latency, prepared-input time, and peak memory at increasing input resolutions.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="citation" class="section shell">
       <div class="citation-head">
-        <h2>Citation</h2>
+        <h2>BibTeX</h2>
         <button type="button" class="button" data-copy-citation hidden>Copy BibTeX</button>
       </div>
       <pre id="bibtex"><code>@unpublished{yang2026spac,
@@ -151,7 +249,8 @@
   </main>
 
   <footer class="site-footer shell">
-    <a href="../">← Back to Junjie Yang’s homepage</a>
+    <a href="../">← Junjie Yang</a>
+    <a href="#top">Back to top ↑</a>
   </footer>
 </body>
 </html>

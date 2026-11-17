@@ -1,0 +1,258 @@
+.evidence-example {
+  --view-color: #284ba1;
+  --b-score: 4.1%;
+  --c-score: 88.6%;
+  margin-block: .45rem clamp(2.75rem, 5vw, 4.25rem);
+}
+
+.evidence-sheet {
+  overflow: hidden;
+  padding: clamp(1.15rem, 3.3vw, 2.35rem);
+  border: 1px solid #dbe1ea;
+  border-radius: 1rem;
+  background: linear-gradient(115deg, #f9fafc, #f1f4fa);
+}
+
+.evidence-head, .evidence-plates {
+  display: grid;
+  align-items: center;
+}
+
+.evidence-head {
+  grid-template-columns: 1fr auto;
+  gap: .75rem 1.2rem;
+  padding-bottom: 1.05rem;
+  border-bottom: 1px solid #d5dce7;
+}
+
+.evidence-head h2 {
+  margin: 0;
+  color: #253245;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 650;
+  letter-spacing: -.035em;
+}
+
+.evidence-switch {
+  display: inline-flex;
+  justify-self: start;
+  min-width: 0;
+  margin: 0;
+  padding: .18rem;
+  border: 1px solid #c5cedb;
+  border-radius: 3rem;
+  background: #fff;
+}
+
+.evidence-switch input, .evidence-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.evidence-switch label {
+  padding: .45rem .9rem;
+  border-radius: 3rem;
+  color: #444e5a;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.evidence-switch input:checked + label {
+  background: var(--view-color);
+  color: #fff;
+}
+
+.evidence-switch input:focus-visible + label {
+  outline: 3px solid #101827;
+  outline-offset: 3px;
+}
+
+.evidence-plates {
+  grid-template-columns: 1.16fr 1fr;
+  gap: clamp(1.6rem, 5.6vw, 4.7rem);
+  padding-top: 1.3rem;
+}
+
+.evidence-question { min-width: 0; }
+
+.evidence-question > p {
+  max-width: 35ch;
+  margin: 0 0 1rem;
+  color: #202e42;
+  font-family: Georgia, Cambria, serif;
+  font-size: clamp(1.15rem, 2.3vw, 1.65rem);
+  line-height: 1.25;
+}
+
+.evidence-data {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #fff;
+  color: #1a293e;
+  text-align: center;
+  font-family: Georgia, Cambria, serif;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.evidence-data td, .evidence-data th {
+  height: 1.85em;
+  padding: .2em .07em;
+  border: 1px solid #ccd5e1;
+}
+
+.evidence-data th {
+  width: 11%;
+  background: #e5ebf4;
+}
+
+.evidence-data .evidence-cell {
+  position: relative;
+  border-right: 2px solid #5877bd;
+  border-left: 2px solid #5877bd;
+  background: #edf2ff;
+}
+
+.evidence-data tr:first-child .evidence-cell { border-top: 2px solid #5877bd; }
+.evidence-data tr:last-child .evidence-cell { border-bottom: 2px solid #5877bd; }
+
+.evidence-answers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .25rem .6rem;
+  padding: 0;
+  margin: .65rem 0 0;
+  list-style: none;
+  color: #4b5666;
+  font-size: .79rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence-answers b { color: #202e42; }
+
+.teacher-plot h3 {
+  margin: 0;
+  color: #202e42;
+  font-size: 1.08rem;
+  font-weight: 670;
+}
+
+.teacher-plot p {
+  margin: .16rem 0 1.1rem;
+  color: #546075;
+  font-size: .83rem;
+}
+
+.token-score {
+  display: grid;
+  grid-template-columns: .85rem minmax(0, 1fr) 3.4em;
+  align-items: center;
+  gap: .6rem;
+  margin-top: .8rem;
+}
+
+.token-score b, .score-value {
+  color: #263348;
+  font-size: 1.04rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-value { text-align: end; }
+
+.score-track {
+  display: block;
+  height: .75rem;
+  border-radius: 3px;
+  background: #dce3ed;
+  overflow: hidden;
+}
+
+.score-track::before {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--view-color);
+}
+
+.score-track.bar-b::before { width: var(--b-score); }
+.score-track.bar-c::before { width: var(--c-score); }
+
+.evidence-example .as-pixelated { display: none; }
+
+.evidence-example:has(#view-pixelated:checked) {
+  --view-color: #975222;
+  --b-score: 83.8%;
+  --c-score: 3.7%;
+}
+
+.evidence-example:has(#view-pixelated:checked) .as-original { display: none; }
+.evidence-example:has(#view-pixelated:checked) .as-pixelated { display: inline; }
+
+.evidence-example:has(#view-pixelated:checked) .evidence-cell {
+  border-color: #b87945;
+  background-color: #b8c0c7;
+  background-image: conic-gradient(#b0b8be 25%, #d5dade 0 50%, #bcc4ca 0 75%, #cbd1d5 0);
+  background-size: 17px 16px;
+}
+
+.evidence-example:has(#view-pixelated:checked) tr:last-child .evidence-cell { background-position: 7px 3px; }
+
+.evidence-example figcaption {
+  max-width: 76ch;
+  margin: .85rem auto 0;
+  text-align: center;
+}
+
+.workflow-figure { margin: 0 auto 2.1rem; }
+
+.benchmark-table {
+  width: min(100%, 47rem);
+  margin: 1.7rem auto 2.3rem;
+  border-collapse: collapse;
+  color: #253044;
+  font-size: clamp(.84rem, 1.5vw, 1rem);
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+}
+
+.benchmark-table caption {
+  margin-bottom: .75rem;
+  color: #4c586b;
+  text-align: left;
+  font-size: .83rem;
+}
+
+.benchmark-table th, .benchmark-table td { padding: .52rem .8rem; text-align: right; }
+.benchmark-table th:first-child { text-align: left; }
+.benchmark-table tbody th { font-weight: 500; }
+.benchmark-table thead { border-block: 1px solid #939dad; font-size: .86em; }
+.benchmark-table tbody tr + tr { border-top: 1px solid #e5e8ee; }
+.benchmark-table .our-scores { background: #eaf0ff; color: #233f87; }
+.benchmark-table .our-scores th { font-weight: 700; }
+.benchmark-table tfoot { border-bottom: 1px solid #939dad; font-size: .85em; }
+.benchmark-table tfoot th { font-weight: 500; }
+
+@media (max-width: 43rem) {
+  .evidence-plates { grid-template-columns: 1fr; gap: 1.2rem; }
+  .teacher-plot { padding-top: 1.1rem; border-top: 1px solid #d5dce7; }
+  .teacher-plot p { margin-bottom: .8rem; }
+  .evidence-answers { justify-content: flex-start; gap: .2rem .8rem; }
+  .benchmark-table th, .benchmark-table td { padding-inline: .4rem; }
+}
+
+@media (max-width: 30rem) {
+  .evidence-head { grid-template-columns: 1fr; }
+}

@@ -25,14 +25,15 @@
   <meta name="citation_author" content="Changmiao Wang">
   <meta name="citation_author" content="Tao Tan">
   <link rel="canonical" href="https://yangjj007.github.io/ravec/">
-  <link rel="stylesheet" href="../assets/css/project.css">
-  <script defer src="../assets/js/project.js"></script>
+  <link rel="stylesheet" href="../assets/css/project.css?v=2">
+  <link rel="stylesheet" href="page.css">
+  <script defer src="../assets/js/project.js?v=2"></script>
 </head>
 <body class="project-page theme-ravec" id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="site-name" href="../">← Junjie Yang</a>
+      <a class="site-name" href="../" aria-label="Junjie Yang’s homepage">← <span class="home-name">Junjie Yang</span><span class="home-short">Home</span></a>
       <nav class="section-nav" aria-label="On this page">
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
@@ -44,7 +45,7 @@
 
   <main id="main" tabindex="-1">
     <section class="hero shell" aria-labelledby="project-title">
-      <h1 class="project-title" id="project-title"><span class="project-accent">RAVEC:</span> Reward-Aligned Visual Evidence Correction</h1>
+      <h1 class="project-title" id="project-title"><span class="project-accent">RAVEC</span> <span class="title-subject">Reward-Aligned Visual Evidence Correction</span></h1>
 
       <div class="authors" role="group" aria-label="Authors">
         <span>Junjie Yang<sup>1</sup>,</span>
@@ -61,32 +62,69 @@
         <span>Changmiao Wang<sup>11</sup>,</span>
         <span>Tao Tan<sup>9</sup></span>
       </div>
-      <div class="affiliations" role="group" aria-label="Affiliations">
-        <span><sup>1</sup> University of Maryland, College Park</span>
-        <span><sup>2</sup> Fudan University</span>
-        <span><sup>3</sup> City University of Hong Kong</span>
-        <span><sup>4</sup> The Hong Kong University of Science and Technology</span>
-        <span><sup>5</sup> The Chinese University of Hong Kong Shenzhen</span>
-        <span><sup>6</sup> Johns Hopkins University</span>
-        <span><sup>7</sup> Shanghai Innovation Institute</span>
-        <span><sup>8</sup> University of the Chinese Academy of Sciences</span>
-        <span><sup>9</sup> Macao Polytechnic University</span>
-        <span><sup>10</sup> Xiangtan University</span>
-        <span><sup>11</sup> Shenzhen Research Institute of Big Data</span>
-      </div>
+      <details class="affiliation-details">
+        <summary>11 affiliations</summary>
+        <div class="affiliations" role="group" aria-label="Affiliations">
+          <span><sup>1</sup> University of Maryland, College Park</span>
+          <span><sup>2</sup> Fudan University</span>
+          <span><sup>3</sup> City University of Hong Kong</span>
+          <span><sup>4</sup> The Hong Kong University of Science and Technology</span>
+          <span><sup>5</sup> The Chinese University of Hong Kong Shenzhen</span>
+          <span><sup>6</sup> Johns Hopkins University</span>
+          <span><sup>7</sup> Shanghai Innovation Institute</span>
+          <span><sup>8</sup> University of the Chinese Academy of Sciences</span>
+          <span><sup>9</sup> Macao Polytechnic University</span>
+          <span><sup>10</sup> Xiangtan University</span>
+          <span><sup>11</sup> Shenzhen Research Institute of Big Data</span>
+        </div>
+      </details>
 
       <nav class="hero-actions" aria-label="Explore RAVEC">
         <a class="button primary" href="https://huggingface.co/Jack04810/RAVEC">Model on Hugging Face</a>
-        <a class="button" href="#method">Explore the method</a>
-        <a class="button" href="#citation">Cite this work</a>
+        <a class="button" href="#citation">BibTeX</a>
       </nav>
     </section>
 
-    <figure class="hero-figure shell">
-      <a href="assets/overview.webp">
-        <img src="assets/overview.webp" width="1800" height="759" fetchpriority="high" alt="RAVEC training workflow. The actor samples a response, paired teacher replay proposes corrections, and local credit, peer credit, and directional risk determine token weights before the actor update.">
-      </a>
-      <figcaption><strong>RAVEC training workflow.</strong> Paired Visual Evidence Contrast proposes signed corrections. Credit–Risk Allocation screens and weights them before calibration and the actor and teacher updates.</figcaption>
+    <figure class="evidence-example shell" aria-labelledby="evidence-caption">
+      <div class="evidence-sheet">
+        <div class="evidence-head">
+          <h2>Paired visual evidence</h2>
+          <fieldset class="evidence-switch">
+            <legend class="evidence-sr">Choose the teacher’s view of the evidence</legend>
+            <input type="radio" id="view-original" name="evidence-view" checked>
+            <label for="view-original">Original</label>
+            <input type="radio" id="view-pixelated" name="evidence-view">
+            <label for="view-pixelated">Pixelated</label>
+          </fieldset>
+        </div>
+        <div class="evidence-plates">
+          <div class="evidence-question">
+            <p>Which point must the regression line pass through?</p>
+            <table class="evidence-data" aria-label="Data in the visual question">
+              <tbody>
+                <tr><th scope="row"><i>x</i></th><td>1</td><td class="evidence-cell"><span class="as-original">2</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>3</td><td>4</td><td>5</td></tr>
+                <tr><th scope="row"><i>y</i></th><td>1.2</td><td class="evidence-cell"><span class="as-original">1.8</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>2.5</td><td>3.2</td><td>3.8</td></tr>
+              </tbody>
+            </table>
+            <ul class="evidence-answers" aria-label="Answer choices">
+              <li><b>A</b> (0, 0)</li><li><b>B</b> (2, 1.8)</li><li><b>C</b> (3, 2.5)</li><li><b>D</b> (4, 3.2)</li>
+            </ul>
+          </div>
+          <div class="teacher-plot" role="group" aria-label="Softened teacher probabilities for answer tokens B and C">
+            <h3>Teacher prediction</h3>
+            <p>Softened probability at the same prefix</p>
+            <div class="token-score">
+              <b>B</b><span class="score-track bar-b" aria-hidden="true"></span>
+              <span class="score-value"><span class="as-original">0.041</span><span class="as-pixelated">0.838</span></span>
+            </div>
+            <div class="token-score">
+              <b>C</b><span class="score-track bar-c" aria-hidden="true"></span>
+              <span class="score-value"><span class="as-original">0.886</span><span class="as-pixelated">0.037</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption id="evidence-caption">Pixelating one column changes the teacher’s preferred answer from <strong>C</strong> to <strong>B</strong>. RAVEC uses this contrast to propose a correction, then checks whether reward evidence supports it.</figcaption>
     </figure>
 
     <section class="section shell" id="abstract" aria-labelledby="abstract-heading">
@@ -101,6 +139,12 @@
       <div class="reading">
         <h2 id="method-heading">From visual evidence to token corrections</h2>
       </div>
+      <figure class="figure-frame workflow-figure">
+        <a href="assets/overview.webp" aria-label="Open the full RAVEC training diagram">
+          <img src="assets/overview.webp" width="1800" height="759" loading="lazy" decoding="async" alt="The actor samples a response. The teacher proposes signed token corrections, and local credit, peer credit, and directional risk determine token weights before the actor update.">
+        </a>
+        <figcaption><strong>RAVEC training workflow.</strong> The actor samples one response. The teacher replays that response with two views of the image. Reward support and directional cost determine which of the proposed corrections enter the actor update.</figcaption>
+      </figure>
 
       <div class="figure-grid">
         <figure class="figure-frame">
@@ -124,18 +168,23 @@
         <p>RAVEC achieves the highest average among the compared methods at both Qwen2.5-VL-Instruct model sizes. The reported score is the equal-weight benchmark average of Avg@8 exact-match accuracy, based on eight sampled generations per question.</p>
       </div>
 
-      <dl class="metrics">
-        <div class="metric">
-          <dt>Qwen2.5-VL-3B-Instruct</dt>
-          <dd class="metric-value">+2.67 pp</dd>
-          <dd>54.42% RAVEC · 51.75% GRPO</dd>
-        </div>
-        <div class="metric">
-          <dt>Qwen2.5-VL-7B-Instruct</dt>
-          <dd class="metric-value">+1.39 pp</dd>
-          <dd>61.00% RAVEC · 59.61% GRPO</dd>
-        </div>
-      </dl>
+      <table class="benchmark-table">
+        <caption>Mean Avg@8 accuracy on ten benchmarks (%)</caption>
+        <thead>
+          <tr><th scope="col">Method</th><th scope="col">Qwen2.5-VL-3B</th><th scope="col">Qwen2.5-VL-7B</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">GRPO</th><td>51.75</td><td>59.61</td></tr>
+          <tr><th scope="row">DAPO</th><td>53.44</td><td>54.20</td></tr>
+          <tr><th scope="row">PAPO</th><td>52.93</td><td>60.47</td></tr>
+          <tr><th scope="row">CFPO</th><td>53.24</td><td><span aria-label="Not reported">—</span></td></tr>
+          <tr><th scope="row">TPAE</th><td><span aria-label="Not reported">—</span></td><td>59.31</td></tr>
+          <tr class="our-scores"><th scope="row">RAVEC</th><td><strong>54.42</strong></td><td><strong>61.00</strong></td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">Gain over GRPO</th><td>+2.67 pp</td><td>+1.39 pp</td></tr>
+        </tfoot>
+      </table>
 
       <figure class="figure-frame">
         <a href="assets/training.webp">
