@@ -18,6 +18,28 @@ My research interests include computer vision, medical AI, 3D vision, and agenti
 
 # Selected Projects
 
+<div class='paper-box'><div class='paper-box-image'><div class="project-thumbnail"><div class="badge">RAVEC</div><a href='/ravec/'><img src='/ravec/assets/overview.webp' alt="RAVEC training workflow combining paired visual evidence contrast and credit-risk allocation" loading="lazy"></a></div></div>
+<div class='paper-box-text' markdown="1">
+
+### [RAVEC: Reward-Aligned Visual Evidence Correction](/ravec/)
+
+RAVEC uses paired views of visual evidence to propose token-level corrections for reinforcement learning. It checks the local and cross-question reward support for each correction before allocating a shared response budget.
+
+[**Open project page**](/ravec/)
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div class="project-thumbnail"><div class="badge">SPAC</div><a href='/spac/'><img src='/spac/assets/overview.webp' alt="SPAC pipeline for encoding sparse mesh geometry into tokens for generation and understanding" loading="lazy"></a></div></div>
+<div class='paper-box-text' markdown="1">
+
+### [From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation](/spac/)
+
+SPAC combines near-surface geometry tokens, spatial 3D byte-pair encoding, and Morton ordering in one autoregressive model for mesh understanding and generation.
+
+[**Open project page**](/spac/)
+</div>
+</div>
+
 <div class='paper-box'><div class='paper-box-image'><div class="project-thumbnail"><div class="badge">TEF</div><a href='https://github.com/Kzczc/ICASSP2027-TEF'><img src='/images/projects/tef-teaser.png' alt="TEF overview comparing direct prediction, voting, and evidence fusion"></a></div></div>
 <div class='paper-box-text' markdown="1">
 

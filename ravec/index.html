@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAVEC: Reward-Aligned Visual Evidence Correction</title>
+  <meta name="description" content="RAVEC uses paired visual evidence and reward support to guide token-level corrections during multimodal reinforcement learning.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RAVEC: Reward-Aligned Visual Evidence Correction">
+  <meta property="og:description" content="Reward-aligned token-level correction for multimodal reinforcement learning.">
+  <meta property="og:image" content="https://yangjj007.github.io/ravec/assets/overview.webp">
+  <meta property="og:url" content="https://yangjj007.github.io/ravec/">
+  <meta name="citation_title" content="RAVEC: Reward-Aligned Visual Evidence Correction">
+  <meta name="citation_author" content="Junjie Yang">
+  <meta name="citation_author" content="Rui Qian">
+  <meta name="citation_author" content="Xutao Mao">
+  <meta name="citation_author" content="Yuhe Wu">
+  <meta name="citation_author" content="Mingda Zhang">
+  <meta name="citation_author" content="Jiaxuan Luo">
+  <meta name="citation_author" content="Yang Tan">
+  <meta name="citation_author" content="Qiang Huang">
+  <meta name="citation_author" content="Zhisheng Chen">
+  <meta name="citation_author" content="Yanfeng Li">
+  <meta name="citation_author" content="Dawen Tian">
+  <meta name="citation_author" content="Changmiao Wang">
+  <meta name="citation_author" content="Tao Tan">
+  <link rel="canonical" href="https://yangjj007.github.io/ravec/">
+  <link rel="stylesheet" href="../assets/css/project.css">
+  <script defer src="../assets/js/project.js"></script>
+</head>
+<body class="project-page theme-ravec" id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-name" href="../">← Junjie Yang</a>
+      <nav class="section-nav" aria-label="On this page">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero shell" aria-labelledby="project-title">
+      <h1 class="project-title" id="project-title"><span class="project-accent">RAVEC:</span> Reward-Aligned Visual Evidence Correction</h1>
+
+      <div class="authors" role="group" aria-label="Authors">
+        <span>Junjie Yang<sup>1</sup>,</span>
+        <span>Rui Qian<sup>2</sup>,</span>
+        <span>Xutao Mao<sup>3</sup>,</span>
+        <span>Yuhe Wu<sup>4</sup>,</span>
+        <span>Mingda Zhang<sup>5</sup>,</span>
+        <span>Jiaxuan Luo<sup>6</sup>,</span>
+        <span>Yang Tan<sup>7</sup>,</span>
+        <span>Qiang Huang<sup>2</sup>,</span>
+        <span>Zhisheng Chen<sup>8</sup>,</span>
+        <span>Yanfeng Li<sup>9</sup>,</span>
+        <span>Dawen Tian<sup>10</sup>,</span>
+        <span>Changmiao Wang<sup>11</sup>,</span>
+        <span>Tao Tan<sup>9</sup></span>
+      </div>
+      <div class="affiliations" role="group" aria-label="Affiliations">
+        <span><sup>1</sup> University of Maryland, College Park</span>
+        <span><sup>2</sup> Fudan University</span>
+        <span><sup>3</sup> City University of Hong Kong</span>
+        <span><sup>4</sup> The Hong Kong University of Science and Technology</span>
+        <span><sup>5</sup> The Chinese University of Hong Kong Shenzhen</span>
+        <span><sup>6</sup> Johns Hopkins University</span>
+        <span><sup>7</sup> Shanghai Innovation Institute</span>
+        <span><sup>8</sup> University of the Chinese Academy of Sciences</span>
+        <span><sup>9</sup> Macao Polytechnic University</span>
+        <span><sup>10</sup> Xiangtan University</span>
+        <span><sup>11</sup> Shenzhen Research Institute of Big Data</span>
+      </div>
+
+      <nav class="hero-actions" aria-label="Explore RAVEC">
+        <a class="button primary" href="https://huggingface.co/Jack04810/RAVEC">Model on Hugging Face</a>
+        <a class="button" href="#method">Explore the method</a>
+        <a class="button" href="#citation">Cite this work</a>
+      </nav>
+    </section>
+
+    <figure class="hero-figure shell">
+      <a href="assets/overview.webp">
+        <img src="assets/overview.webp" width="1800" height="759" fetchpriority="high" alt="RAVEC training workflow. The actor samples a response, paired teacher replay proposes corrections, and local credit, peer credit, and directional risk determine token weights before the actor update.">
+      </a>
+      <figcaption><strong>RAVEC training workflow.</strong> Paired Visual Evidence Contrast proposes signed corrections. Credit–Risk Allocation screens and weights them before calibration and the actor and teacher updates.</figcaption>
+    </figure>
+
+    <section class="section shell" id="abstract" aria-labelledby="abstract-heading">
+      <div class="reading">
+        <h2 id="abstract-heading">Abstract</h2>
+        <p>Reinforcement learning with verifiable rewards improves multimodal reasoning, but response-level feedback provides limited guidance on which intermediate decisions to correct. Visual interventions reveal sensitivity to image content. RAVEC uses local and cross-question reward support to determine whether to act on that sensitivity and how strongly to weight each correction.</p>
+        <p>Paired Visual Evidence Contrast compares predictions from an exponential moving average teacher at the same sampled response prefix under the original image and a version with the annotated evidence region suppressed. Credit–Risk Allocation then screens the signed directions and allocates a shared response budget, with additional cost for directions that locally reduce predictive entropy. The resulting visual loss augments Group Relative Policy Optimization during training. Inference uses the original image and question.</p>
+      </div>
+    </section>
+
+    <section class="section shell" id="method" aria-labelledby="method-heading">
+      <div class="reading">
+        <h2 id="method-heading">From visual evidence to token corrections</h2>
+      </div>
+
+      <div class="figure-grid">
+        <figure class="figure-frame">
+          <a href="assets/pvec.webp">
+            <img src="assets/pvec.webp" width="1200" height="567" loading="lazy" decoding="async" alt="Example table question. At the same prefix, the teacher favors answer C with the original image and B after pixelating the evidence region.">
+          </a>
+          <figcaption><strong>Paired Visual Evidence Contrast.</strong> Comparing the two teacher predictions at a fixed response prefix gives signed directions for strengthening or suppressing token preferences.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <a href="assets/allocation.webp">
+            <img src="assets/allocation.webp" width="1200" height="819" loading="lazy" decoding="async" alt="Two panels show that entropy-contracting directions have higher cost and lower-cost directions receive more weight at equal credit under the same budget.">
+          </a>
+          <figcaption><strong>Credit–Risk Allocation.</strong> Local alignment and support from other questions determine which directions qualify. The allocation then favors lower-cost directions at equal credit within a shared response budget.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section shell" id="results" aria-labelledby="results-heading">
+      <div class="reading">
+        <h2 id="results-heading">Results on ten multimodal benchmarks</h2>
+        <p>RAVEC achieves the highest average among the compared methods at both Qwen2.5-VL-Instruct model sizes. The reported score is the equal-weight benchmark average of Avg@8 exact-match accuracy, based on eight sampled generations per question.</p>
+      </div>
+
+      <dl class="metrics">
+        <div class="metric">
+          <dt>Qwen2.5-VL-3B-Instruct</dt>
+          <dd class="metric-value">+2.67 pp</dd>
+          <dd>54.42% RAVEC · 51.75% GRPO</dd>
+        </div>
+        <div class="metric">
+          <dt>Qwen2.5-VL-7B-Instruct</dt>
+          <dd class="metric-value">+1.39 pp</dd>
+          <dd>61.00% RAVEC · 59.61% GRPO</dd>
+        </div>
+      </dl>
+
+      <figure class="figure-frame">
+        <a href="assets/training.webp">
+          <img src="assets/training.webp" width="1680" height="440" loading="lazy" decoding="async" alt="Training curves over 200 steps compare validation accuracy, training reward, response length, and predictive entropy across six methods. RAVEC leads in final validation accuracy.">
+        </a>
+        <figcaption><strong>Controlled training comparison.</strong> With the 3B backbone and a shared 1,024-question training set, RAVEC finishes the 200-step run at 45.86% validation accuracy, 3.28 percentage points above the best final baseline. This analysis uses a fixed validation set drawn from eight benchmarks.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section shell" id="citation" aria-labelledby="citation-heading">
+      <div class="reading">
+        <div class="citation-head">
+          <h2 id="citation-heading">BibTeX</h2>
+          <button class="button" type="button" data-copy-citation hidden>Copy BibTeX</button>
+        </div>
+        <pre id="bibtex"><code>@unpublished{yang2026ravec,
+  title  = {{RAVEC}: Reward-Aligned Visual Evidence Correction},
+  author = {Yang, Junjie and Qian, Rui and Mao, Xutao and Wu, Yuhe and
+            Zhang, Mingda and Luo, Jiaxuan and Tan, Yang and Huang, Qiang and
+            Chen, Zhisheng and Li, Yanfeng and Tian, Dawen and
+            Wang, Changmiao and Tan, Tao},
+  year   = {2026},
+  note   = {Manuscript}
+}</code></pre>
+        <p class="copy-status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <a href="../">← Junjie Yang</a>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>

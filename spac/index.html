@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation</title>
+  <meta name="description" content="SPAC combines sparse surface encoding, reversible 3D byte-pair merges, and Morton ordering for unified 3D captioning and mesh generation.">
+  <meta property="og:title" content="From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation">
+  <meta property="og:description" content="A shared sparse geometry vocabulary for 3D captioning and text-conditioned mesh generation.">
+  <meta property="og:type" content="website">
+  <meta name="citation_title" content="From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation">
+  <meta name="citation_author" content="Junjie Yang">
+  <meta name="citation_author" content="Rui Qian">
+  <meta name="citation_author" content="Yijiang Li">
+  <meta name="citation_author" content="Jinyi Xu">
+  <meta name="citation_author" content="Yuhao Yan">
+  <meta name="citation_author" content="Xinjian Yi">
+  <meta name="citation_author" content="Yanfeng Li">
+  <meta name="citation_author" content="Mingxuan Li">
+  <meta name="citation_author" content="Xiang Wan">
+  <meta name="citation_author" content="Jicong Fan">
+  <meta name="citation_author" content="Siqi Liu">
+  <meta name="citation_author" content="Ahmed Elazab">
+  <meta name="citation_author" content="Changmiao Wang">
+  <link rel="canonical" href="https://yangjj007.github.io/spac/">
+  <link rel="stylesheet" href="../assets/css/project.css">
+  <script defer src="../assets/js/project.js"></script>
+</head>
+
+<body class="project-page theme-spac">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-name" href="../">← Junjie Yang</a>
+      <nav class="section-nav" aria-label="On this page">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="project-title">
+      <h1 id="project-title" class="project-title"><span class="project-accent">From Dense to Sparse:</span> Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation</h1>
+      <div class="authors" role="group" aria-label="Authors">
+        <span>Junjie Yang<sup>1</sup>,</span>
+        <span>Rui Qian<sup>2</sup>,</span>
+        <span>Yijiang Li<sup>3</sup>,</span>
+        <span>Jinyi Xu<sup>4</sup>,</span>
+        <span>Yuhao Yan<sup>5</sup>,</span>
+        <span>Xinjian Yi<sup>6</sup>,</span>
+        <span>Yanfeng Li<sup>7</sup>,</span>
+        <span>Mingxuan Li<sup>2</sup>,</span>
+        <span>Xiang Wan<sup>8</sup>,</span>
+        <span>Jicong Fan<sup>9</sup>,</span>
+        <span>Siqi Liu<sup>10</sup>,</span>
+        <span>Ahmed Elazab<sup>11</sup>,</span>
+        <span>Changmiao Wang<sup>8</sup></span>
+      </div>
+      <div class="affiliations" role="group" aria-label="Affiliations">
+        <span><sup>1</sup>University of Maryland, College Park</span>
+        <span><sup>2</sup>Fudan University</span>
+        <span><sup>3</sup>University of California, San Diego</span>
+        <span><sup>4</sup>Beihang University</span>
+        <span><sup>5</sup>Zhejiang University</span>
+        <span><sup>6</sup>Southeast University</span>
+        <span><sup>7</sup>Macao Polytechnic University</span>
+        <span><sup>8</sup>Shenzhen Research Institute of Big Data</span>
+        <span><sup>9</sup>The Chinese University of Hong Kong Shenzhen</span>
+        <span><sup>10</sup>National Health Institute of Big Data, Shenzhen</span>
+        <span><sup>11</sup>Tsinghua University</span>
+      </div>
+      <nav class="hero-actions" aria-label="Project resources">
+        <a class="button primary" href="https://huggingface.co/Jack04810/SPAC-4B">Model on Hugging Face</a>
+        <a class="button" href="#method">Explore the method</a>
+        <a class="button" href="#citation">Cite this work</a>
+      </nav>
+    </section>
+
+    <figure class="hero-figure shell">
+      <a href="assets/overview.webp" aria-label="Open the full-size SPAC overview">
+        <img src="assets/overview.webp" width="2160" height="965" fetchpriority="high" alt="SPAC’s shared language model describes an input treasure-chest mesh and generates a treasure-chest mesh from a text prompt.">
+      </a>
+      <figcaption><strong>SPAC at a glance.</strong> A shared geometry vocabulary connects 3D understanding and text-conditioned mesh generation in one autoregressive model.</figcaption>
+    </figure>
+
+    <section id="abstract" class="section shell">
+      <div class="reading">
+        <h2>Abstract</h2>
+        <p>Unified 3D understanding and generation require compact sequences that preserve spatial structure. Dense grids yield long sequences, and serialization can separate spatial neighbors. Sparse Proximity Aware Compression (SPAC) combines near-surface encoding with reversible spatial merging in a shared signed distance field (SDF) vocabulary. A Sparse SDF VQ-VAE quantizes near-surface features with explicit coordinates, while 3D Byte-Pair Encoding (3D-BPE) merges recurring face-adjacent patterns using relative offsets. The resulting macro tokens recover the original leaf tokens and coordinates exactly. After Morton serialization, a shared language model reads geometry for captioning and predicts tokens that decode into meshes for text-conditioned generation. Across 43,180 text-to-3D records, 3D-BPE reduces mean complete reference sequence length by 45.4%.</p>
+      </div>
+    </section>
+
+    <section id="method" class="section shell">
+      <div class="reading">
+        <h2>Method</h2>
+        <p>The Sparse SDF VQ-VAE encodes geometry near the surface as discrete leaf tokens with explicit coordinates. 3D-BPE learns a merge table over recurring face-adjacent patterns before serialization. Each merge records its relative offset, so the model can expand a macro token back into its constituent leaf codes and their coordinates.</p>
+        <p>Morton order provides a sequence of coordinate–macro pairs for the shared language model. For captioning, the model reads that sequence. For generation, it predicts the sequence, expands the macro tokens, and reconstructs a sparse SDF for mesh extraction using Marching Cubes.</p>
+      </div>
+      <figure class="figure-frame">
+        <a href="assets/spatial-bpe.webp" aria-label="Open the full-size 3D-BPE data flow">
+          <img src="assets/spatial-bpe.webp" width="2160" height="718" loading="lazy" alt="Face-adjacent leaf patterns are merged with offsets, serialized as macros, and later expanded into the same leaf tokens and coordinates.">
+        </a>
+        <figcaption><strong>Spatial compression with 3D-BPE.</strong> The same merge table supports compression and exact expansion.</figcaption>
+      </figure>
+    </section>
+
+    <section id="results" class="section shell">
+      <div class="reading">
+        <h2>Results</h2>
+        <p>With 8,192 learned merge rules, the mean complete reference sequence falls from 6,873.2 to 3,753.1 tokens, including coordinates, text, and control tokens. SPAC scores 21.50 METEOR on Objaverse captioning, compared with 20.91 for LEO. In the text-to-3D comparison, its Fréchet distance is 23.7 versus 25.9 for ShapeLLM-Omni.</p>
+      </div>
+      <div class="metrics" role="group" aria-label="Selected experimental results">
+        <div class="metric"><strong class="metric-value">45.4%</strong><span>shorter mean reference sequences</span></div>
+        <div class="metric"><strong class="metric-value">21.50</strong><span>METEOR on Objaverse captioning</span></div>
+        <div class="metric"><strong class="metric-value">23.7</strong><span>Fréchet distance on text-to-3D</span></div>
+      </div>
+
+      <figure class="figure-frame">
+        <a href="assets/generation-case-study.webp" aria-label="Open the full-size text-to-3D examples">
+          <img src="assets/generation-case-study.webp" width="2160" height="910" loading="lazy" alt="Text prompts for a barrel, butterfly, carton, milk can, and wooden chest compared across SPAC and five text-to-3D baselines.">
+        </a>
+        <figcaption><strong>Text-to-3D examples.</strong> SPAC generates untextured meshes. The paper uses TRELLIS to add surface appearance to the SPAC results displayed here.</figcaption>
+      </figure>
+
+      <figure class="figure-frame">
+        <a href="assets/encoder-scaling.webp" aria-label="Open the full-size encoder efficiency charts">
+          <img src="assets/encoder-scaling.webp" width="1440" height="992" loading="lazy" alt="Four charts compare forward FLOPs, inference latency, prepared-input wall time, and peak VRAM as input resolution increases.">
+        </a>
+        <figcaption><strong>Encoder efficiency across resolutions.</strong> With geometry, architecture, and voxel-band width held fixed, SPAC’s sparse encoder cost grows approximately quadratically with input resolution.</figcaption>
+      </figure>
+    </section>
+
+    <section id="citation" class="section shell">
+      <div class="citation-head">
+        <h2>Citation</h2>
+        <button type="button" class="button" data-copy-citation hidden>Copy BibTeX</button>
+      </div>
+      <pre id="bibtex"><code>@unpublished{yang2026spac,
+  title  = {From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation},
+  author = {Yang, Junjie and Qian, Rui and Li, Yijiang and Xu, Jinyi and Yan, Yuhao
+            and Yi, Xinjian and Li, Yanfeng and Li, Mingxuan and Wan, Xiang and Fan, Jicong
+            and Liu, Siqi and Elazab, Ahmed and Wang, Changmiao},
+  year   = {2026},
+  note   = {Manuscript}
+}</code></pre>
+      <p class="copy-status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <a href="../">← Back to Junjie Yang’s homepage</a>
+  </footer>
+</body>
+</html>
