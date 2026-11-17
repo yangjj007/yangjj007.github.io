@@ -26,18 +26,18 @@
   <meta name="citation_author" content="Tao Tan">
   <link rel="canonical" href="https://yangjj007.github.io/ravec/">
   <link rel="stylesheet" href="../assets/css/project.css?v=2">
-  <link rel="stylesheet" href="page.css">
+  <link rel="stylesheet" href="page.css?v=3">
   <script defer src="../assets/js/project.js?v=2"></script>
 </head>
 <body class="project-page theme-ravec" id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="site-name" href="../" aria-label="Junjie Yang’s homepage">← <span class="home-name">Junjie Yang</span><span class="home-short">Home</span></a>
       <nav class="section-nav" aria-label="On this page">
-        <a href="#abstract">Abstract</a>
+        <a href="#abstract">Overview</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#example">Example</a>
         <a href="#citation">Citation</a>
       </nav>
     </div>
@@ -48,7 +48,7 @@
       <h1 class="project-title" id="project-title"><span class="project-accent">RAVEC</span> <span class="title-subject">Reward-Aligned Visual Evidence Correction</span></h1>
 
       <div class="authors" role="group" aria-label="Authors">
-        <span>Junjie Yang<sup>1</sup>,</span>
+        <span><a class="first-author" href="../">Junjie Yang</a><sup>1</sup>,</span>
         <span>Rui Qian<sup>2</sup>,</span>
         <span>Xutao Mao<sup>3</sup>,</span>
         <span>Yuhe Wu<sup>4</sup>,</span>
@@ -85,87 +85,43 @@
       </nav>
     </section>
 
-    <figure class="evidence-example shell" aria-labelledby="evidence-caption">
-      <div class="evidence-sheet">
-        <div class="evidence-head">
-          <h2>Paired visual evidence</h2>
-          <fieldset class="evidence-switch">
-            <legend class="evidence-sr">Choose the teacher’s view of the evidence</legend>
-            <input type="radio" id="view-original" name="evidence-view" checked>
-            <label for="view-original">Original</label>
-            <input type="radio" id="view-pixelated" name="evidence-view">
-            <label for="view-pixelated">Pixelated</label>
-          </fieldset>
-        </div>
-        <div class="evidence-plates">
-          <div class="evidence-question">
-            <p>Which point must the regression line pass through?</p>
-            <table class="evidence-data" aria-label="Data in the visual question">
-              <tbody>
-                <tr><th scope="row"><i>x</i></th><td>1</td><td class="evidence-cell"><span class="as-original">2</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>3</td><td>4</td><td>5</td></tr>
-                <tr><th scope="row"><i>y</i></th><td>1.2</td><td class="evidence-cell"><span class="as-original">1.8</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>2.5</td><td>3.2</td><td>3.8</td></tr>
-              </tbody>
-            </table>
-            <ul class="evidence-answers" aria-label="Answer choices">
-              <li><b>A</b> (0, 0)</li><li><b>B</b> (2, 1.8)</li><li><b>C</b> (3, 2.5)</li><li><b>D</b> (4, 3.2)</li>
-            </ul>
-          </div>
-          <div class="teacher-plot" role="group" aria-label="Softened teacher probabilities for answer tokens B and C">
-            <h3>Teacher prediction</h3>
-            <p>Softened probability at the same prefix</p>
-            <div class="token-score">
-              <b>B</b><span class="score-track bar-b" aria-hidden="true"></span>
-              <span class="score-value"><span class="as-original">0.041</span><span class="as-pixelated">0.838</span></span>
-            </div>
-            <div class="token-score">
-              <b>C</b><span class="score-track bar-c" aria-hidden="true"></span>
-              <span class="score-value"><span class="as-original">0.886</span><span class="as-pixelated">0.037</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <figcaption id="evidence-caption">Pixelating one column changes the teacher’s preferred answer from <strong>C</strong> to <strong>B</strong>. RAVEC uses this contrast to propose a correction, then checks whether reward evidence supports it.</figcaption>
-    </figure>
-
-    <section class="section shell" id="abstract" aria-labelledby="abstract-heading">
+    <section class="section shell ravec-opening" id="abstract" aria-labelledby="abstract-heading">
       <div class="reading">
-        <h2 id="abstract-heading">Abstract</h2>
-        <p>Reinforcement learning with verifiable rewards improves multimodal reasoning, but response-level feedback provides limited guidance on which intermediate decisions to correct. Visual interventions reveal sensitivity to image content. RAVEC uses local and cross-question reward support to determine whether to act on that sensitivity and how strongly to weight each correction.</p>
-        <p>Paired Visual Evidence Contrast compares predictions from an exponential moving average teacher at the same sampled response prefix under the original image and a version with the annotated evidence region suppressed. Credit–Risk Allocation then screens the signed directions and allocates a shared response budget, with additional cost for directions that locally reduce predictive entropy. The resulting visual loss augments Group Relative Policy Optimization during training. Inference uses the original image and question.</p>
-      </div>
-    </section>
-
-    <section class="section shell" id="method" aria-labelledby="method-heading">
-      <div class="reading">
-        <h2 id="method-heading">From visual evidence to token corrections</h2>
+        <h2 id="abstract-heading">Where did the wrong answer begin?</h2>
+        <p>A model can misread one number in a table and still do the arithmetic perfectly. Group Relative Policy Optimization (GRPO) uses the final answer’s reward to assign the same advantage to the mistaken lookup and every correct step that follows.</p>
+        <p>RAVEC asks a teacher to predict the next token twice from the same partially written answer, first with the key image region visible, then with it pixelated. The shift reveals which token choices depend on that region. RAVEC acts on a proposed change only when reward signals from this response and other questions support it.</p>
+        <p class="opening-result">RAVEC outperforms GRPO on <strong>all ten benchmarks</strong> at both model sizes. The average gain is <strong>2.67 percentage points at 3B</strong> and <strong>1.39 at 7B</strong>.</p>
       </div>
       <figure class="figure-frame workflow-figure">
         <a href="assets/overview.webp" aria-label="Open the full RAVEC training diagram">
-          <img src="assets/overview.webp" width="1800" height="759" loading="lazy" decoding="async" alt="The actor samples a response. The teacher proposes signed token corrections, and local credit, peer credit, and directional risk determine token weights before the actor update.">
+          <img src="assets/overview.webp" width="1800" height="759" fetchpriority="high" decoding="async" alt="The actor samples a response. The teacher proposes signed token corrections, and local credit, peer credit, and directional risk determine token weights before the actor update.">
         </a>
-        <figcaption><strong>RAVEC training workflow.</strong> The actor samples one response. The teacher replays that response with two views of the image. Reward support and directional cost determine which of the proposed corrections enter the actor update.</figcaption>
+        <figcaption><strong>Training with two views.</strong> The actor samples a response from the original image. The teacher replays it twice to guide the update. At inference, the model needs only the original image and question.</figcaption>
       </figure>
+    </section>
 
-      <div class="figure-grid">
-        <figure class="figure-frame">
-          <a href="assets/pvec.webp">
-            <img src="assets/pvec.webp" width="1200" height="567" loading="lazy" decoding="async" alt="Example table question. At the same prefix, the teacher favors answer C with the original image and B after pixelating the evidence region.">
-          </a>
-          <figcaption><strong>Paired Visual Evidence Contrast.</strong> Comparing the two teacher predictions at a fixed response prefix gives signed directions for strengthening or suppressing token preferences.</figcaption>
-        </figure>
-        <figure class="figure-frame">
-          <a href="assets/allocation.webp">
-            <img src="assets/allocation.webp" width="1200" height="819" loading="lazy" decoding="async" alt="Two panels show that entropy-contracting directions have higher cost and lower-cost directions receive more weight at equal credit under the same budget.">
-          </a>
-          <figcaption><strong>Credit–Risk Allocation.</strong> Local alignment and support from other questions determine which directions qualify. The allocation then favors lower-cost directions at equal credit within a shared response budget.</figcaption>
-        </figure>
+    <section class="section shell" id="method" aria-labelledby="method-heading">
+      <div class="reading method-copy">
+        <h2 id="method-heading">How RAVEC chooses a correction</h2>
+        <h3>Find what the image changes</h3>
+        <p>Paired Visual Evidence Contrast (PVEC) uses a moving average of the model as its teacher. A reference answer guides the region annotation during training. The teacher sees only the question, image view, and preceding tokens. If hiding the region lowers a token’s probability, PVEC proposes strengthening that token. If its probability rises, PVEC proposes suppressing it.</p>
+        <h3>Check the proposal against other questions</h3>
+        <p>Blur alone can change a prediction. Credit–Risk Allocation (CRA) checks whether the proposed update points in a direction supported by reward on this response and on other questions. The second check excludes every response to the source question. A token receives weight only if it passes both checks.</p>
+        <h3>Decide how much to change</h3>
+        <p>The surviving corrections share one budget for the response. At equal reward support and update size, a direction that would narrow the model’s next-token distribution costs more and receives less weight. The weighted corrections form an extra training loss alongside GRPO.</p>
       </div>
+      <figure class="figure-frame allocation-figure">
+        <a href="assets/allocation.webp" aria-label="Enlarge the diagram of risk and allocation">
+          <img src="assets/allocation.webp" width="1200" height="819" loading="lazy" decoding="async" alt="Two equal-length updates have different effects on entropy. With equal credit, the direction that costs less receives more of the response budget.">
+        </a>
+        <figcaption>The left panel shows how two updates can change uncertainty in opposite directions. The dot on the right shows how CRA divides the budget when the two updates have equal credit.</figcaption>
+      </figure>
     </section>
 
     <section class="section shell" id="results" aria-labelledby="results-heading">
       <div class="reading">
-        <h2 id="results-heading">Results on ten multimodal benchmarks</h2>
-        <p>RAVEC achieves the highest average among the compared methods at both Qwen2.5-VL-Instruct model sizes. The reported score is the equal-weight benchmark average of Avg@8 exact-match accuracy, based on eight sampled generations per question.</p>
+        <h2 id="results-heading">Gains across ten multimodal benchmarks</h2>
+        <p>We trained the 3B and 7B Qwen2.5-VL-Instruct models on 38,870 ViRL39K questions. At 3B, the largest gains over GRPO came on MARS-Bench (+4.70 points) and Geometry3K (+4.56). At 7B, MathVerse-V gained 3.32 points. The table gives equal weight to each benchmark and averages exact-match accuracy over eight sampled answers per question (Avg@8).</p>
       </div>
 
       <table class="benchmark-table">
@@ -186,12 +142,75 @@
         </tfoot>
       </table>
 
-      <figure class="figure-frame">
+      <div class="reading result-notes">
+        <h3>Does the split of the budget matter?</h3>
+        <p>In a separate 3B experiment on eight benchmarks, we kept the response budget fixed and gave every active token equal weight. Mean accuracy fell from 51.54% to 49.26%. Counting showed the largest drop, from 75.63% to 60.25%.</p>
+        <h3>Does higher training reward predict better answers?</h3>
+        <p>In a controlled 200-step run, GRPO and VGPO earned higher training rewards than RAVEC. RAVEC finished with the highest validation accuracy, 45.86%, on a fixed set of 160 questions. That was 3.28 points above CFPO, the strongest baseline at the final checkpoint.</p>
+      </div>
+      <figure class="figure-frame dynamics-figure">
         <a href="assets/training.webp">
           <img src="assets/training.webp" width="1680" height="440" loading="lazy" decoding="async" alt="Training curves over 200 steps compare validation accuracy, training reward, response length, and predictive entropy across six methods. RAVEC leads in final validation accuracy.">
         </a>
-        <figcaption><strong>Controlled training comparison.</strong> With the 3B backbone and a shared 1,024-question training set, RAVEC finishes the 200-step run at 45.86% validation accuracy, 3.28 percentage points above the best final baseline. This analysis uses a fixed validation set drawn from eight benchmarks.</figcaption>
+        <figcaption>All six methods started from the same 3B model and trained on the same 1,024 questions. The validation points are unsmoothed. Each training curve shows a trailing five-step mean.</figcaption>
       </figure>
+    </section>
+
+    <section class="section shell example-section" id="example" aria-labelledby="example-heading">
+      <div class="reading">
+        <h2 id="example-heading">What changes when one column disappears?</h2>
+        <p>Switch views to see the teacher’s predictions at the same point in a response. Only the highlighted column changes. In the paper’s broader control experiment, hiding the annotated evidence shifted predictions more than hiding an equally large random region on <strong>72.7% of prompts</strong>.</p>
+      </div>
+      <figure class="evidence-example" aria-labelledby="evidence-caption">
+        <div class="evidence-sheet">
+          <div class="evidence-head">
+            <h3>Paired visual evidence</h3>
+            <fieldset class="evidence-switch">
+              <legend class="evidence-sr">Choose the teacher’s view of the evidence</legend>
+              <input type="radio" id="view-original" name="evidence-view" checked>
+              <label for="view-original">Original</label>
+              <input type="radio" id="view-pixelated" name="evidence-view">
+              <label for="view-pixelated">Pixelated</label>
+            </fieldset>
+          </div>
+          <div class="evidence-plates">
+            <div class="evidence-question">
+              <p>Which point must the regression line pass through?</p>
+              <table class="evidence-data" aria-label="Data in the visual question">
+                <tbody>
+                  <tr><th scope="row"><i>x</i></th><td>1</td><td class="evidence-cell"><span class="as-original">2</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>3</td><td>4</td><td>5</td></tr>
+                  <tr><th scope="row"><i>y</i></th><td>1.2</td><td class="evidence-cell"><span class="as-original">1.8</span><span class="as-pixelated evidence-sr">Pixelated</span></td><td>2.5</td><td>3.2</td><td>3.8</td></tr>
+                </tbody>
+              </table>
+              <ul class="evidence-answers" aria-label="Answer choices">
+                <li><b>A</b> (0, 0)</li><li><b>B</b> (2, 1.8)</li><li><b>C</b> (3, 2.5)</li><li><b>D</b> (4, 3.2)</li>
+              </ul>
+            </div>
+            <div class="teacher-plot" role="group" aria-label="Softened teacher probabilities for answer tokens B and C">
+              <h3>Teacher prediction</h3>
+              <p>Softened probability at the same prefix</p>
+              <div class="token-score">
+                <b>B</b><span class="score-track bar-b" aria-hidden="true"></span>
+                <span class="score-value"><span class="as-original">0.041</span><span class="as-pixelated">0.838</span></span>
+              </div>
+              <div class="token-score">
+                <b>C</b><span class="score-track bar-c" aria-hidden="true"></span>
+                <span class="score-value"><span class="as-original">0.886</span><span class="as-pixelated">0.037</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption id="evidence-caption">With the table intact, the teacher favors <strong>C</strong> (0.886). With the column pixelated, it favors <strong>B</strong> (0.838). The contrast proposes raising the preference for C and lowering it for B. Both proposals still have to pass the reward checks.</figcaption>
+      </figure>
+      <details class="paper-example">
+        <summary>View the original paper figure</summary>
+        <figure class="figure-frame">
+          <a href="assets/pvec.webp">
+            <img src="assets/pvec.webp" width="1200" height="567" loading="lazy" decoding="async" alt="Example table question. At the same prefix, the teacher favors answer C with the original image and B after pixelating the evidence region.">
+          </a>
+          <figcaption>Figure 2 from the paper shows the paired predictions and the signed differences for B and C.</figcaption>
+        </figure>
+      </details>
     </section>
 
     <section class="section shell" id="citation" aria-labelledby="citation-heading">
@@ -215,7 +234,6 @@
   </main>
 
   <footer class="site-footer shell">
-    <a href="../">← Junjie Yang</a>
     <a href="#top">Back to top ↑</a>
   </footer>
 </body>
