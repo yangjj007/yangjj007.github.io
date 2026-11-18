@@ -249,82 +249,52 @@
 .paper-illustration:last-child, .paper-table-figure:last-child { margin-bottom: 0; }
 .paper-illustration { max-width: 62rem; }
 #paper-figure-2, #paper-figure-3, #paper-figure-4 { max-width: 42rem; }
-.algorithm-illustration, #appendix-prompts .paper-illustration { max-width: 49rem; }
-.paper-illustration figcaption, .paper-table-figure figcaption {
+.algorithm-illustration { max-width: 49rem; }
+.paper-illustration figcaption {
   max-width: 52rem;
   margin: .9rem auto 0;
   text-align: left;
   overflow-wrap: break-word;
 }
-.paper-number, .paper-table-number {
+.paper-number {
   color: var(--accent);
   font-weight: 700;
   white-space: nowrap;
 }
-.appendix-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .5rem 1.35rem;
-  font-size: .94rem;
+/* The paper facsimiles include their captions. Keep the equivalent table data
+   available to screen readers and searchable in the page. */
+.paper-table-figure > figcaption, .table-transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  margin: 0;
+  padding: 0;
 }
-.appendix-topic {
-  margin-top: clamp(3rem, 6vw, 5rem);
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
+.paper-table-figure { max-width: 49rem; }
+#paper-table-3 { max-width: 44rem; }
+#motivation .reading { display: flow-root; max-width: 54rem; }
+#paper-table-1 {
+  float: right;
+  width: 41%;
+  margin: .15rem 0 .5rem clamp(1.4rem, 3.3vw, 2.4rem);
 }
-.appendix-topic > h3 {
-  max-width: 52rem;
-  margin-inline: auto;
-  color: var(--ink);
-  font: 400 clamp(1.6rem, 3vw, 2.15rem)/1.2 var(--serif);
-  letter-spacing: -.025em;
+.figure-dialog:has(img[src*="assets/table-"]) figcaption { display: none; }
+
+@media (max-width: 45rem) {
+  #motivation .reading { display: flex; flex-direction: column; }
+  #paper-table-1 { order: 1; float: none; width: min(100%, 23rem); margin: 1.4rem auto 0; }
+  .figure-dialog:has(img[src*="assets/table-"]) figure { overflow-x: auto; }
+  .figure-dialog img[src*="assets/table-"] { width: 47rem; max-width: none; max-height: none; }
+  .figure-dialog img[src*="assets/table-01"] { width: 28rem; }
 }
-.paper-table-figure { max-width: 62rem; }
-#paper-table-1, #paper-table-s4, #paper-table-s6 { max-width: 48rem; }
-.paper-table-figure figcaption { max-width: none; margin: 0 0 .9rem; }
-.paper-table-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-color: #a7b2c1 #f4f6fa;
-}
-.paper-table-scroll + .paper-table-scroll { margin-top: 1.4rem; }
-.native-paper-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-block: 1px solid #919dac;
-  color: #253044;
-  font-size: .89rem;
-  line-height: 1.45;
-  font-variant-numeric: lining-nums tabular-nums;
-}
-.native-paper-table th, .native-paper-table td { padding: .44rem .58rem; text-align: left; vertical-align: top; }
-.native-paper-table tbody tr + tr { border-top: 1px solid #e1e6ed; }
-.native-paper-table thead { background: #f1f4f8; border-bottom: 1px solid #b6c1cd; }
-.native-paper-table tbody th { font-weight: 500; }
-.native-paper-table .paper-table-ours { background: #edf2fc; color: #1d3971; }
-.native-paper-table .paper-table-group th { background: #f5f7fa; color: #394d66; font-weight: 650; }
-.paper-table-panel-title { text-align: left; margin: 0 0 .5rem; font-weight: 650; }
-.paper-method-source { color: #515e71; }
-.paper-mark { text-decoration: none; }
-#paper-table-1 td { text-align: center; }
-#paper-table-1 thead th:not(:first-child) { text-align: center; }
-#paper-table-2 :is(th, td):not(:first-child),
-#paper-table-3 :is(th, td):not(:first-child) { text-align: right; }
-#paper-table-2 thead th:first-child,
-#paper-table-3 thead th:first-child { min-width: 9.5rem; }
-#paper-table-s1 td, #paper-table-s2 td, #paper-table-s3 td, #paper-table-s5 td { min-width: 8rem; }
-.print-layout { margin: .4rem 0 0; text-align: right; font-size: .79rem; }
-.print-layout a { color: var(--muted); }
 
 @media (max-width: 43rem) {
   .evidence-plates { grid-template-columns: 1fr; gap: 1.2rem; }
   .teacher-plot { padding-top: 1.1rem; border-top: 1px solid #d5dce7; }
   .teacher-plot p { margin-bottom: .8rem; }
   .evidence-answers { justify-content: flex-start; gap: .2rem .8rem; }
-  .native-paper-table { font-size: .85rem; }
-  .native-paper-table th, .native-paper-table td { padding-inline: .4rem; }
 }
 
 @media (max-width: 30rem) {
@@ -332,5 +302,4 @@
   .header-inner { justify-content: center; }
   .section-nav { justify-content: center; flex-wrap: wrap; gap: 0 .65rem; }
   .section-nav a { min-height: 2.25rem; }
-  .appendix-nav { justify-content: flex-start; }
 }
