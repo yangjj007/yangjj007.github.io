@@ -1,14 +1,14 @@
 .header-inner { justify-content: center; }
 .site-footer { justify-content: flex-end; }
 
-.first-author {
-  color: var(--accent);
-  font-weight: 700;
+.authors a {
+  color: #344969;
   text-decoration: underline;
-  text-decoration-color: #b4c3df;
+  text-decoration-color: #c1ccd9;
   text-underline-offset: .18em;
 }
-.first-author:hover { text-decoration-color: currentColor; }
+.authors .first-author { color: var(--accent); font-weight: 700; text-decoration-color: #8fabc9; }
+.authors a:hover, .authors a:focus-visible { color: var(--accent-hover); text-decoration-color: currentColor; }
 
 .ravec-opening { padding-top: clamp(1.65rem, 3.3vw, 2.85rem); }
 .ravec-opening h2 { margin-bottom: .55em; }
