@@ -223,6 +223,22 @@ h1, h2, h3 { text-wrap: balance; }
   line-height: 1.5;
 }
 
+.institution-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem clamp(1.2rem, 3vw, 2.25rem);
+  margin: 1.2rem auto 0;
+}
+
+.institution-logos img {
+  width: auto;
+  height: clamp(2rem, 4.6vw, 2.65rem);
+  max-width: min(100%, 17rem);
+  object-fit: contain;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
