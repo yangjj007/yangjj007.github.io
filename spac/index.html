@@ -26,7 +26,7 @@
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link rel="canonical" href="https://yangjj007.github.io/spac/">
   <link rel="stylesheet" href="../assets/css/project.css?v=3">
-  <link rel="stylesheet" href="page.css?v=3">
+  <link rel="stylesheet" href="page.css?v=4">
   <!--
   <link rel="stylesheet" href="mesh-viewer.css">
   <script type="module" src="mesh-viewer.js"></script>
@@ -272,16 +272,18 @@
         </a>
         <figcaption id="paper-figure-4-caption"><span class="paper-number">Figure 4.</span> <strong>3D-BPE merge budget sweep.</strong> Horizontal axis: merge budget <i>K</i><sub>merge</sub>. Left: length compression ratio <i>R</i><sub>len</sub> and length-normalized unigram cost Ĥ<sub>1</sub>(<i>B</i>)<i>R</i><sub>len</sub>. The dotted line marks the leaf baseline Ĥ<sub>1</sub>(<i>X</i>). Right: residual boundary edge ratio <i>R</i><sub>edge</sub>, per-edge MI ratio <i>R</i><sub>MI</sub>, and weighted MI ratio <i>R</i><sub>wMI</sub>. Ratios are relative to unmerged leaf tokens.</figcaption>
       </figure>
-      <div class="reading">
+      <div class="reading encoder-scaling">
         <h3>How does the encoder scale?</h3>
-        <p>Holding the shape and the surface band’s width in voxels fixed, a finer grid adds samples along the surface. At the largest uncapped resolution tested (256), SPAC uses 137.98 GFLOPs per forward pass and takes 85.04 ms on one A100.</p>
+        <figure class="figure-frame paper-figure" id="paper-figure-5">
+          <a href="assets/encoder-scaling.webp" aria-label="Enlarge Figure 5">
+            <img src="assets/encoder-scaling.webp" width="1440" height="992" alt="Four log-scale charts compare forward FLOPs, inference latency, prepared-input wall time and peak memory for SPAC, ShapeLLM-Omni, PointLLM and EVA01 across input resolutions." loading="lazy" decoding="async">
+          </a>
+          <figcaption id="paper-figure-5-caption"><span class="paper-number">Figure 5.</span> <strong>Encoder efficiency across input resolutions.</strong> The top row shows forward FLOPs and latency. The bottom row shows prepared-input wall time and peak inference memory. All four panels use logarithmic vertical axes.</figcaption>
+        </figure>
+        <p>SPAC encodes a narrow band of voxels around the mesh surface. With the shape and the band width in voxels held fixed, doubling the grid resolution produces roughly four times as many active sites. Encoder FLOPs grow at a similar rate, while peak memory grows slowly.</p>
+        <p>At a grid resolution of 256, the largest tested before surface sampling reaches its cap, SPAC uses 137.98&nbsp;GFLOPs and takes 85.04&nbsp;ms per encoder forward pass. ShapeLLM-Omni uses 41.38&nbsp;TFLOPs and takes 4,227.84&nbsp;ms. Both measurements use one shape on a single&nbsp;A100.</p>
+        <p>PointLLM keeps its FLOPs nearly constant by using 512 point groups at every resolution. EVA01 has a higher constant cost. For dense encoding, the plot extrapolates FLOPs beyond the executable range.</p>
       </div>
-      <figure class="figure-frame paper-figure" id="paper-figure-5">
-        <a href="assets/encoder-scaling.webp" aria-label="Enlarge Figure 5">
-          <img src="assets/encoder-scaling.webp" width="1440" height="992" alt="Four log-scale charts compare forward FLOPs, inference latency, prepared-input wall time and peak memory for SPAC, ShapeLLM-Omni, PointLLM and EVA01 across input resolutions." loading="lazy" decoding="async">
-        </a>
-        <figcaption id="paper-figure-5-caption"><span class="paper-number">Figure 5.</span> <strong>Encoder efficiency across input resolutions.</strong> The top-left and top-right panels report forward FLOPs and encoder inference latency; the bottom-left and bottom-right panels report prepared-input wall time and peak inference VRAM. Results use batch size 1 and logarithmic vertical axes. SPAC’s sparse encoder exhibits near-O(R²) scaling with low memory growth. PointLLM’s fixed 512-group budget yields nearly constant FLOPs, while EVA01 incurs a larger constant cost. Dense FLOPs beyond the executable range are analytically extrapolated.</figcaption>
-      </figure>
     </section>
 
     <!--
