@@ -23,9 +23,12 @@
   <meta name="citation_author" content="Siqi Liu">
   <meta name="citation_author" content="Ahmed Elazab">
   <meta name="citation_author" content="Changmiao Wang">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link rel="canonical" href="https://yangjj007.github.io/spac/">
   <link rel="stylesheet" href="../assets/css/project.css?v=3">
-  <link rel="stylesheet" href="page.css">
+  <link rel="stylesheet" href="page.css?v=2">
+  <link rel="stylesheet" href="mesh-viewer.css">
+  <script type="module" src="mesh-viewer.js"></script>
   <script defer src="../assets/js/project.js?v=2"></script>
 </head>
 
@@ -33,12 +36,11 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="site-name" href="../" aria-label="Junjie Yang’s homepage">← <span class="home-name">Junjie Yang</span><span class="home-short">Home</span></a>
       <nav class="section-nav" aria-label="On this page">
-        <a href="#examples">Examples</a>
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#examples">Case studies</a>
         <a href="#citation">Citation</a>
       </nav>
     </div>
@@ -48,7 +50,7 @@
     <section class="hero shell" aria-labelledby="project-title">
       <h1 id="project-title" class="project-title"><span class="project-accent">SPAC</span> <span class="title-subject">From Dense to Sparse: Morton-Ordered Sparse Mapping for Efficient 3D Mesh Generation</span></h1>
       <div class="authors" role="group" aria-label="Authors">
-        <span>Junjie Yang<sup>1</sup>,</span>
+        <span><a class="first-author" href="../">Junjie Yang</a><sup>1</sup>,</span>
         <span>Rui Qian<sup>2</sup>,</span>
         <span>Yijiang Li<sup>3</sup>,</span>
         <span>Jinyi Xu<sup>4</sup>,</span>
@@ -62,22 +64,19 @@
         <span>Ahmed Elazab<sup>11</sup>,</span>
         <span>Changmiao Wang<sup>8</sup></span>
       </div>
-      <details class="affiliation-details">
-        <summary>11 affiliations</summary>
-        <div class="affiliations" role="group" aria-label="Affiliations">
-          <span><sup>1</sup>University of Maryland, College Park</span>
-          <span><sup>2</sup>Fudan University</span>
-          <span><sup>3</sup>University of California, San Diego</span>
-          <span><sup>4</sup>Beihang University</span>
-          <span><sup>5</sup>Zhejiang University</span>
-          <span><sup>6</sup>Southeast University</span>
-          <span><sup>7</sup>Macao Polytechnic University</span>
-          <span><sup>8</sup>Shenzhen Research Institute of Big Data</span>
-          <span><sup>9</sup>The Chinese University of Hong Kong Shenzhen</span>
-          <span><sup>10</sup>National Health Institute of Big Data, Shenzhen</span>
-          <span><sup>11</sup>Tsinghua University</span>
+      <div class="affiliations" role="group" aria-label="Affiliations">
+          <span><sup>1</sup> University of Maryland, College Park</span>
+          <span><sup>2</sup> Fudan University</span>
+          <span><sup>3</sup> University of California, San Diego</span>
+          <span><sup>4</sup> Beihang University</span>
+          <span><sup>5</sup> Zhejiang University</span>
+          <span><sup>6</sup> Southeast University</span>
+          <span><sup>7</sup> Macao Polytechnic University</span>
+          <span><sup>8</sup> Shenzhen Research Institute of Big Data</span>
+          <span><sup>9</sup> The Chinese University of Hong Kong Shenzhen</span>
+          <span><sup>10</sup> National Health Institute of Big Data, Shenzhen</span>
+          <span><sup>11</sup> Tsinghua University</span>
         </div>
-      </details>
       <div class="institution-logos" role="group" aria-label="Author institutions">
         <img src="../assets/images/institutions/umd.svg" width="314" height="50" alt="University of Maryland, College Park">
         <img src="../assets/images/institutions/cuhk-shenzhen.png" width="697" height="100" alt="The Chinese University of Hong Kong, Shenzhen">
@@ -91,155 +90,272 @@
       </nav>
     </section>
 
-    <section class="mesh-gallery shell" id="examples" aria-label="Text-to-mesh gallery">
-      <fieldset class="mesh-picker">
-        <legend class="mesh-visually-hidden">Choose a text-to-mesh example</legend>
-        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-theropod" aria-controls="view-theropod" checked>
-        <label class="mesh-tab" for="mesh-theropod">
-          <img src="assets/theropod-1.webp" width="592" height="259" alt="">
-          <span>Theropod</span>
-        </label>
-        <figure class="mesh-example" id="view-theropod">
-          <figcaption class="mesh-prompt">
-            <span>Generation prompt</span>
-            <p>“A brown theropod dinosaur with a large head, short arms, strong legs and a long tapered tail.”</p>
-          </figcaption>
-          <div class="mesh-main-view">
-            <img src="assets/theropod-1.webp" width="592" height="259" alt="A textured brown theropod in profile, showing its tapered tail and two hind legs." fetchpriority="high">
-          </div>
-          <div class="mesh-more-views" role="group" aria-label="Two more views of the theropod">
-            <span aria-hidden="true">Other views</span>
-            <img src="assets/theropod-2.webp" width="320" height="219" alt="Rear three-quarter view of the dinosaur.">
-            <img src="assets/theropod-3.webp" width="222" height="240" alt="Front view with the head above the small arms.">
-          </div>
-        </figure>
-        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-butterfly" aria-controls="view-butterfly">
-        <label class="mesh-tab" for="mesh-butterfly">
-          <img src="assets/butterfly-1.webp" width="545" height="513" alt="">
-          <span>Butterfly</span>
-        </label>
-        <figure class="mesh-example" id="view-butterfly">
-          <figcaption class="mesh-prompt">
-            <span>Generation prompt</span>
-            <p>“Green butterfly with slanted wings.”</p>
-          </figcaption>
-          <div class="mesh-main-view">
-            <img src="assets/butterfly-1.webp" width="545" height="513" alt="A green butterfly with four angular wings spread around its central body.">
-          </div>
-          <div class="mesh-more-views" role="group" aria-label="Two more views of the butterfly">
-            <span aria-hidden="true">Other views</span>
-            <img src="assets/butterfly-2.webp" width="54" height="240" alt="A side view shows the thin edge of the wings.">
-            <img src="assets/butterfly-3.webp" width="263" height="240" alt="Reverse view showing both pairs of wings.">
-          </div>
-        </figure>
-        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-whale" aria-controls="view-whale">
-        <label class="mesh-tab" for="mesh-whale">
-          <img src="assets/whale-1.webp" width="592" height="128" alt="">
-          <span>Whale</span>
-        </label>
-        <figure class="mesh-example" id="view-whale">
-          <figcaption class="mesh-prompt">
-            <span>Generation prompt</span>
-            <p>“A long blue-gray whale with a streamlined body, small pectoral fins and a wide fluke.”</p>
-          </figcaption>
-          <div class="mesh-main-view">
-            <img src="assets/whale-1.webp" width="592" height="128" alt="A long blue-gray whale in profile, with a fin below its body.">
-          </div>
-          <div class="mesh-more-views" role="group" aria-label="Two more views of the whale">
-            <span aria-hidden="true">Other views</span>
-            <img src="assets/whale-2.webp" width="315" height="186" alt="The whale seen diagonally from above.">
-            <img src="assets/whale-3.webp" width="316" height="192" alt="An angled view of the opposite side of the whale.">
-          </div>
-        </figure>
-        <input class="mesh-choice" type="radio" name="mesh-example" id="mesh-raft" aria-controls="view-raft">
-        <label class="mesh-tab" for="mesh-raft">
-          <img src="assets/raft-1.webp" width="443" height="269" alt="">
-          <span>Raft</span>
-        </label>
-        <figure class="mesh-example" id="view-raft">
-          <figcaption class="mesh-prompt">
-            <span>Generation prompt</span>
-            <p>“An inflatable yellow oval raft with an outer ring, flat inner base and two white oars.”</p>
-          </figcaption>
-          <div class="mesh-main-view">
-            <img src="assets/raft-1.webp" width="443" height="269" alt="A yellow raft seen from above at an angle, with two long oars across its open interior.">
-          </div>
-          <div class="mesh-more-views" role="group" aria-label="Two more views of the raft">
-            <span aria-hidden="true">Other views</span>
-            <img src="assets/raft-2.webp" width="320" height="147" alt="Side view of the raised rim.">
-            <img src="assets/raft-3.webp" width="320" height="220" alt="Another angled view into the open raft.">
-          </div>
-        </figure>
-      </fieldset>
-      <p class="mesh-credit">SPAC generates the geometry. TRELLIS adds surface appearance. Shown here are three views per mesh and shortened prompts from the paper’s training-set examples.</p>
-    </section>
-
-    <section id="abstract" class="section shell">
+    <section id="abstract" class="section shell" aria-labelledby="abstract-heading">
       <div class="reading">
-        <h2>Abstract</h2>
-        <p>Generating a mesh and describing one both require a short token sequence that preserves the shape. Dense grids spend tokens on empty space, and serializing a grid can split neighboring features apart.</p>
-        <p>Sparse Proximity Aware Compression (SPAC) encodes the region near a surface, merges recurring three-dimensional patterns, and orders the resulting tokens along a Morton curve. A single autoregressive model can then read these tokens to caption an object or predict them to generate a mesh from text.</p>
+        <h2 id="abstract-heading">Abstract</h2>
+        <p>Unified 3D understanding and generation require compact sequences preserving spatial structure. Dense grids yield long sequences, while serialization can separate spatial neighbors. We propose <strong>S</strong>parse <strong>P</strong>roximity <strong>A</strong>ware <strong>C</strong>ompression (SPAC), a shared sparse SDF vocabulary combining sparse encoding with reversible spatial merging. A Sparse SDF VQ-VAE quantizes near-surface features while retaining explicit coordinates, using reconstruction supervision for surface fidelity and detail. 3D Byte-Pair Encoding (3D-BPE) merges recurring face-adjacent patterns using relative offsets before serialization. Macro tokens expand exactly into leaf tokens and coordinates. After Morton serialization, a shared LLM reads geometry for captioning and predicts tokens that decode into meshes for text-conditioned generation. With fixed geometry, architecture, and band width in voxels, sparse encoder cost grows approximately quadratically with resolution. 3D-BPE reduces mean complete LLM sequence length by 45.4 percent, including coordinates, text, and control tokens. SPAC achieves strong results in both 3D captioning and text-conditioned mesh generation. Ablations show gains over leaf tokens and Morton 1D-BPE in both tasks.</p>
       </div>
     </section>
 
-    <section id="method" class="section shell">
+    <section id="method" class="section shell" aria-labelledby="method-heading">
       <div class="reading">
-        <h2>How SPAC represents a mesh</h2>
-        <p>The sparse signed distance field (SDF) encoder quantizes features close to the surface. It keeps the spatial coordinate of each leaf token so the language model can connect words to geometry in both directions.</p>
+        <h2 id="method-heading">How does a mesh become a sentence?</h2>
+        <p>To describe a mesh, a language model needs a sequence it can read. To generate one, the same sequence must tell a decoder where each piece of the surface belongs. SPAC gives every local surface feature a code and a position, then learns which neighbors can share a token.</p>
       </div>
-      <figure class="figure-frame">
-        <a href="assets/overview.webp" aria-label="Open the full-size SPAC overview">
-          <img src="assets/overview.webp" width="2160" height="965" loading="lazy" alt="SPAC’s shared language model describes an input treasure-chest mesh and generates a treasure-chest mesh from a text prompt.">
+      <figure class="figure-frame paper-figure" id="paper-figure-1">
+        <a href="assets/overview.webp" aria-label="Enlarge Figure 1">
+          <img src="assets/overview.webp" width="2160" height="965" alt="A mesh is encoded into sparse surface tokens, merged into macro tokens and read by a shared language model. The reverse path expands the tokens and reconstructs a mesh." loading="lazy" decoding="async">
         </a>
-        <figcaption><strong>Geometry and language share a model.</strong> A shared geometry vocabulary connects 3D understanding and text-conditioned mesh generation in one autoregressive model.</figcaption>
+        <figcaption id="paper-figure-1-caption"><span class="paper-number">Figure 1.</span> <strong>Overview of SPAC.</strong> (1) Sparse Encoding: A trained Sparse SDF VQ-VAE converts near-surface geometry into discrete leaf tokens with explicit coordinates. (2) 3D-BPE: Reversible, offset-conditioned merges combine recurring face-adjacent patterns into macro tokens. (3) Unified Modeling: The LLM tokenizer is extended with Morton, distance, and macro tokens. After Morton serialization, a shared autoregressive LLM reads geometry tokens for understanding and predicts them for generation. (4) Reconstruction: Predicted macro tokens expand into leaf tokens, which the VQ-VAE decodes into a sparse SDF for mesh extraction with Marching Cubes.</figcaption>
       </figure>
-      <div class="reading spac-subsection">
-        <h3>Merge spatial neighbors before serialization</h3>
-        <p>3D Byte-Pair Encoding (3D-BPE) learns recurring patterns of face-adjacent tokens. Each merge records the relative offset of its parts, so the shared merge table can recover the original leaf codes and coordinates exactly. The model reads the merged tokens in Morton order for captioning. For generation, it predicts the sequence, expands the tokens, and extracts a mesh with Marching Cubes.</p>
-      </div>
-      <figure class="figure-frame">
-        <a href="assets/spatial-bpe.webp" aria-label="Open the full-size 3D-BPE data flow">
-          <img src="assets/spatial-bpe.webp" width="2160" height="718" loading="lazy" alt="Face-adjacent leaf patterns are merged with offsets, serialized as macros, and later expanded into the same leaf tokens and coordinates.">
-        </a>
-        <figcaption><strong>Spatial compression with 3D-BPE.</strong> The same merge table supports compression and exact expansion.</figcaption>
-      </figure>
-    </section>
-
-    <section id="results" class="section shell">
       <div class="reading">
-        <h2>Compression and generation results</h2>
-        <p>With 8,192 merge rules, SPAC reduces the length of the sequence processed by the language model. The comparison counts geometry, coordinates, text, and control tokens across 43,180 text-to-3D records.</p>
+        <h3>Merge neighbors before putting them in order</h3>
+        <p>A sparse signed distance field records geometry in a narrow band around the surface. The encoder quantizes these features into leaf tokens. Whenever a face-adjacent pair recurs, 3D-BPE can replace it with a macro token that records the two parts and their relative offset.</p>
       </div>
-      <dl class="metrics" aria-label="Selected experimental results">
-        <div class="metric"><dt>Mean reference length</dt><dd class="metric-value">−45.4%</dd><dd>6,873.2 → 3,753.1 tokens</dd></div>
-        <div class="metric"><dt>Objaverse captioning</dt><dd class="metric-value">21.50</dd><dd>METEOR, compared with 20.91 for LEO</dd></div>
-        <div class="metric"><dt>Text-to-3D generation</dt><dd class="metric-value">23.7</dd><dd>Fréchet distance, compared with 25.9 for ShapeLLM-Omni</dd></div>
-      </dl>
-
-      <figure class="figure-frame">
-        <a href="assets/generation-case-study.webp" aria-label="Open the full-size text-to-3D examples">
-          <img src="assets/generation-case-study.webp" width="2160" height="910" loading="lazy" alt="Text prompts for a barrel, butterfly, carton, milk can, and wooden chest compared across SPAC and five text-to-3D baselines.">
+      <figure class="figure-frame paper-figure" id="paper-figure-2">
+        <a href="assets/spatial-bpe.webp" aria-label="Enlarge Figure 2">
+          <img src="assets/spatial-bpe.webp" width="2160" height="718" alt="The illustrated merge table joins adjacent leaf tokens using offsets and reverses the process to recover the original three-dimensional pattern. A barrel example shows the path from text to mesh." loading="lazy" decoding="async">
         </a>
-        <figcaption><strong>Text-to-3D examples.</strong> SPAC generates untextured meshes. The paper uses TRELLIS to add surface appearance to the SPAC results displayed here.</figcaption>
+        <figcaption id="paper-figure-2-caption"><span class="paper-number">Figure 2.</span> <strong>Spatial compression with 3D-BPE.</strong> Subscripts M denote lookup in the shared merge table, learned offline and then fixed. The local example illustrates face-adjacent merging and exact recovery of leaf codes and coordinates. Below, SPAC predicts coordinate–macro pairs, which are expanded using the same table and decoded into a mesh.</figcaption>
       </figure>
-
-      <div class="spac-scaling">
-        <div class="spac-scaling-copy">
-          <h3>Encoder cost across resolutions</h3>
-          <p>Holding the surface area and voxel-band width fixed, the sparse encoder processes a narrow band around the surface. Its measured forward cost grows approximately quadratically with input resolution.</p>
+      <div class="algorithm-layout">
+        <div class="reading">
+          <h3>Read the sequence in either direction</h3>
+          <p>For captioning, SPAC sorts the merged blocks along a Morton curve and the language model reads their coordinates and codes. For generation, the model starts from text and predicts that sequence itself.</p>
+          <p>The merge rules undo each macro exactly, restoring the original leaf codes and their coordinates. The VQ-VAE decoder turns these into a signed distance field, and Marching Cubes extracts the mesh. Surface detail depends on SDF sampling, the codebook and the decoder.</p>
         </div>
-        <figure class="figure-frame">
-          <a href="assets/encoder-scaling.webp" aria-label="Open the full-size encoder efficiency charts">
-            <img src="assets/encoder-scaling.webp" width="1440" height="992" loading="lazy" alt="Four charts compare forward FLOPs, inference latency, prepared-input wall time, and peak VRAM as input resolution increases.">
+        <figure class="figure-frame paper-algorithm" id="paper-algorithm-1">
+          <a href="assets/paper/algorithm-01.webp" aria-label="Enlarge Algorithm 1">
+            <img src="assets/paper/algorithm-01.webp" width="1175" height="1690" alt="All 24 steps of 3D-BPE, from counting frequent face-adjacent pairs to applying learned rules, Morton ordering and exact recovery of occupied coordinates and leaf tokens." loading="lazy" decoding="async">
           </a>
-          <figcaption>Forward FLOPs, latency, prepared-input time, and peak memory at increasing input resolutions.</figcaption>
+          <figcaption id="paper-algorithm-1-caption" class="print-transcript"><span class="paper-number">Algorithm 1.</span> <strong>3D-BPE Learning, Encoding and Decoding.</strong></figcaption>
         </figure>
       </div>
     </section>
 
-    <section id="citation" class="section shell">
+    <section id="results" class="section shell" aria-labelledby="results-heading">
+      <div class="reading">
+        <h2 id="results-heading">What changes when the sequence gets shorter?</h2>
+        <p>Across 43,180 text-to-3D records, 8,192 merge rules bring the mean full sequence from <strong>6,873 to 3,753 tokens</strong>, a <strong>45.4% reduction</strong>. The count includes text, coordinates and control tokens as well as geometry.</p>
+      </div>
+      <div class="reading">
+        <h3>Language and 3D captioning</h3>
+        <p>SPAC retains much of its Qwen3-4B backbone’s language performance, scoring 73.4 on BBH versus 72.5 for the backbone. On the Objaverse captioning test, SPAC leads the compared models on all five metrics, reaching 21.50 METEOR and 62.20 SimCSE.</p>
+      </div>
+      <figure class="figure-frame paper-table" id="paper-table-1">
+        <a href="assets/paper/table-01.webp" aria-label="Enlarge Table 1">
+          <img src="assets/paper/table-01.webp" width="1900" height="424" alt="SPAC scores 69.5 on MMLU, 47.9 on MMLU-Pro, 86.1 on GSM8K and 73.4 on BBH. It leads the compared 3D-oriented language models on all four benchmarks." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-table-1-caption" class="print-transcript"><span class="paper-number">Table 1.</span> <strong>Language capabilities comparison.</strong> Best values are bold and second-best values are underlined.</figcaption>
+        <div class="print-transcript">
+          <table aria-labelledby="paper-table-1-caption">
+            <thead><tr><th scope="col">Model</th><th scope="col">MMLU</th><th scope="col">MMLU-Pro</th><th scope="col">GSM8K</th><th scope="col">BBH</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">SPAC (ours)</th><td>69.5</td><td>47.9</td><td>86.1</td><td>73.4</td></tr>
+              <tr><th scope="row">Qwen3-4B</th><td>72.9</td><td>50.5</td><td>87.7</td><td>72.5</td></tr>
+              <tr><th scope="row">ShapeLLM-Omni-7B</th><td>63.9</td><td>38.2</td><td>51.1</td><td>68.6</td></tr>
+              <tr><th scope="row">Chameleon-7B</th><td>59.4</td><td>25.4</td><td>66.9</td><td>57.9</td></tr>
+              <tr><th scope="row">LLaMA-Mesh-8B</th><td>57.4</td><td>27.0</td><td>33.1</td><td>65.5</td></tr>
+              <tr><th scope="row">PointLLM-13B</th><td>48.5</td><td>11.8</td><td>27.2</td><td>51.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="figure-frame paper-table" id="paper-table-2">
+        <a href="assets/paper/table-02.webp" aria-label="Enlarge Table 2">
+          <img src="assets/paper/table-02.webp" width="1900" height="748" alt="SPAC leads the five captioning metrics with BLEU-1 22.31, ROUGE-L 24.43, METEOR 21.50, Sentence-BERT 68.24 and SimCSE 62.20." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-table-2-caption" class="print-transcript"><span class="paper-number">Table 2.</span> <strong>3D object captioning results on Objaverse.</strong> The table highlights the best result for each metric in bold and marks the second-best result with underlining.</figcaption>
+        <div class="print-transcript">
+          <table aria-labelledby="paper-table-2-caption">
+            <thead><tr><th scope="col">Model</th><th scope="col">BLEU-1</th><th scope="col">ROUGE-L</th><th scope="col">METEOR</th><th scope="col">Sentence-BERT</th><th scope="col">SimCSE</th></tr></thead>
+            <tbody>
+              <tr><th scope="rowgroup" colspan="6">General vision-language models</th></tr>
+              <tr><th scope="row">InstructBLIP-13B</th><td>4.65</td><td>8.85</td><td>13.23</td><td>45.90</td><td>48.86</td></tr>
+              <tr><th scope="row">LLaVA-13B</th><td>4.02</td><td>8.15</td><td>12.58</td><td>46.37</td><td>45.90</td></tr>
+              <tr><th scope="row">Qwen2.5-VL-7B</th><td>4.05</td><td>7.85</td><td>14.23</td><td>48.90</td><td>50.86</td></tr>
+            </tbody>
+            <tbody>
+              <tr><th scope="rowgroup" colspan="6">3D understanding models</th></tr>
+              <tr><th scope="row">3D-LLM</th><td>16.91</td><td>19.48</td><td>19.73</td><td>44.48</td><td>43.68</td></tr>
+              <tr><th scope="row">PointLLM-13B</th><td>17.09</td><td>20.99</td><td>16.45</td><td>50.15</td><td>50.83</td></tr>
+              <tr><th scope="row">LEO</th><td>16.98</td><td>20.12</td><td>20.91</td><td>48.01</td><td>47.25</td></tr>
+            </tbody>
+            <tbody>
+              <tr><th scope="rowgroup" colspan="6">Unified 3D understanding and generation models</th></tr>
+              <tr><th scope="row">ShapeLLM-Omni</th><td>18.51</td><td>21.37</td><td>19.89</td><td>48.34</td><td>49.72</td></tr>
+              <tr><th scope="row">SPAC (ours)</th><td>22.31</td><td>24.43</td><td>21.50</td><td>68.24</td><td>62.20</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="reading">
+        <h3>Text-to-3D generation</h3>
+        <p>On text-conditioned generation, SPAC reaches a Fréchet distance of 23.7, compared with 25.9 for ShapeLLM-Omni. The <a href="#paper-figure-3">visual comparison</a> shows the shapes behind the scores.</p>
+      </div>
+      <figure class="figure-frame paper-table" id="paper-table-3">
+        <a href="assets/paper/table-03.webp" aria-label="Enlarge Table 3">
+          <img src="assets/paper/table-03.webp" width="1900" height="612" alt="SPAC records CLIP 24.4, FD 23.7 and scaled KD 0.22. ShapeLLM-Omni records 26.7, 25.9 and 0.25 respectively." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-table-3-caption" class="print-transcript"><span class="paper-number">Table 3.</span> <strong>Comparison on text-to-3D generation.</strong> KD is scaled by 10². Best are in bold and second-best are underlined.</figcaption>
+        <div class="print-transcript">
+          <table aria-labelledby="paper-table-3-caption">
+            <thead><tr><th scope="col">Method</th><th scope="col">CLIP ↑</th><th scope="col">FD (Inception) ↓</th><th scope="col">KD (Inception), scaled by 100 ↓</th></tr></thead>
+            <tbody>
+              <tr><th scope="rowgroup" colspan="4">Specialized 3D generators</th></tr>
+              <tr><th scope="row">SAR3D</th><td>23.9</td><td>27.2</td><td>0.28</td></tr>
+              <tr><th scope="row">3DTopia-XL</th><td>25.89</td><td>43.46</td><td>1.18</td></tr>
+              <tr><th scope="row">Shap-E</th><td>24.94</td><td>53.24</td><td>1.13</td></tr>
+              <tr><th scope="row">CLAY</th><td>23.28</td><td>48.43</td><td>0.59</td></tr>
+              <tr><th scope="row">TRELLIS</th><td>30.8</td><td>18.3</td><td>0.10</td></tr>
+            </tbody>
+            <tbody>
+              <tr><th scope="rowgroup" colspan="4">Unified 3D models</th></tr>
+              <tr><th scope="row">ShapeLLM-Omni</th><td>26.7</td><td>25.9</td><td>0.25</td></tr>
+              <tr><th scope="row">SPAC (ours)</th><td>24.4</td><td>23.7</td><td>0.22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="reading">
+        <h3>Which merges help?</h3>
+        <p>At the same merge budget, spatial 3D-BPE retains 75.4% of the leaf-token count. Merging neighbors in the serialized Morton sequence retains 80.3%. In the downstream comparison, spatial merging also improves captioning METEOR from 15.59 to 21.50.</p>
+      </div>
+      <figure class="figure-frame paper-table" id="paper-table-4">
+        <a href="assets/paper/table-04.webp" aria-label="Enlarge Table 4">
+          <img src="assets/paper/table-04.webp" width="1900" height="472" alt="Comparison of leaf tokens, Morton 1D-BPE and SPAC on generation, captioning, FLOPs and latency. SPAC leads all ten reported columns." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-table-4-caption" class="print-transcript"><span class="paper-number">Table 4.</span> <strong>3D-BPE ablation.</strong> KD is scaled by 10². The best result in each column is bold, and the second best is underlined.</figcaption>
+        <div class="print-transcript">
+          <table aria-labelledby="paper-table-4-caption">
+            <thead><tr><th scope="col">Variant</th><th scope="col">CLIP ↑</th><th scope="col">FD ↓</th><th scope="col">KD, scaled by 100 ↓</th><th scope="col">BLEU-1 ↑</th><th scope="col">ROUGE-L ↑</th><th scope="col">METEOR ↑</th><th scope="col">Sentence-BERT ↑</th><th scope="col">SimCSE ↑</th><th scope="col">FLOPs (G) ↓</th><th scope="col">Latency (s) ↓</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">w.o. BPE</th><td>22.1</td><td>28.4</td><td>0.31</td><td>7.08</td><td>19.72</td><td>13.07</td><td>56.27</td><td>51.09</td><td>69,771.35</td><td>348.40</td></tr>
+              <tr><th scope="row">Morton 1D-BPE</th><td>23.4</td><td>26.9</td><td>0.27</td><td>9.15</td><td>21.72</td><td>15.59</td><td>62.61</td><td>58.04</td><td>56,299.82</td><td>262.93</td></tr>
+              <tr><th scope="row">SPAC</th><td>24.4</td><td>23.7</td><td>0.22</td><td>22.31</td><td>24.43</td><td>21.50</td><td>68.24</td><td>62.20</td><td>41,122.05</td><td>171.69</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="figure-frame paper-table" id="paper-table-5">
+        <a href="assets/paper/table-05.webp" aria-label="Enlarge Table 5">
+          <img src="assets/paper/table-05.webp" width="1904" height="628" alt="Leaf sequences average 6,873.2 tokens and 3D-BPE sequences average 3,753.1, a 45.40% reduction. Morton 1D, Hilbert 1D and random 1D reduce length by 20.81%, 21.65% and 17.86%." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-table-5-caption" class="print-transcript"><span class="paper-number">Table 5.</span> <strong>BPE compression and full LLM reference sequence lengths.</strong> Results use 8,192 merge rules. R_len is the retained geometry-token fraction; entropy metrics are in bits. Full sequence lengths count geometry, coordinates, text, and control tokens before truncation or packing; reduction is relative to Leaf. Best are in bold and second-best are underlined.</figcaption>
+        <div class="print-transcript">
+          <table aria-labelledby="paper-table-5-caption">
+            <thead><tr><th scope="col">Method</th><th scope="col">Retained token fraction ↓</th><th scope="col">Length-normalized unigram cost ↓</th><th scope="col">Bigram entropy ↓</th><th scope="col">Trigram entropy ↓</th><th scope="col">Mean sequence length ↓</th><th scope="col">P95 sequence length ↓</th><th scope="col">Reduction ↑</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Leaf</th><td>1.000</td><td>10.910</td><td>—</td><td>—</td><td>6,873.2</td><td>14,675.1</td><td>—</td></tr>
+              <tr><th scope="row">Morton 1D</th><td>0.803</td><td>9.881</td><td>1.092</td><td>0.127</td><td>5,443.2</td><td>11,852.2</td><td>20.81%</td></tr>
+              <tr><th scope="row">Hilbert 1D</th><td>0.820</td><td>10.010</td><td>1.220</td><td>0.072</td><td>5,385.4</td><td>11,700.1</td><td>21.65%</td></tr>
+              <tr><th scope="row">Random 1D</th><td>0.998</td><td>10.910</td><td>2.167</td><td>0.166</td><td>5,645.6</td><td>12,281.1</td><td>17.86%</td></tr>
+              <tr><th scope="row">3D-BPE</th><td>0.754</td><td>9.420</td><td>0.972</td><td>0.061</td><td>3,753.1</td><td>8,483.2</td><td>45.40%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="figure-frame paper-figure" id="paper-figure-4">
+        <a href="assets/paper/figure-04.webp" aria-label="Enlarge Figure 4">
+          <img src="assets/paper/figure-04.webp" width="2048" height="548" alt="Two plots show how increasing the merge budget shortens the geometry sequence and changes the number of remaining boundaries and the mutual information across them." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-4-caption"><span class="paper-number">Figure 4.</span> <strong>3D-BPE merge budget sweep.</strong> Horizontal axis: merge budget <i>K</i><sub>merge</sub>. Left: length compression ratio <i>R</i><sub>len</sub> and length-normalized unigram cost Ĥ<sub>1</sub>(<i>B</i>)<i>R</i><sub>len</sub>. The dotted line marks the leaf baseline Ĥ<sub>1</sub>(<i>X</i>). Right: residual boundary edge ratio <i>R</i><sub>edge</sub>, per-edge MI ratio <i>R</i><sub>MI</sub>, and weighted MI ratio <i>R</i><sub>wMI</sub>. Ratios are relative to unmerged leaf tokens.</figcaption>
+      </figure>
+      <div class="reading">
+        <h3>How does the encoder scale?</h3>
+        <p>Holding the shape and the surface band’s width in voxels fixed, a finer grid adds samples along the surface. At the largest uncapped resolution tested (256), SPAC uses 137.98 GFLOPs per forward pass and takes 85.04 ms on one A100.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-5">
+        <a href="assets/encoder-scaling.webp" aria-label="Enlarge Figure 5">
+          <img src="assets/encoder-scaling.webp" width="1440" height="992" alt="Four log-scale charts compare forward FLOPs, inference latency, prepared-input wall time and peak memory for SPAC, ShapeLLM-Omni, PointLLM and EVA01 across input resolutions." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-5-caption"><span class="paper-number">Figure 5.</span> <strong>Encoder efficiency across input resolutions.</strong> The top-left and top-right panels report forward FLOPs and encoder inference latency; the bottom-left and bottom-right panels report prepared-input wall time and peak inference VRAM. Results use batch size 1 and logarithmic vertical axes. SPAC’s sparse encoder exhibits near-O(R²) scaling with low memory growth. PointLLM’s fixed 512-group budget yields nearly constant FLOPs, while EVA01 incurs a larger constant cost. Dense FLOPs beyond the executable range are analytically extrapolated.</figcaption>
+      </figure>
+    </section>
+
+    <section id="examples" class="section shell" aria-labelledby="examples-heading">
+      <div class="reading">
+        <h2 id="examples-heading">Case studies</h2>
+        <p>These three training-set examples show meshes generated from text. SPAC produced the geometry, and TRELLIS supplied the surface appearance. For the viewer, we simplified the meshes and removed detached fragments. The prompts are abbreviated.</p>
+      </div>
+      <div class="model-gallery" data-model-gallery>
+        <nav class="model-gallery__picker" aria-label="Choose a 3D model">
+          <a href="#mesh-theropod">Theropod</a>
+          <a href="#mesh-butterfly">Butterfly</a>
+          <a href="#mesh-whale">Whale</a>
+        </nav>
+        <figure id="mesh-theropod" class="model-gallery__case" data-model="assets/models/theropod.glb" data-orbit="103deg 76deg" data-description="Three-dimensional theropod model with a large head and a long tail.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/theropod.webp" width="960" height="540" loading="lazy" alt="A theropod dinosaur with powerful hind legs and a tapered tail.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “A brown theropod dinosaur with a large head, short arms, strong legs and a long tapered tail.”</figcaption>
+        </figure>
+        <figure id="mesh-butterfly" class="model-gallery__case" data-model="assets/models/butterfly.glb" data-orbit="-8deg 81deg" data-description="Three-dimensional butterfly model with two pairs of green wings.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/butterfly.webp" width="960" height="540" loading="lazy" alt="A green butterfly with angular wings spread around its body.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “Green butterfly with slanted wings.”</figcaption>
+        </figure>
+        <figure id="mesh-whale" class="model-gallery__case" data-model="assets/models/whale.glb" data-orbit="110deg 62deg" data-description="Three-dimensional whale model with two pectoral fins and a broad fluke.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/whale.webp" width="960" height="540" loading="lazy" alt="A long blue-gray whale with a streamlined body and wide fluke.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “A long blue-gray whale with a streamlined body, small pectoral fins and a wide fluke.”</figcaption>
+        </figure>
+        <div class="model-gallery__controls" hidden>
+          <span role="status" aria-live="polite"></span>
+          <div class="model-gallery__actions">
+            <button type="button" data-zoom="2" aria-label="Zoom in" title="Zoom in">+</button>
+            <button type="button" data-zoom="-2" aria-label="Zoom out" title="Zoom out">−</button>
+            <button type="button">Reset view</button>
+          </div>
+        </div>
+      </div>
+      <div class="reading">
+        <h3>The same prompt across six generators</h3>
+        <p>The rows below hold the text fixed. Compare the silhouette of the barrel, the angle of the butterfly wings, and the curved lid of the chest across methods.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-3">
+        <a href="assets/generation-case-study.webp" aria-label="Enlarge Figure 3">
+          <img src="assets/generation-case-study.webp" width="2160" height="910" alt="Five prompt-matched rows compare a barrel, butterfly, orange carton, milk can and wooden chest across SPAC, TRELLIS, SAR3D, 3DTopia-XL, LGM and Shap-E." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-3-caption"><span class="paper-number">Figure 3.</span> <strong>Comparisons with other baselines on the Text-to-3D task.</strong> SPAC generates untextured meshes. Following ShapeLLM-Omni (Ye et al., 2025), we use TRELLIS (Xiang et al., 2025b) to add surface appearance to the SPAC results shown here.</figcaption>
+      </figure>
+      <div class="reading">
+        <h3>Twelve prompts and their generated meshes</h3>
+        <p>The views of each object reveal details that a single silhouette can hide, from the windows on a bus to the opening in a wardrobe.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-a6">
+        <a href="assets/paper/figure-a06.webp" aria-label="Enlarge Figure A6">
+          <img src="assets/paper/figure-a06.webp" width="2100" height="2287" alt="Twelve shortened generation prompts paired with multiple views of their outputs, including a bus, pizza, burger, drum, pear and wardrobe." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-a6-caption"><span class="paper-number">Figure A6.</span> <strong>Additional text-to-3D examples, G13–G24.</strong> G13–G17 are saved outputs from an earlier Toys4K evaluation. TRELLIS reconstructed geometry and appearance from their generated meshes. G18–G24 use training objects and retain the geometry generated by SPAC, with TRELLIS surface appearance.</figcaption>
+      </figure>
+      <div class="reading">
+        <h3>Reading geometry back into words</h3>
+        <p>Each example pairs two views of a mesh with SPAC’s saved caption. The model receives the shape’s signed distance field.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-a7">
+        <a href="assets/paper/figure-a07.webp" aria-label="Enlarge Figure A7">
+          <img src="assets/paper/figure-a07.webp" width="2100" height="2258" alt="Eight rendered training objects alongside the original SPAC captions, including a lion, monkey, butterfly, lizard, chicken, panda and violin." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-a7-caption"><span class="paper-number">Figure A7.</span> <strong>Additional 3D-to-text examples, U01–U08.</strong> Renders show original materials for context. The captions are saved model outputs for training objects, conditioned on SDF geometry.</figcaption>
+      </figure>
+      <div class="reading">
+        <h3>Where do descriptions agree or diverge?</h3>
+        <p>For the same four objects, the appendix compares model captions against the dataset descriptions and marks matching details and mismatches.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-a4">
+        <a href="assets/paper/figure-a04.webp" aria-label="Enlarge Figure A4">
+          <img src="assets/paper/figure-a04.webp" width="3000" height="2088" alt="Four columns compare saved captions and references for a violin, helicopter, tractor and mushroom, with supported visible attributes marked green and mismatches red." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-a4-caption"><span class="paper-number">Figure A4.</span> <strong>Additional 3D understanding comparisons.</strong> These are training-seen Toys4K objects. Captions are saved outputs, and Reference denotes dataset descriptions. Green/red phrases highlight supported/mismatched visible attributes. SPAC received saved SDF tokens and a one-sentence prompt. Baselines used their own input formats and detailed-caption prompts.</figcaption>
+      </figure>
+    </section>
+
+    <section id="citation" class="section shell" aria-labelledby="citation-heading">
       <div class="citation-head">
-        <h2>BibTeX</h2>
+        <h2 id="citation-heading">BibTeX</h2>
         <button type="button" class="button" data-copy-citation hidden>Copy BibTeX</button>
       </div>
       <pre id="bibtex"><code>@unpublished{yang2026spac,
@@ -255,7 +371,6 @@
   </main>
 
   <footer class="site-footer shell">
-    <a href="../">← Junjie Yang</a>
     <a href="#top">Back to top ↑</a>
   </footer>
 </body>
