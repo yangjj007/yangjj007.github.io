@@ -35,7 +35,7 @@
 .encoder-scaling { display: flow-root; max-width: 54rem; }
 #paper-figure-5 {
   float: right;
-  width: 44%;
+  width: 60%;
   margin: 0 0 .75rem clamp(1.25rem, 3vw, 2.25rem);
 }
 #paper-figure-5 figcaption { margin-top: .6rem; }
