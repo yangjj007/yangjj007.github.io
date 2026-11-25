@@ -26,9 +26,11 @@
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link rel="canonical" href="https://yangjj007.github.io/spac/">
   <link rel="stylesheet" href="../assets/css/project.css?v=3">
-  <link rel="stylesheet" href="page.css?v=2">
+  <link rel="stylesheet" href="page.css?v=3">
+  <!--
   <link rel="stylesheet" href="mesh-viewer.css">
   <script type="module" src="mesh-viewer.js"></script>
+  -->
   <script defer src="../assets/js/project.js?v=2"></script>
 </head>
 
@@ -36,11 +38,16 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="shell header-inner">
+      <div class="institution-marks" role="group" aria-label="Author institutions">
+        <img src="../assets/images/institutions/umd-mark.svg" width="52" height="52" alt="University of Maryland, College Park">
+        <img src="../assets/images/institutions/cuhk-shenzhen-mark.png" width="126" height="99" alt="The Chinese University of Hong Kong, Shenzhen">
+        <img src="../assets/images/institutions/fudan-mark.png" width="63" height="64" alt="Fudan University">
+      </div>
       <nav class="section-nav" aria-label="On this page">
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
-        <a href="#examples">Case studies</a>
+        <!-- <a href="#examples">Case studies</a> -->
         <a href="#citation">Citation</a>
       </nav>
     </div>
@@ -77,15 +84,9 @@
           <span><sup>10</sup> National Health Institute of Big Data, Shenzhen</span>
           <span><sup>11</sup> Tsinghua University</span>
         </div>
-      <div class="institution-logos" role="group" aria-label="Author institutions">
-        <img src="../assets/images/institutions/umd.svg" width="314" height="50" alt="University of Maryland, College Park">
-        <img src="../assets/images/institutions/cuhk-shenzhen.png" width="697" height="100" alt="The Chinese University of Hong Kong, Shenzhen">
-        <img src="../assets/images/institutions/fudan.png" width="222" height="64" alt="Fudan University">
-      </div>
       <nav class="hero-actions" aria-label="Project resources">
         <a class="button" href="https://github.com/yangjj007/SPAC">Code on GitHub</a>
         <a class="button primary" href="https://huggingface.co/Jack04810/SPAC-4B" aria-label="SPAC-4B model on Hugging Face">SPAC-4B</a>
-        <a class="button" href="https://huggingface.co/datasets/Jack04810/bpe-mix-dataset" aria-label="Training dataset on Hugging Face">Dataset</a>
         <a class="button" href="#citation">BibTeX</a>
       </nav>
     </section>
@@ -218,6 +219,16 @@
         </div>
       </figure>
       <div class="reading">
+        <h3>The same prompt across six generators</h3>
+        <p>The rows below hold the text fixed. Compare the silhouette of the barrel, the angle of the butterfly wings, and the curved lid of the chest across methods.</p>
+      </div>
+      <figure class="figure-frame paper-figure" id="paper-figure-3">
+        <a href="assets/generation-case-study.webp" aria-label="Enlarge Figure 3">
+          <img src="assets/generation-case-study.webp" width="2160" height="910" alt="Five prompt-matched rows compare a barrel, butterfly, orange carton, milk can and wooden chest across SPAC, TRELLIS, SAR3D, 3DTopia-XL, LGM and Shap-E." loading="lazy" decoding="async">
+        </a>
+        <figcaption id="paper-figure-3-caption"><span class="paper-number">Figure 3.</span> <strong>Comparisons with other baselines on the Text-to-3D task.</strong> SPAC generates untextured meshes. Following ShapeLLM-Omni (Ye et al., 2025), we use TRELLIS (Xiang et al., 2025b) to add surface appearance to the SPAC results shown here.</figcaption>
+      </figure>
+      <div class="reading">
         <h3>Which merges help?</h3>
         <p>At the same merge budget, spatial 3D-BPE retains 75.4% of the leaf-token count. Merging neighbors in the serialized Morton sequence retains 80.3%. In the downstream comparison, spatial merging also improves captioning METEOR from 15.59 to 21.50.</p>
       </div>
@@ -273,15 +284,19 @@
       </figure>
     </section>
 
+    <!--
     <section id="examples" class="section shell" aria-labelledby="examples-heading">
       <div class="reading">
         <h2 id="examples-heading">Case studies</h2>
-        <p>These training-set examples show meshes generated from text. SPAC produced the geometry, and TRELLIS supplied the surface appearance. For the viewer, we simplified the meshes and removed detached fragments. The prompts are abbreviated.</p>
+        <p>SPAC generated these training-set meshes from text, and TRELLIS added surface appearance. We removed loose fragments for interactive viewing. For the three examples from <a href="#paper-figure-a6">Figure A6</a>, we also rebuilt damaged surfaces and retouched the original textures.</p>
       </div>
       <div class="model-gallery" data-model-gallery>
         <nav class="model-gallery__picker" aria-label="Choose a 3D model">
           <a href="#mesh-theropod">Theropod</a>
           <a href="#mesh-butterfly">Butterfly</a>
+          <a href="#mesh-cut-lemon">Cut lemon</a>
+          <a href="#mesh-sandwich">Sandwich</a>
+          <a href="#mesh-pear">Pear</a>
         </nav>
         <figure id="mesh-theropod" class="model-gallery__case" data-model="assets/models/theropod.glb" data-orbit="103deg 76deg" data-description="Three-dimensional theropod model with a large head and a long tail.">
           <div class="model-gallery__stage">
@@ -295,6 +310,24 @@
           </div>
           <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “Green butterfly with slanted wings.”</figcaption>
         </figure>
+        <figure id="mesh-cut-lemon" class="model-gallery__case" data-model="assets/models/cut-lemon.glb" data-orbit="24deg 48deg" data-description="A cut lemon with yellow peel, white pith, and a pale segmented face.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/cut-lemon.webp" width="960" height="540" loading="lazy" alt="A yellow lemon viewed from above and to one side, showing its circular cut face.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “A yellow lemon cut in half, revealing internal segments, white membranes and a bright white center.” <small class="model-gallery__source">Retouched display mesh · <a href="#paper-figure-a6">Original in Figure A6, G19</a></small></figcaption>
+        </figure>
+        <figure id="mesh-sandwich" class="model-gallery__case" data-model="assets/models/sandwich.glb" data-orbit="34deg 41deg" data-description="An oblong sandwich with a toasted top and a darker crust around the sides.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/sandwich.webp" width="960" height="540" loading="lazy" alt="A long sandwich seen from above and to one side.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “A sub sandwich with light-brown buns, green lettuce, reddish-brown meat and thin yellow cheese.” <small class="model-gallery__source">Retouched display mesh · <a href="#paper-figure-a6">Original in Figure A6, G18</a></small></figcaption>
+        </figure>
+        <figure id="mesh-pear" class="model-gallery__case" data-model="assets/models/pear.glb" data-orbit="28deg 68deg" data-description="A pale green pear with a rounded base and a tapered crown.">
+          <div class="model-gallery__stage">
+            <img class="model-gallery__poster" src="assets/models/pear.webp" width="960" height="540" loading="lazy" alt="A light-green, stemless pear viewed from slightly above.">
+          </div>
+          <figcaption class="model-gallery__prompt"><strong>Prompt</strong> “A light-green teardrop-shaped pear with a light-brown stem and a green oval leaf.” <small class="model-gallery__source">Retouched display mesh · The generated pear omits the stem and leaf. <a href="#paper-figure-a6">Original in Figure A6, G20</a></small></figcaption>
+        </figure>
         <div class="model-gallery__controls" hidden>
           <span role="status" aria-live="polite"></span>
           <div class="model-gallery__actions">
@@ -304,16 +337,6 @@
           </div>
         </div>
       </div>
-      <div class="reading">
-        <h3>The same prompt across six generators</h3>
-        <p>The rows below hold the text fixed. Compare the silhouette of the barrel, the angle of the butterfly wings, and the curved lid of the chest across methods.</p>
-      </div>
-      <figure class="figure-frame paper-figure" id="paper-figure-3">
-        <a href="assets/generation-case-study.webp" aria-label="Enlarge Figure 3">
-          <img src="assets/generation-case-study.webp" width="2160" height="910" alt="Five prompt-matched rows compare a barrel, butterfly, orange carton, milk can and wooden chest across SPAC, TRELLIS, SAR3D, 3DTopia-XL, LGM and Shap-E." loading="lazy" decoding="async">
-        </a>
-        <figcaption id="paper-figure-3-caption"><span class="paper-number">Figure 3.</span> <strong>Comparisons with other baselines on the Text-to-3D task.</strong> SPAC generates untextured meshes. Following ShapeLLM-Omni (Ye et al., 2025), we use TRELLIS (Xiang et al., 2025b) to add surface appearance to the SPAC results shown here.</figcaption>
-      </figure>
       <div class="reading">
         <h3>Twelve prompts and their generated meshes</h3>
         <p>The views of each object reveal details that a single silhouette can hide, from the windows on a bus to the opening in a wardrobe.</p>
@@ -346,6 +369,7 @@
       </figure>
     </section>
 
+    -->
     <section id="citation" class="section shell" aria-labelledby="citation-heading">
       <div class="citation-head">
         <h2 id="citation-heading">BibTeX</h2>
